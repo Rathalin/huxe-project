@@ -18,6 +18,9 @@ function App() {
         >
           Learn React
         </a>
+        <p className="text-3xl font-bold underline">
+          Tailwind is working!
+        </p>
       </header>
     </div>
   );
