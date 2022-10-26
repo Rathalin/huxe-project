@@ -10,12 +10,12 @@ export function GraphQLTest() {
               Title
               IconName
               WeeklyGoal
-              Test
             }
           }
         }
       }
     `));
+  const moodPriorities = data!.moodPriorities!.data.map(moodPriority => moodPriority.attributes!);
 
   if (loading) return (
     <div>'Loading...'</div>
@@ -25,10 +25,11 @@ export function GraphQLTest() {
   );
 
   return (
-    <ul>{data?.moodPriorities?.data.map(moodPriority => moodPriority.attributes).map(attributes => (
-      <li key={attributes?.Title}>
-        <div>{attributes?.Title}</div>
-        <div>{attributes?.IconName}</div>
+    <ul>{moodPriorities.map(moodPriority => (
+      <li key={moodPriority.Title}>
+        <div>{moodPriority.Title}</div>
+        <div>{moodPriority.IconName}</div>
+        <div>{moodPriority.WeeklyGoal}</div>
       </li>
     ))}</ul>
   );

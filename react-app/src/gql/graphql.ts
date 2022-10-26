@@ -210,9 +210,8 @@ export type JsonFilterInput = {
 
 export type MoodPriority = {
   __typename?: 'MoodPriority';
-  IconName?: Maybe<Scalars['String']>;
-  Test?: Maybe<Scalars['String']>;
-  Title?: Maybe<Scalars['String']>;
+  IconName: Scalars['String'];
+  Title: Scalars['String'];
   WeeklyGoal?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   publishedAt?: Maybe<Scalars['DateTime']>;
@@ -238,7 +237,6 @@ export type MoodPriorityEntityResponseCollection = {
 
 export type MoodPriorityFiltersInput = {
   IconName?: InputMaybe<StringFilterInput>;
-  Test?: InputMaybe<StringFilterInput>;
   Title?: InputMaybe<StringFilterInput>;
   WeeklyGoal?: InputMaybe<IntFilterInput>;
   and?: InputMaybe<Array<InputMaybe<MoodPriorityFiltersInput>>>;
@@ -252,7 +250,6 @@ export type MoodPriorityFiltersInput = {
 
 export type MoodPriorityInput = {
   IconName?: InputMaybe<Scalars['String']>;
-  Test?: InputMaybe<Scalars['String']>;
   Title?: InputMaybe<Scalars['String']>;
   WeeklyGoal?: InputMaybe<Scalars['Int']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
@@ -955,7 +952,7 @@ export type UsersPermissionsUserRelationResponseCollection = {
 export type MoodPriorityQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MoodPriorityQuery = { __typename?: 'Query', moodPriorities?: { __typename?: 'MoodPriorityEntityResponseCollection', data: Array<{ __typename?: 'MoodPriorityEntity', attributes?: { __typename?: 'MoodPriority', Title?: string | null, IconName?: string | null, WeeklyGoal?: number | null, Test?: string | null } | null }> } | null };
+export type MoodPriorityQuery = { __typename?: 'Query', moodPriorities?: { __typename?: 'MoodPriorityEntityResponseCollection', data: Array<{ __typename?: 'MoodPriorityEntity', attributes?: { __typename?: 'MoodPriority', Title: string, IconName: string, WeeklyGoal?: number | null } | null }> } | null };
 
 
-export const MoodPriorityDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MoodPriority"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"moodPriorities"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Title"}},{"kind":"Field","name":{"kind":"Name","value":"IconName"}},{"kind":"Field","name":{"kind":"Name","value":"WeeklyGoal"}},{"kind":"Field","name":{"kind":"Name","value":"Test"}}]}}]}}]}}]}}]} as unknown as DocumentNode<MoodPriorityQuery, MoodPriorityQueryVariables>;
+export const MoodPriorityDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MoodPriority"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"moodPriorities"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Title"}},{"kind":"Field","name":{"kind":"Name","value":"IconName"}},{"kind":"Field","name":{"kind":"Name","value":"WeeklyGoal"}}]}}]}}]}}]}}]} as unknown as DocumentNode<MoodPriorityQuery, MoodPriorityQueryVariables>;

@@ -13,16 +13,16 @@
   "pluginOptions": {},
   "attributes": {
     "Title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "IconName": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "WeeklyGoal": {
-      "type": "integer"
-    },
-    "Test": {
-      "type": "string"
+      "type": "integer",
+      "required": false
     }
   }
 }
