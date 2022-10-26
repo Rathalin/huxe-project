@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "mood_priorities",
+  "info": {
+    "singularName": "mood-priority",
+    "pluralName": "mood-priorities",
+    "displayName": "Mood Priority",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "IconName": {
+      "type": "string"
+    },
+    "WeeklyGoal": {
+      "type": "integer"
+    },
+    "Test": {
+      "type": "string"
+    }
+  }
+}
