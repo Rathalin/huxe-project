@@ -98,7 +98,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']>;
 };
 
-export type GenericMorph = I18NLocale | MoodPriority | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = I18NLocale | MoodPriority | Note | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type I18NLocale = {
   __typename?: 'I18NLocale';
@@ -210,12 +210,21 @@ export type JsonFilterInput = {
 
 export type MoodPriority = {
   __typename?: 'MoodPriority';
-  IconName: Scalars['String'];
+  IconName?: Maybe<Scalars['String']>;
+  Notes?: Maybe<NoteRelationResponseCollection>;
   Title: Scalars['String'];
-  WeeklyGoal?: Maybe<Scalars['Int']>;
+  WeeklyGoal: Scalars['Int'];
   createdAt?: Maybe<Scalars['DateTime']>;
   publishedAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+
+export type MoodPriorityNotesArgs = {
+  filters?: InputMaybe<NoteFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type MoodPriorityEntity = {
@@ -237,6 +246,7 @@ export type MoodPriorityEntityResponseCollection = {
 
 export type MoodPriorityFiltersInput = {
   IconName?: InputMaybe<StringFilterInput>;
+  Notes?: InputMaybe<NoteFiltersInput>;
   Title?: InputMaybe<StringFilterInput>;
   WeeklyGoal?: InputMaybe<IntFilterInput>;
   and?: InputMaybe<Array<InputMaybe<MoodPriorityFiltersInput>>>;
@@ -250,6 +260,7 @@ export type MoodPriorityFiltersInput = {
 
 export type MoodPriorityInput = {
   IconName?: InputMaybe<Scalars['String']>;
+  Notes?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   Title?: InputMaybe<Scalars['String']>;
   WeeklyGoal?: InputMaybe<Scalars['Int']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
@@ -260,6 +271,7 @@ export type Mutation = {
   /** Change user password. Confirm with the current password. */
   changePassword?: Maybe<UsersPermissionsLoginPayload>;
   createMoodPriority?: Maybe<MoodPriorityEntityResponse>;
+  createNote?: Maybe<NoteEntityResponse>;
   createUploadFile?: Maybe<UploadFileEntityResponse>;
   createUploadFolder?: Maybe<UploadFolderEntityResponse>;
   /** Create a new role */
@@ -267,6 +279,7 @@ export type Mutation = {
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   deleteMoodPriority?: Maybe<MoodPriorityEntityResponse>;
+  deleteNote?: Maybe<NoteEntityResponse>;
   deleteUploadFile?: Maybe<UploadFileEntityResponse>;
   deleteUploadFolder?: Maybe<UploadFolderEntityResponse>;
   /** Delete an existing role */
@@ -286,6 +299,7 @@ export type Mutation = {
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
   updateFileInfo: UploadFileEntityResponse;
   updateMoodPriority?: Maybe<MoodPriorityEntityResponse>;
+  updateNote?: Maybe<NoteEntityResponse>;
   updateUploadFile?: Maybe<UploadFileEntityResponse>;
   updateUploadFolder?: Maybe<UploadFolderEntityResponse>;
   /** Update an existing role */
@@ -305,6 +319,11 @@ export type MutationChangePasswordArgs = {
 
 export type MutationCreateMoodPriorityArgs = {
   data: MoodPriorityInput;
+};
+
+
+export type MutationCreateNoteArgs = {
+  data: NoteInput;
 };
 
 
@@ -329,6 +348,11 @@ export type MutationCreateUsersPermissionsUserArgs = {
 
 
 export type MutationDeleteMoodPriorityArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteNoteArgs = {
   id: Scalars['ID'];
 };
 
@@ -405,6 +429,12 @@ export type MutationUpdateMoodPriorityArgs = {
 };
 
 
+export type MutationUpdateNoteArgs = {
+  data: NoteInput;
+  id: Scalars['ID'];
+};
+
+
 export type MutationUpdateUploadFileArgs = {
   data: UploadFileInput;
   id: Scalars['ID'];
@@ -437,6 +467,52 @@ export type MutationUploadArgs = {
   refId?: InputMaybe<Scalars['ID']>;
 };
 
+export type Note = {
+  __typename?: 'Note';
+  Text: Scalars['String'];
+  createdAt?: Maybe<Scalars['DateTime']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type NoteEntity = {
+  __typename?: 'NoteEntity';
+  attributes?: Maybe<Note>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type NoteEntityResponse = {
+  __typename?: 'NoteEntityResponse';
+  data?: Maybe<NoteEntity>;
+};
+
+export type NoteEntityResponseCollection = {
+  __typename?: 'NoteEntityResponseCollection';
+  data: Array<NoteEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type NoteFiltersInput = {
+  Text?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<NoteFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<NoteFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<NoteFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type NoteInput = {
+  Text?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type NoteRelationResponseCollection = {
+  __typename?: 'NoteRelationResponseCollection';
+  data: Array<NoteEntity>;
+};
+
 export type Pagination = {
   __typename?: 'Pagination';
   page: Scalars['Int'];
@@ -464,6 +540,8 @@ export type Query = {
   me?: Maybe<UsersPermissionsMe>;
   moodPriorities?: Maybe<MoodPriorityEntityResponseCollection>;
   moodPriority?: Maybe<MoodPriorityEntityResponse>;
+  note?: Maybe<NoteEntityResponse>;
+  notes?: Maybe<NoteEntityResponseCollection>;
   uploadFile?: Maybe<UploadFileEntityResponse>;
   uploadFiles?: Maybe<UploadFileEntityResponseCollection>;
   uploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -497,6 +575,19 @@ export type QueryMoodPrioritiesArgs = {
 
 export type QueryMoodPriorityArgs = {
   id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type QueryNoteArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type QueryNotesArgs = {
+  filters?: InputMaybe<NoteFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
@@ -952,7 +1043,7 @@ export type UsersPermissionsUserRelationResponseCollection = {
 export type MoodPriorityQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MoodPriorityQuery = { __typename?: 'Query', moodPriorities?: { __typename?: 'MoodPriorityEntityResponseCollection', data: Array<{ __typename?: 'MoodPriorityEntity', attributes?: { __typename?: 'MoodPriority', Title: string, IconName: string, WeeklyGoal?: number | null } | null }> } | null };
+export type MoodPriorityQuery = { __typename?: 'Query', moodPriorities?: { __typename?: 'MoodPriorityEntityResponseCollection', data: Array<{ __typename?: 'MoodPriorityEntity', attributes?: { __typename?: 'MoodPriority', Title: string, IconName?: string | null, WeeklyGoal: number, Notes?: { __typename?: 'NoteRelationResponseCollection', data: Array<{ __typename?: 'NoteEntity', attributes?: { __typename?: 'Note', Text: string } | null }> } | null } | null }> } | null };
 
 
-export const MoodPriorityDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MoodPriority"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"moodPriorities"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Title"}},{"kind":"Field","name":{"kind":"Name","value":"IconName"}},{"kind":"Field","name":{"kind":"Name","value":"WeeklyGoal"}}]}}]}}]}}]}}]} as unknown as DocumentNode<MoodPriorityQuery, MoodPriorityQueryVariables>;
+export const MoodPriorityDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MoodPriority"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"moodPriorities"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Title"}},{"kind":"Field","name":{"kind":"Name","value":"IconName"}},{"kind":"Field","name":{"kind":"Name","value":"WeeklyGoal"}},{"kind":"Field","name":{"kind":"Name","value":"Notes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Text"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<MoodPriorityQuery, MoodPriorityQueryVariables>;

@@ -4,7 +4,7 @@
   "info": {
     "singularName": "mood-priority",
     "pluralName": "mood-priorities",
-    "displayName": "Mood Priority",
+    "displayName": "MoodPriority",
     "description": ""
   },
   "options": {
@@ -14,15 +14,24 @@
   "attributes": {
     "Title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "maxLength": 50
     },
     "IconName": {
       "type": "string",
-      "required": true
+      "required": false,
+      "maxLength": 20
     },
     "WeeklyGoal": {
       "type": "integer",
-      "required": false
+      "required": true,
+      "max": 7,
+      "min": 1
+    },
+    "Notes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::note.note"
     }
   }
 }
