@@ -1,4 +1,4 @@
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { graphql } from '../graphql';
 
 export function MoodPriorityExample() {
@@ -24,10 +24,10 @@ export function MoodPriorityExample() {
     `));
 
   if (loading) return (
-    <div>'Loading...'</div>
+    <div>Loading...</div>
   );
   if (error) return (
-    <div>`Error! ${error.message}`</div>
+    <div>Error! {error.message}</div>
   );
 
   const moodPriorities = data!.moodPriorities!.data.map(moodPriority => moodPriority.attributes!);
