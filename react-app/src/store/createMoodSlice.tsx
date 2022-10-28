@@ -1,12 +1,11 @@
-import { StateCreator } from 'zustand'
-import React from 'react';
+import { StateCreator } from 'zustand';
 import { Mood } from '../interfaces/mood';
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from 'uuid';
 
 export interface MoodSlice {
-  moods: Mood[]
-  addMood: (name:string) => void;
-  removeMood: (id: string) => void
+  moods: Mood[],
+  addMood: (name: string) => void,
+  removeMood: (id: string) => void,
 }
 
 

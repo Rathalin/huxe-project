@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useStore } from '../store/useStore';
 import { Button, Container, TextField } from '@mui/material';
 
@@ -9,7 +9,7 @@ export const NewMood = () => {
   return (
     <Container maxWidth='xs'>
       <TextField id='outlined-basic' label='MoodName' variant='outlined' onChange={(e) => setName(e.target.value)}
-                 value={name} />
+        value={name} />
       <Button variant='outlined' onClick={() => {
         if (name.length) {
           addMood(name);
