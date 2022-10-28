@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ApolloProvider client={apolloClient}>
-        <App />
+      <App />
     </ApolloProvider>
   </React.StrictMode>
 );
