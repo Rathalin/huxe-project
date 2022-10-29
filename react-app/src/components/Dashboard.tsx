@@ -1,14 +1,14 @@
 import { Moods } from './Moods';
 import { NewMood } from './NewMood';
 import React from 'react';
-import { Container } from '@mui/material';
+import { Box } from '@mui/material';
 
 export const Dashboard = () => {
 
   return (
-    <Container maxWidth='xs'>
+    <Box sx={{height: '100vh'}}>
       <Moods />
       <NewMood />
-    </Container>
+    </Box>
   );
 };

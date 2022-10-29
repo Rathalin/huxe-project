@@ -1,5 +1,4 @@
 import { StateCreator } from 'zustand'
-import React from 'react';
 import { Mood } from '../interfaces/mood';
 import { v4 as uuidv4 } from "uuid";
 

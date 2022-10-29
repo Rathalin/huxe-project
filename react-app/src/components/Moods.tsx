@@ -8,7 +8,7 @@ export const Moods = () => {
   return(
     <Container maxWidth='xs'>
       {moods.map((mood) => (
-    <Card variant="outlined">
+    <Card key={mood.id} variant="outlined">
       <CardContent>
       <Typography gutterBottom variant="h5" component="div">
         {mood.name}

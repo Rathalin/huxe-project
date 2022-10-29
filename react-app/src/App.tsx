@@ -1,18 +1,27 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
-import { MoodPriorityExample } from './components/MoodPriorityExample'
-import { Dashboard } from './components/Dashboard';
+import { CustomAppbar } from './components/CustomAppbar';
+import { Container, CssBaseline } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+import { Theme } from './components/ui/theme/Theme';
+import { Copyright } from './components/Copyright';
+import { CustomRouter } from './components/routes/Router';
+
+const theme = Theme();
 
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-       <Dashboard/>
-      </header>
-    </div>
-  );
+    <ThemeProvider theme={theme}>
+      <Container maxWidth='xs' className='App' disableGutters={true}>
+        <CssBaseline />
+        <CustomAppbar />
+        <CustomRouter />
+        <Copyright sx={{ mt: 5 }} />
+      </Container>
+    </ThemeProvider>
+  )
+    ;
 }
 
 export default App;
