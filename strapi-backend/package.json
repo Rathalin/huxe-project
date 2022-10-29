@@ -6,7 +6,7 @@
   "scripts": {
     "client": "cd ../react-app && npm run start",
     "codegen": "cd ../react-app && npm run codegen:watch",
-    "develop": "strapi develop",
+    "dev": "strapi develop",
     "start": "concurrently -k \"npm run client\" \"npm run startstrapi\" \"npm run codegen\"",
     "build": "strapi build",
     "startstrapi": "strapi develop",

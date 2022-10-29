@@ -1,5 +1,3 @@
-import React from 'react';
-import logo from './assets/logo.svg';
 import { CustomAppbar } from './components/CustomAppbar';
 import { Container, CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
@@ -8,7 +6,6 @@ import { Copyright } from './components/Copyright';
 import { CustomRouter } from './components/routes/Router';
 
 const theme = Theme();
-
 
 function App() {
   return (
@@ -22,8 +19,7 @@ function App() {
         </Container>
       </Container>
     </ThemeProvider>
-  )
-    ;
+  );
 }
 
 export default App;
