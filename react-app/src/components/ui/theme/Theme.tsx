@@ -5,7 +5,9 @@ export const themeOptions: ThemeOptions = {
     mode: 'light',
     primary: {
       main: '#31347D',
-      light: '#7FAFF3',
+      light: '#373652',
+      dark: '#000',
+      contrastText: '#fff'
     },
     secondary: {
       main: '#f50057',

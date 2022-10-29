@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+import logo from './assets/logo.svg';
 import { CustomAppbar } from './components/CustomAppbar';
 import { Container, CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
@@ -16,8 +16,10 @@ function App() {
       <Container maxWidth='xs' className='app' disableGutters={true}>
         <CssBaseline />
         <CustomAppbar />
-        <CustomRouter />
-        <Copyright sx={{ mt: 5 }} />
+        <Container component='main' maxWidth='xs'>
+          <CustomRouter />
+          <Copyright sx={{ mt: 5 }} />
+        </Container>
       </Container>
     </ThemeProvider>
   )
