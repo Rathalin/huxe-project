@@ -11,17 +11,18 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { ThemeProvider } from '@mui/material/styles';
 import { Theme } from './ui/theme/Theme';
+import { useStore } from '../store/useStore';
 
 const theme = Theme();
 
 export const Register = () => {
+  const { setUsername, setLoggedIn } = useStore();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+      setUsername(data.get('firstName') as string);
+      setLoggedIn(true);
   };
 
   return (

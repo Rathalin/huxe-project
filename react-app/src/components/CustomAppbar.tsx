@@ -7,16 +7,19 @@ import {
 } from '@mui/material';
 import React from 'react';
 import { AccountCircle } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
+import { useStore } from '../store/useStore';
 
 export const CustomAppbar = () => {
-
-  const [auth, setAuth] = React.useState(true);
+  const { setUsername, setLoggedIn, loggedIn, username } = useStore();
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAuth(event.target.checked);
-  };
+  const handleLogout = () => {
+    setUsername("");
+    setLoggedIn(false);
+    navigate('/login')
+  }
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -32,7 +35,7 @@ export const CustomAppbar = () => {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Mood Tracking
         </Typography>
-        {auth && (
+        {loggedIn && (
           <div>
             <IconButton
               size="large"
@@ -42,30 +45,33 @@ export const CustomAppbar = () => {
               onClick={handleMenu}
               color="inherit"
             >
+              <Typography variant="h6" component="span" sx={{ flexGrow: 1 }}>
+                Hello, {username}
+              </Typography>
               <AccountCircle />
             </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>My Priorities</MenuItem>
-              <MenuItem onClick={handleClose}>
-                <Link to="/">Dashboard</Link></MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
-            </Menu>
           </div>
         )}
+        <Menu
+          id="menu-appbar"
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={handleClose}>My Priorities</MenuItem>
+          <MenuItem onClick={handleClose}>
+            <Link to="/">Dashboard</Link></MenuItem>
+          <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        </Menu>
       </Toolbar>
     </AppBar>
   )

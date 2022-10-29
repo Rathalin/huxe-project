@@ -1,16 +1,22 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { Dashboard } from '../Dashboard';
 import { Register } from '../Register';
 import { Login } from '../Login';
+import { useStore } from '../../store/useStore';
 
 export const CustomRouter = () => {
+  const { loggedIn } = useStore();
 
-  return(
+  return (
 
     <Routes>
-      <Route path="/" element={<Dashboard />} />
-      <Route path="login" element={<Login />} />
-      <Route path="register" element={<Register />} />
+      <Route path='/' element={loggedIn ? <Navigate to='/dashboard' /> : <Login />}
+      />
+      <Route path='dashboard' element={!loggedIn ? <Navigate to='/login' /> : <Dashboard />} />
+      <Route path='login' element={loggedIn ? <Navigate to='/dashboard' /> : <Login />}
+      />
+      <Route path='register' element={loggedIn ? <Navigate to='/dashboard' /> : <Register />}
+      />
     </Routes>
-  )
-}
+  );
+};
