@@ -1,17 +1,17 @@
-import { StateCreator } from 'zustand'
+import { StateCreator } from 'zustand';
 
 export interface LoginSlice {
-  username: string
-  setUsername: (username:string) => void
+  username: string,
+  setUsername: (username: string) => void,
 }
 
 
 const createLoginSlice: StateCreator<LoginSlice> = (set) => ({
-  username: "",
+  username: '',
   setUsername: (name) =>
     set(() => ({
       username: name
-    }))
+    })),
 });
 
 export default createLoginSlice;

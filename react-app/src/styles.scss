@@ -1,0 +1,30 @@
+
+/* colours */
+
+$bg: #7FAFF3;
+$primary: #31347D;
+
+h4 {
+  font-size: 35px;
+  margin: 0.5em 0em;
+  color: $primary;
+  font-family: 'Muli';
+  font-weight: 700;
+}
+
+.App-header {
+    background-color: $bg;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+
+  body {
+    font-family: 'Muli', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  }

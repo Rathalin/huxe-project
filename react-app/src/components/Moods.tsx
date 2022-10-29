@@ -1,11 +1,10 @@
 import { useStore } from '../store/useStore';
 import { Card, CardContent, Container, Typography } from '@mui/material';
 
-
 export const Moods = () => {
   const { moods } = useStore();
 
-  return(
+  return (
     <Container maxWidth='xs'>
       {moods.map((mood) => (
     <Card key={mood.id} variant="outlined">
@@ -20,7 +19,6 @@ export const Moods = () => {
     </Card>
           ))}
     </Container>
-
-      )
+  );
 
 }

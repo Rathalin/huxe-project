@@ -3,15 +3,15 @@ import { v4 as uuidv4 } from "uuid";
 import { Priority } from '../interfaces/priority';
 
 export interface PrioritySlice {
-  priorities: Priority[]
-  addPriority: (title: string, weeklyGoal:number) => void;
-  removePriority: (id: string) => void;
+  priorities: Priority[],
+  addPriority: (title: string, weeklyGoal: number) => void,
+  removePriority: (id: string) => void,
 }
 
 
 const createPrioritySlice: StateCreator<PrioritySlice> = (set) => ({
   priorities: [],
-  addPriority: (title: string, weeklyGoal:number) => {
+  addPriority: (title: string, weeklyGoal: number) => {
     set((state) => ({
       priorities: [
         ...state.priorities,

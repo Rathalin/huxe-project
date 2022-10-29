@@ -13,7 +13,7 @@ const theme = Theme();
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Container maxWidth='xs' className='App' disableGutters={true}>
+      <Container maxWidth='xs' className='app' disableGutters={true}>
         <CssBaseline />
         <CustomAppbar />
         <CustomRouter />
