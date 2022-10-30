@@ -3,25 +3,25 @@ import { graphql } from '../graphql';
 
 export function MoodPriorityExample() {
   const { loading, error, data } = useQuery(graphql(`
-      query MoodPriority {
-        moodPriorities {
-          data {
-            attributes {
-              Title
-              IconName
-              WeeklyGoal
-              Notes {
-                data {
-                  attributes {
-                    Text
-                  }
+    query MoodPriority {
+      moodPriorities {
+        data {
+          attributes {
+            Title
+            IconName
+            WeeklyGoal
+            Notes {
+              data {
+                attributes {
+                  Text
                 }
               }
             }
           }
         }
       }
-    `));
+    }
+  `));
 
   if (loading) return (
     <div>Loading...</div>

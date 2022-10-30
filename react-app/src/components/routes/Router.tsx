@@ -8,7 +8,6 @@ export const CustomRouter = () => {
   const { loggedIn } = useStore();
 
   return (
-
     <Routes>
       <Route path='/' element={loggedIn ? <Navigate to='/dashboard' /> : <Login />}
       />

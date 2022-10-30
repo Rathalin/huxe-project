@@ -3,10 +3,10 @@ import Box from '@mui/material/Box';
 import { useTheme } from '@mui/system';
 
 interface LoadingErrorProps {
-  message: string,
+  error: string,
 }
 
-export function LoadingError({ message }: LoadingErrorProps) {
+export function LoadingError({ error: message }: LoadingErrorProps) {
   const theme = useTheme();
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', }}>
