@@ -12,7 +12,7 @@ export const NewNote = () => {
       <h4>Add a Note</h4>
       <TextField 
       //InputLabelProps={{shrink: false}} 
-      sx={{ border: 3, borderRadius: 3, backgroundColor: '#91B7ED', '& legend': { display: 'none' }, '& fieldset': { top: 0 } }}
+      sx={{ border: 3, borderRadius: 3, '& legend': { display: 'none' }, '& fieldset': { top: 0 } }}
       id='outlined-basic' 
       label='Note' 
       multiline

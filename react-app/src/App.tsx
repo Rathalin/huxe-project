@@ -10,10 +10,10 @@ const theme = Theme();
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Container maxWidth='xs' className='app' disableGutters={true}>
+      <Container maxWidth='xl' className='app' disableGutters={true}>
         <CssBaseline />
         <CustomAppbar />
-        <Container component='main' maxWidth='xs'>
+        <Container component='main' maxWidth='xl'>
           <CustomRouter />
           <Copyright sx={{ mt: 5 }} />
         </Container>
