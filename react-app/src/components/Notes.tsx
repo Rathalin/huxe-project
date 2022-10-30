@@ -14,7 +14,7 @@ export const Notes = () => {
         border: 3, 
         borderColor: '#fff', 
         borderRadius: 3, 
-        backgroundColor: '#91B7ED', 
+        //backgroundColor: '#91B7ED', 
         margin: '1em'}}>
       <CardContent>
       <Typography gutterBottom variant="h5" component="div">

@@ -4,25 +4,28 @@ export const themeOptions: ThemeOptions = {
   palette: {
     mode: 'light',
     primary: {
-      main: '#31347D',
-      light: '#373652',
-      dark: '#000',
+      main: '#3a048c',
+      light: '#6e38bd',
+      dark: '#00005d',
       contrastText: '#fff'
     },
     secondary: {
-      main: '#f50057',
+      main: '#ffb300',
+      light: '#ffe54c',
+      dark: '#c68400',
+      contrastText: '#000036'
     },
     background: {
-      default: '#7FAFF3',
+      default: '#F6F2F7',
     },
     text: {
-      primary: '#31347D',
-      secondary: 'rgba(49,52,125,0.5)',
+      primary: '#00005d',
+      secondary: '#3F3E40',
     },
   },
   typography: {
     fontSize: 16,
-    fontFamily: 'Lato',
+    fontFamily: 'Muli',
   },
 };
 
