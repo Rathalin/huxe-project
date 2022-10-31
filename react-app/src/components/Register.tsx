@@ -9,10 +9,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { Theme } from './ui/theme/Theme';
 import { useStore } from '../store/useStore';
-
-const theme = Theme();
 
 export const Register = () => {
   const { setUsername, setLoggedIn } = useStore();
@@ -25,7 +22,7 @@ export const Register = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="sm">
       <CssBaseline />
       <Box
         sx={{

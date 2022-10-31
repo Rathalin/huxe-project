@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -18,8 +18,6 @@ import { useTheme } from '@mui/material';
 
 export const Login = () => {
   const theme = useTheme();
-  const [emailInput, setEmailInput] = useState('');
-  const [passwordInput, setPasswordInput] = useState('');
   let showInvalidCredentialsError = false;
   const { setUsername, setLoggedIn } = useStore();
 
@@ -45,88 +43,86 @@ export const Login = () => {
   if (error != null) {
     const err = error.graphQLErrors[0];
     if (err.extensions.code === 'BAD_USER_INPUT') {
-      showInvalidCredentialsError = true;
-      console.log('showInvalidCredentialsError');
+      showInvalidCredentialsError= true;
     } else {
       return <LoadingError error={JSON.stringify(error)} />;
     }
   }
 
-  async function handleLogin() {
-    console.log(`Login with ${emailInput} - ${passwordInput}`);
+  const handleLogin = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    console.log(`Login with ${formData.get('email')} - ${formData.get('password')}`);
+    const emailInput = formData.get('email') as string
+    const passwordInput = formData.get('password') as string
     if (emailInput.length > 0) {
       login({
         variables: {
           input: {
             identifier: emailInput,
-            password: passwordInput,
+            password: passwordInput
           }
         }
       }).catch((error: ApolloError) => {
-        console.log('Uncaught error');
+        console.log('Uncaught error' + error);
       });
     }
   }
 
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component='main' maxWidth='xs'>
       <CssBaseline />
       <Box
         sx={{
           marginTop: 8,
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
+          alignItems: 'center'
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component='h1' variant='h5'>
           Sign in
         </Typography>
-        <Box sx={{ mt: 1 }}>
+        <Box sx={{ mt: 1 }} component="form" onSubmit={handleLogin}>
           <TextField
-            margin="normal"
+            margin='normal'
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id='email'
+            label='Email Address'
+            name='email'
+            autoComplete='email'
             autoFocus
-            value={emailInput}
-            onChange={(e) => setEmailInput(e.target.value)}
           />
           <TextField
-            margin="normal"
+            margin='normal'
             required
             fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={passwordInput}
-            onChange={(e) => setPasswordInput(e.target.value)}
+            name='password'
+            label='Password'
+            type='password'
+            id='password'
+            autoComplete='current-password'
           />
           {showInvalidCredentialsError && <p style={{ color: theme.palette.error.main }}>
             Invalid identifier or password
           </p>}
           <Button
-            type="submit"
+            type='submit'
             fullWidth
-            variant="contained"
+            variant='contained'
             sx={{ mt: 3, mb: 2 }}
-            onClick={handleLogin}
           >
             Sign In
           </Button>
           <Grid container>
             <Grid item>
-              <Link to="/register">
-                {"Don't have an account? Sign Up"}
+              <Link to='/register'>
+                {'Don\'t have an account? Sign Up'}
               </Link>
             </Grid>
           </Grid>
@@ -134,4 +130,4 @@ export const Login = () => {
       </Box>
     </Container>
   );
-}
+};
