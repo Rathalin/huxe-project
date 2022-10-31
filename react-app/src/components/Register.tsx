@@ -10,13 +10,11 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { FormEvent, useRef, useState } from 'react';
 import { ResponseError, useAuthStore } from '../store/authStore';
-import { useTheme } from '@mui/material';
 import { Loading } from './ui/loading/Loading';
 import { LoadingError } from './ui/error/LoadingError';
 import { LoadingSuccess } from './ui/success/LoadingSuccess';
 
 export const Register = () => {
-  const theme = useTheme();
   const { register } = useAuthStore();
   const [error, setError] = useState<ResponseError | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +29,6 @@ export const Register = () => {
     const usernameInput = formData.get('username')?.toString() ?? '';
     const emailInput = formData.get('email')?.toString() ?? '';
     const passwordInput = formData.get('password')?.toString() ?? '';
-    console.log(`Register with ${usernameInput}, ${emailInput}, ${passwordInput}`);
     const responseError = await register(emailInput, usernameInput, passwordInput);
     setError(responseError);
     if (responseError == null) {
@@ -92,9 +89,11 @@ export const Register = () => {
               />
             </Grid>
           </Grid>
-          <Loading loading={isLoading} />
-          <LoadingError error={error?.text} />
-          <LoadingSuccess success={success ? 'Sucessfully registered.' : undefined} />
+          <Box sx={{ mt: 2 }}>
+            <Loading loading={isLoading} />
+            <LoadingError error={error?.text} />
+            <LoadingSuccess success={success ? 'Sucessfully registered.' : undefined} />
+          </Box>
           <Button
             type="submit"
             fullWidth

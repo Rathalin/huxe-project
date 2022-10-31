@@ -9,13 +9,11 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { useTheme } from '@mui/material';
 import { ResponseError, useAuthStore } from '../store/authStore';
 import { LoadingError } from './ui/error/LoadingError';
 import { Loading } from './ui/loading/Loading';
 
 export const Login = () => {
-  const theme = useTheme();
   const { login } = useAuthStore();
   const [error, setError] = useState<ResponseError | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -27,7 +25,6 @@ export const Login = () => {
     const formData = new FormData(event.currentTarget);
     const emailInput = formData.get('email')?.toString() ?? '';
     const passwordInput = formData.get('password')?.toString() ?? '';
-    console.log(`Login with ${emailInput} - ${passwordInput}`);
     if (emailInput.length > 0) {
       const response = await login(emailInput, passwordInput);
       if (response != null) {
@@ -75,8 +72,10 @@ export const Login = () => {
             id="password"
             autoComplete="current-password"
           />
-          <LoadingError error={error?.text} />
-          <Loading loading={isLoading} />
+          <Box sx={{ mt: 2 }}>
+            <LoadingError error={error?.text} />
+            <Loading loading={isLoading} />
+          </Box>
           <Button
             type='submit'
             fullWidth

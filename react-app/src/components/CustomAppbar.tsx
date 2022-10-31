@@ -46,6 +46,7 @@ export const CustomAppbar = () => {
               aria-haspopup="true"
               onClick={handleMenu}
               color="inherit"
+              sx={{ gap: 1 }}
             >
               <AccountCircle />
               <Typography variant="h6" component="span" sx={{ flexGrow: 1 }}>
@@ -70,7 +71,7 @@ export const CustomAppbar = () => {
               <MenuItem onClick={handleClose}>My Priorities</MenuItem>
               <MenuItem onClick={handleClose}>
                 <Link to="/">Dashboard</Link></MenuItem>
-              <MenuItem onClick={() => { handleClose();handleLogout();}}>Logout</MenuItem>
+              <MenuItem onClick={() => { handleClose(); handleLogout(); }}>Logout</MenuItem>
             </Menu>
           </div>
         )}

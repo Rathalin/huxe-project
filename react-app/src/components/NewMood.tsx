@@ -7,7 +7,7 @@ export const NewMood = () => {
   const [name, setName] = useState('');
 
   return (
-    <Container maxWidth='xs'>
+    <Container maxWidth='xs' sx={{ mt: 3, display: 'flex', gap: 1 }}>
       <TextField id='outlined-basic' label='MoodName' variant='outlined' onChange={(e) => setName(e.target.value)}
         value={name} />
       <Button variant='outlined' onClick={() => {
