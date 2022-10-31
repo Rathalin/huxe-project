@@ -16,7 +16,6 @@ export const NewMood = () => {
           setName('');
         }
       }}>Add Mood</Button>
-
     </Container>
   );
 };

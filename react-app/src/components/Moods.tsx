@@ -7,17 +7,17 @@ export const Moods = () => {
   return (
     <Container maxWidth='xs'>
       {moods.map((mood) => (
-    <Card key={mood.id} variant="outlined">
-      <CardContent>
-      <Typography gutterBottom variant="h5" component="div">
-        {mood.name}
-      </Typography>
-      <Typography variant="body2" color="text.secondary">
-        {mood.date.toString()}
-      </Typography>
-    </CardContent>
-    </Card>
-          ))}
+        <Card key={mood.id} variant="outlined">
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {mood.name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {mood.date.toString()}
+            </Typography>
+          </CardContent>
+        </Card>
+      ))}
     </Container>
   );
 

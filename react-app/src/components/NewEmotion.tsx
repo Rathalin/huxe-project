@@ -4,7 +4,7 @@ import { Button, Container, IconButton, styled, ButtonProps } from '@mui/materia
 
 export const NewEmotion = () => {
   const [emotion, setEmotion] = useState('');
-  
+
   const emotionSelect = (e: React.MouseEvent<HTMLButtonElement>) => {
     //console.dir(e.currentTarget.value)
     setEmotion(e.currentTarget.value)
@@ -12,13 +12,13 @@ export const NewEmotion = () => {
 
   const MoodButton = styled(IconButton)<ButtonProps>(({ theme }) => ({
     '&:hover': {
-        boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
     },
     '&:active': {
-        boxShadow: '0 0 0 0.2rem rgba(0,123,255,1)',
-      },
+      boxShadow: '0 0 0 0.2rem rgba(0,123,255,1)',
+    },
     '&:focus': {
-        boxShadow: '0 0 0 0.2rem rgba(0,123,255,1)',
+      boxShadow: '0 0 0 0.2rem rgba(0,123,255,1)',
     },
   }));
 
@@ -27,19 +27,19 @@ export const NewEmotion = () => {
 
       <h5>Is your strong emotion good or bad?</h5>
 
-      <MoodButton 
+      <MoodButton
         value={"Good"}
         onClick={emotionSelect}>
         <img
-        src={`${process.env.PUBLIC_URL}/mood1.png`}
-        alt={'good'}/></MoodButton>
+          src={`${process.env.PUBLIC_URL}/mood1.png`}
+          alt={'good'} /></MoodButton>
 
-      <MoodButton 
+      <MoodButton
         value={"Good"}
         onClick={emotionSelect}>
         <img
-        src={`${process.env.PUBLIC_URL}/mood4.png`}
-        alt={'good'}/></MoodButton>
+          src={`${process.env.PUBLIC_URL}/mood4.png`}
+          alt={'good'} /></MoodButton>
 
     </Container>
   );

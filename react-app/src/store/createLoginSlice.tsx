@@ -1,23 +1,21 @@
 import { StateCreator } from 'zustand';
 
-export interface LoginSlice {
+export interface User {
+  id: string,
   username: string,
-  setUsername: (username: string) => void,
-  loggedIn: boolean,
-  setLoggedIn: (loggedIn: boolean) => void
+  email: string,
+  jwt: string,
+}
+export interface LoginSlice {
+  user: User | null,
+  setUser: (user: User | null) => void,
 }
 
-
 const createLoginSlice: StateCreator<LoginSlice> = (set) => ({
-  username: '',
-  setUsername: (name) =>
+  user: null,
+  setUser: user =>
     set(() => ({
-      username: name
-    })),
-  loggedIn: false,
-  setLoggedIn: (logged) =>
-    set(() => ({
-      loggedIn: logged
+      user
     })),
 });
 

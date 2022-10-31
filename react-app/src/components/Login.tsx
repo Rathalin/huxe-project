@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -9,65 +9,28 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { useStore } from '../store/useStore';
-import { ApolloError, useMutation } from '@apollo/client';
-import { graphql } from '../graphql';
-import { Loading } from './ui/loading/Loading';
-import { LoadingError } from './ui/error/LoadingError';
 import { useTheme } from '@mui/material';
+import { ResponseError, useAuthStore } from '../store/authStore';
 
 export const Login = () => {
   const theme = useTheme();
-  const [emailInput, setEmailInput] = useState('');
-  const [passwordInput, setPasswordInput] = useState('');
-  let showInvalidCredentialsError = false;
-  const { setUsername, setLoggedIn } = useStore();
+  const { login } = useAuthStore();
+  let [error, setError] = useState<ResponseError | null>(null);
 
-  const [login, { loading, error, data }] = useMutation(graphql(`
-    mutation Login($input: UsersPermissionsLoginInput!) {
-      login(input: $input) {
-        user {
-          username
-        }
-        jwt
-      }
-    }
-  `));
-
-  useEffect(() => {
-    if (data != null) {
-      setUsername(data.login.user.username);
-      setLoggedIn(true);
-    }
-  }, [data]);
-
-  if (loading) return <Loading />;
-  if (error != null) {
-    const err = error.graphQLErrors[0];
-    if (err.extensions.code === 'BAD_USER_INPUT') {
-      showInvalidCredentialsError = true;
-      console.log('showInvalidCredentialsError');
-    } else {
-      return <LoadingError error={JSON.stringify(error)} />;
-    }
-  }
-
-  async function handleLogin() {
+  async function handleLogin(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError(null);
+    const formData = new FormData(event.currentTarget);
+    const emailInput = formData.get('email')?.toString() ?? '';
+    const passwordInput = formData.get('password')?.toString() ?? '';
     console.log(`Login with ${emailInput} - ${passwordInput}`);
     if (emailInput.length > 0) {
-      login({
-        variables: {
-          input: {
-            identifier: emailInput,
-            password: passwordInput,
-          }
-        }
-      }).catch((error: ApolloError) => {
-        console.log('Uncaught error');
-      });
+      const response = await login(emailInput, passwordInput);
+      if (response != null) {
+        setError(response);
+      }
     }
   }
-
 
   return (
     <Container component="main" maxWidth="xs">
@@ -86,7 +49,7 @@ export const Login = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleLogin} sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
@@ -96,8 +59,6 @@ export const Login = () => {
             name="email"
             autoComplete="email"
             autoFocus
-            value={emailInput}
-            onChange={(e) => setEmailInput(e.target.value)}
           />
           <TextField
             margin="normal"
@@ -108,18 +69,15 @@ export const Login = () => {
             type="password"
             id="password"
             autoComplete="current-password"
-            value={passwordInput}
-            onChange={(e) => setPasswordInput(e.target.value)}
           />
-          {showInvalidCredentialsError && <p style={{ color: theme.palette.error.main }}>
-            Invalid identifier or password
+          {error && <p style={{ color: theme.palette.error.main }}>
+            {error.text}
           </p>}
           <Button
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            onClick={handleLogin}
           >
             Sign In
           </Button>

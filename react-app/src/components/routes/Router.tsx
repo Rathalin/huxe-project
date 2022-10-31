@@ -4,9 +4,10 @@ import { StrongEmotion } from '../StrongEmotion';
 import { Register } from '../Register';
 import { Login } from '../Login';
 import { useStore } from '../../store/useStore';
+import { useAuthStore } from '../../store/authStore';
 
 export const CustomRouter = () => {
-  const { loggedIn } = useStore();
+  const loggedIn = useAuthStore().user != null;
 
   return (
     <Routes>

@@ -3,33 +3,35 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  Toolbar, Typography
+  Toolbar,
+  Typography,
 } from '@mui/material';
-import React from 'react';
+import { useState, MouseEvent } from 'react';
 import { AccountCircle } from '@mui/icons-material';
-import { Link, useNavigate  } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
+import { useAuthStore } from '../store/authStore';
 
 export const CustomAppbar = () => {
-  const { setUsername, setLoggedIn, loggedIn, username } = useStore();
+  const { user, logout } = useAuthStore();
+  const loggedIn = user != null;
   const navigate = useNavigate();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const handleLogout = () => {
-    setUsername("");
-    setLoggedIn(false);
-    navigate('/login')
+  function handleLogout() {
+    logout();
+    navigate('/login');
   }
 
-  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+  function handleMenu(event: MouseEvent<HTMLElement>) {
     setAnchorEl(event.currentTarget);
-  };
+  }
 
-  const handleClose = () => {
+  function handleClose() {
     setAnchorEl(null);
-  };
+  }
 
-  return(
+  return (
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -46,7 +48,7 @@ export const CustomAppbar = () => {
               color="inherit"
             >
               <Typography variant="h6" component="span" sx={{ flexGrow: 1 }}>
-                Hello, {username}
+                Hello, {user.username}
               </Typography>
               <AccountCircle />
             </IconButton>

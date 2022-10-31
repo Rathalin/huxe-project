@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -9,20 +8,29 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { Theme } from './ui/theme/Theme';
-import { useStore } from '../store/useStore';
-
-const theme = Theme();
+import { FormEvent, useRef, useState } from 'react';
+import { ResponseError, useAuthStore } from '../store/authStore';
+import { useTheme } from '@mui/material';
 
 export const Register = () => {
-  const { setUsername, setLoggedIn } = useStore();
+  const theme = useTheme();
+  const { register } = useAuthStore();
+  const [error, setError] = useState<ResponseError | null>(null);
+  const [success, setSuccess] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    setUsername(data.get('firstName') as string);
-    setLoggedIn(true);
-  };
+    const formData = new FormData(event.currentTarget);
+    const usernameInput = formData.get('username')?.toString() ?? '';
+    const emailInput = formData.get('email')?.toString() ?? '';
+    const passwordInput = formData.get('password')?.toString() ?? '';
+    console.log(`Register with ${usernameInput}, ${emailInput}, ${passwordInput}`);
+    const responseError = await register(emailInput, usernameInput, passwordInput);
+    setError(responseError);
+    if (responseError == null) {
+      setSuccess(true);
+    }
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -76,6 +84,12 @@ export const Register = () => {
               />
             </Grid>
           </Grid>
+          {error && <p style={{ color: theme.palette.error.main }}>
+            {error.text}
+          </p>}
+          {success && <p style={{ color: theme.palette.success.main }}>
+            Sucessfully registered.
+          </p>}
           <Button
             type="submit"
             fullWidth
