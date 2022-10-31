@@ -47,33 +47,33 @@ export const CustomAppbar = () => {
               onClick={handleMenu}
               color="inherit"
             >
+              <AccountCircle />
               <Typography variant="h6" component="span" sx={{ flexGrow: 1 }}>
                 Hello, {user.username}
               </Typography>
-              <AccountCircle />
             </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>My Priorities</MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link to="/">Dashboard</Link></MenuItem>
+              <MenuItem onClick={() => { handleClose();handleLogout();}}>Logout</MenuItem>
+            </Menu>
           </div>
         )}
-        <Menu
-          id="menu-appbar"
-          anchorEl={anchorEl}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-        >
-          <MenuItem onClick={handleClose}>My Priorities</MenuItem>
-          <MenuItem onClick={handleClose}>
-            <Link to="/">Dashboard</Link></MenuItem>
-          <MenuItem onClick={handleLogout}>Logout</MenuItem>
-        </Menu>
       </Toolbar>
     </AppBar>
   )
