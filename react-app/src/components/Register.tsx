@@ -11,15 +11,22 @@ import Container from '@mui/material/Container';
 import { FormEvent, useRef, useState } from 'react';
 import { ResponseError, useAuthStore } from '../store/authStore';
 import { useTheme } from '@mui/material';
+import { Loading } from './ui/loading/Loading';
+import { LoadingError } from './ui/error/LoadingError';
+import { LoadingSuccess } from './ui/success/LoadingSuccess';
 
 export const Register = () => {
   const theme = useTheme();
   const { register } = useAuthStore();
   const [error, setError] = useState<ResponseError | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setError(null);
+    setSuccess(false);
+    setIsLoading(true);
     const formData = new FormData(event.currentTarget);
     const usernameInput = formData.get('username')?.toString() ?? '';
     const emailInput = formData.get('email')?.toString() ?? '';
@@ -30,6 +37,7 @@ export const Register = () => {
     if (responseError == null) {
       setSuccess(true);
     }
+    setIsLoading(false);
   }
 
   return (
@@ -84,12 +92,9 @@ export const Register = () => {
               />
             </Grid>
           </Grid>
-          {error && <p style={{ color: theme.palette.error.main }}>
-            {error.text}
-          </p>}
-          {success && <p style={{ color: theme.palette.success.main }}>
-            Sucessfully registered.
-          </p>}
+          <Loading loading={isLoading} />
+          <LoadingError error={error?.text} />
+          <LoadingSuccess success={success ? 'Sucessfully registered.' : undefined} />
           <Button
             type="submit"
             fullWidth

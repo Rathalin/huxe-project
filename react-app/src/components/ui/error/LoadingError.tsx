@@ -1,16 +1,15 @@
 import { Alert } from '@mui/material';
 import Box from '@mui/material/Box';
-import { useTheme } from '@mui/system';
 
 interface LoadingErrorProps {
-  error: string,
+  error?: string,
 }
 
-export function LoadingError({ error: message }: LoadingErrorProps) {
-  const theme = useTheme();
+export function LoadingError({ error: error }: LoadingErrorProps) {
+  if (error == null) return null;
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', }}>
-      <Alert severity="error">{message}</Alert>
+      <Alert severity="error">{error}</Alert>
     </Box>
   );
 }

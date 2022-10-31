@@ -11,14 +11,18 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useTheme } from '@mui/material';
 import { ResponseError, useAuthStore } from '../store/authStore';
+import { LoadingError } from './ui/error/LoadingError';
+import { Loading } from './ui/loading/Loading';
 
 export const Login = () => {
   const theme = useTheme();
   const { login } = useAuthStore();
-  let [error, setError] = useState<ResponseError | null>(null);
+  const [error, setError] = useState<ResponseError | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleLogin(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setIsLoading(true);
     setError(null);
     const formData = new FormData(event.currentTarget);
     const emailInput = formData.get('email')?.toString() ?? '';
@@ -30,6 +34,7 @@ export const Login = () => {
         setError(response);
       }
     }
+    setIsLoading(false);
   }
 
   return (
@@ -70,9 +75,8 @@ export const Login = () => {
             id="password"
             autoComplete="current-password"
           />
-          {error && <p style={{ color: theme.palette.error.main }}>
-            {error.text}
-          </p>}
+          <LoadingError error={error?.text} />
+          <Loading loading={isLoading} />
           <Button
             type='submit'
             fullWidth
