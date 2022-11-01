@@ -37,7 +37,6 @@ export const useAuthStore = create<UserState>(set => ({
       return {
         text: data.error.message,
       };
-
     }
     set({
       user: {

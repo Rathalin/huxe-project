@@ -58,34 +58,36 @@ export const Register = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                autoComplete="user-name"
-                name="username"
-                required
-                fullWidth
                 id="username"
+                name="username"
                 label="Username"
+                type="text"
+                autoComplete="new-username"
+                fullWidth
+                required
                 autoFocus
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                required
-                fullWidth
                 id="email"
-                label="Email Address"
                 name="email"
-                autoComplete="email"
+                label="Email Address"
+                type="email"
+                autoComplete="new-email"
+                fullWidth
+                required
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                required
-                fullWidth
+                id="password"
                 name="password"
                 label="Password"
                 type="password"
-                id="password"
                 autoComplete="new-password"
+                fullWidth
+                required
               />
             </Grid>
           </Grid>
