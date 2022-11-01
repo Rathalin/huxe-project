@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "emotion_types",
+  "info": {
+    "singularName": "emotion-type",
+    "pluralName": "emotion-types",
+    "displayName": "EmotionType"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 20,
+      "unique": true
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "priority_notes",
+  "info": {
+    "singularName": "priority-note",
+    "pluralName": "priority-notes",
+    "displayName": "PriorityNote"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "priority": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::priority.priority"
+    },
+    "note": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::note.note"
+    }
+  }
+}

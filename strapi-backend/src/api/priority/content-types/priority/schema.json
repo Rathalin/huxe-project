@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "priorities",
+  "info": {
+    "singularName": "priority",
+    "pluralName": "priorities",
+    "displayName": "Priority",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 30
+    },
+    "iconName": {
+      "type": "string",
+      "required": true,
+      "maxLength": 20
+    },
+    "weeklyGoal": {
+      "type": "integer",
+      "required": true,
+      "max": 7,
+      "min": 1
+    }
+  }
+}

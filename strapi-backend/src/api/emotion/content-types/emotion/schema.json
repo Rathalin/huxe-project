@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "emotions",
+  "info": {
+    "singularName": "emotion",
+    "pluralName": "emotions",
+    "displayName": "Emotion",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 20,
+      "unique": true
+    },
+    "emotionType": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::emotion-type.emotion-type"
+    }
+  }
+}

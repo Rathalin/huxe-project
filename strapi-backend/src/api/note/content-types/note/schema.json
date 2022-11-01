@@ -4,17 +4,18 @@
   "info": {
     "singularName": "note",
     "pluralName": "notes",
-    "displayName": "Note"
+    "displayName": "Note",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "Text": {
-      "type": "string",
+    "text": {
+      "type": "text",
       "required": true,
-      "maxLength": 100
+      "maxLength": 200
     }
   }
 }

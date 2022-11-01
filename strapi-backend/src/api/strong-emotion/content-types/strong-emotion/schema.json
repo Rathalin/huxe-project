@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "strong_emotions",
+  "info": {
+    "singularName": "strong-emotion",
+    "pluralName": "strong-emotions",
+    "displayName": "StrongEmotion"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "emotions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::emotion.emotion"
+    },
+    "note": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::note.note"
+    }
+  }
+}

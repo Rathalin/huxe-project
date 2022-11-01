@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "daily_moods",
+  "info": {
+    "singularName": "daily-mood",
+    "pluralName": "daily-moods",
+    "displayName": "DailyMood",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "satisfiedPriorities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::priority.priority"
+    },
+    "mood": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::mood.mood"
+    },
+    "note": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::note.note"
+    },
+    "priorityNote": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::priority-note.priority-note"
+    }
+  }
+}
