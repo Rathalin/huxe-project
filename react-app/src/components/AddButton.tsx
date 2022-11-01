@@ -13,7 +13,7 @@ export const AddButton = ({ Icon, onClick }: PropsWithChildren<AddButtonProps>) 
       mt: 3, display: 'flex', flexDirection: 'row',
       alignItems: 'center'
     }}>
-    <Icon/>
+    <Icon />
       <IconButton color="primary" aria-label="add" onClick={onClick}>
         <AddBoxIcon />
       </IconButton>

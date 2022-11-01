@@ -1,19 +1,17 @@
-import { Moods } from './Moods';
-import { NewMood } from './NewMood';
 import { MoodCalender } from './MoodCalender';
 import { MoodGraph } from './MoodGraph';
 import React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Unstable_Grid2';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Container from '@mui/material/Container';
-import { NewEmotion } from './NewEmotion';
 import { Notes } from './Notes';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
 import { AddButton } from './AddButton';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
+import { Priorities } from './Priorities';
 
 export const Dashboard = () => {
   const navigate = useNavigate();
@@ -22,9 +20,6 @@ export const Dashboard = () => {
     "July", "August", "September", "October", "November", "December"
   ];
 
-  const handleClick = () => {
-    navigate("/newMood")
-  }
   return (
     <Container component='main' maxWidth='md'>
       <CssBaseline />
@@ -40,26 +35,26 @@ export const Dashboard = () => {
             <Typography component='h3' variant='h5'>
               Priorities
             </Typography>
-            <Moods />
+            <Priorities />
           </Grid>
           <Grid xs={12} md={6}>
             <Typography component='h3' variant='h5'>
               Track Mood
             </Typography>
-            <AddButton Icon={() => <SentimentSatisfiedAltIcon />} onClick={() => { navigate("/newMood") }} />
+            <AddButton Icon={() => <SentimentSatisfiedAltIcon  fontSize="large" />} onClick={() => { navigate("/newMood") }} />
           </Grid>
           <Grid xs={12} md={6}>
             <Typography component='h3' variant='h5'>
               Strong Emotion
             </Typography>
-            <AddButton Icon={() => <ThunderstormIcon />} onClick={() => { navigate("/newEmotion") }} />
+            <AddButton Icon={() => <ThunderstormIcon  fontSize="large" />} onClick={() => { navigate("/newEmotion") }} />
           </Grid>
           <Grid xs={12} md={12}>
             <Grid xs={12} md={6}>
               <Typography component='h3' variant='h5'>
                 {monthNames[date.getMonth()]}
               </Typography>
-              <MoodCalender />
+              <MoodCalender year={date.getFullYear()} month={date.getMonth() +1} />
             </Grid>
             <Grid xs={12} md={6}>
               <MoodGraph />

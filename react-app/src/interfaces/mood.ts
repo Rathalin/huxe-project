@@ -1,5 +1,5 @@
 export interface Mood {
   id: string,
-  name: string,
+  type: string,
   date: Date,
 }

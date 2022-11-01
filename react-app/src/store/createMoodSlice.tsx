@@ -4,20 +4,20 @@ import { v4 as uuidv4 } from 'uuid';
 
 export interface MoodSlice {
   moods: Mood[],
-  addMood: (name: string) => void,
+  addMood: (type: string) => void,
   removeMood: (id: string) => void,
 }
 
 
 const createMoodSlice: StateCreator<MoodSlice> = (set) => ({
   moods: [],
-  addMood: (name: string) => {
+  addMood: (type: string) => {
     set((state) => ({
       moods: [
         ...state.moods,
         {
           id: uuidv4(),
-          name,
+          type,
           date: new Date(),
         } as Mood,
       ],
