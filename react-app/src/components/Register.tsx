@@ -12,12 +12,12 @@ import { FormEvent, useRef, useState } from 'react';
 import { Loading } from './ui/loading/Loading';
 import { LoadingError } from './ui/error/LoadingError';
 import { LoadingSuccess } from './ui/success/LoadingSuccess';
-import { ResponseError } from '../services/rest-api.service';
 import { useAuthStore } from '../stores/authStore';
+import { ResponseError } from '../services/rest-api.responses';
 
 export const Register = () => {
   const { register } = useAuthStore();
-  const [error, setError] = useState<ResponseError | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -30,9 +30,10 @@ export const Register = () => {
     const usernameInput = formData.get('username')?.toString() ?? '';
     const emailInput = formData.get('email')?.toString() ?? '';
     const passwordInput = formData.get('password')?.toString() ?? '';
-    const responseError = await register(emailInput, usernameInput, passwordInput);
-    setError(responseError);
-    if (responseError == null) {
+    const res = await register(emailInput, usernameInput, passwordInput);
+    if (res.error != null) {
+      setError(res.error.message);
+    } else {
       setSuccess(true);
     }
     setIsLoading(false);
@@ -94,7 +95,7 @@ export const Register = () => {
           </Grid>
           <Box sx={{ mt: 2 }}>
             <Loading loading={isLoading} />
-            <LoadingError error={error?.text} />
+            <LoadingError error={error ?? undefined} />
             <LoadingSuccess success={success ? 'Sucessfully registered.' : undefined} />
           </Box>
           <Button

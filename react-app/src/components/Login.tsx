@@ -11,12 +11,11 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { LoadingError } from './ui/error/LoadingError';
 import { Loading } from './ui/loading/Loading';
-import { ResponseError } from '../services/rest-api.service';
 import { useAuthStore } from '../stores/authStore';
 
 export const Login = () => {
   const { login } = useAuthStore();
-  const [error, setError] = useState<ResponseError | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   async function handleLogin(event: FormEvent<HTMLFormElement>) {
@@ -26,11 +25,9 @@ export const Login = () => {
     const formData = new FormData(event.currentTarget);
     const emailInput = formData.get('email')?.toString() ?? '';
     const passwordInput = formData.get('password')?.toString() ?? '';
-    if (emailInput.length > 0) {
-      const response = await login(emailInput, passwordInput);
-      if (response != null) {
-        setError(response);
-      }
+    const res = await login(emailInput, passwordInput);
+    if (res.error != null) {
+      setError(res.error.message);
     }
     setIsLoading(false);
   }
@@ -52,7 +49,7 @@ export const Login = () => {
         <Typography component='h1' variant='h5'>
           Sign in
         </Typography>
-        <Box component="form" onSubmit={handleLogin} sx={{ mt: 1 }}>
+        <Box component="form" noValidate onSubmit={handleLogin} sx={{ mt: 1 }}>
           <TextField
             margin='normal'
             required
@@ -74,7 +71,7 @@ export const Login = () => {
             autoComplete="current-password"
           />
           <Box sx={{ mt: 2 }}>
-            <LoadingError error={error?.text} />
+            <LoadingError error={error ?? undefined} />
             <Loading loading={isLoading} />
           </Box>
           <Button

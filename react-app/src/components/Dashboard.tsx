@@ -12,9 +12,11 @@ import { AddButton } from './AddButton';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
 import { Priorities } from './Priorities';
+import { useDailyMoodStore } from '../stores/dailyMoodStore';
 
 export const Dashboard = () => {
   const navigate = useNavigate();
+  useDailyMoodStore().init();
   const date = new Date();
   const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
@@ -41,20 +43,20 @@ export const Dashboard = () => {
             <Typography component='h3' variant='h5'>
               Track Mood
             </Typography>
-            <AddButton Icon={() => <SentimentSatisfiedAltIcon  fontSize="large" />} onClick={() => { navigate("/newMood") }} />
+            <AddButton Icon={() => <SentimentSatisfiedAltIcon fontSize="large" />} onClick={() => { navigate("/newMood") }} />
           </Grid>
           <Grid xs={12} md={6}>
             <Typography component='h3' variant='h5'>
               Strong Emotion
             </Typography>
-            <AddButton Icon={() => <ThunderstormIcon  fontSize="large" />} onClick={() => { navigate("/newEmotion") }} />
+            <AddButton Icon={() => <ThunderstormIcon fontSize="large" />} onClick={() => { navigate("/newEmotion") }} />
           </Grid>
           <Grid xs={12} md={12}>
             <Grid xs={12} md={6}>
               <Typography component='h3' variant='h5'>
                 {monthNames[date.getMonth()]}
               </Typography>
-              <MoodCalender year={date.getFullYear()} month={date.getMonth() +1} />
+              <MoodCalender year={date.getFullYear()} month={date.getMonth() + 1} />
             </Grid>
             <Grid xs={12} md={6}>
               <MoodGraph />

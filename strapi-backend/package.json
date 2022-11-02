@@ -18,7 +18,8 @@
     "@strapi/strapi": "4.4.5",
     "better-sqlite3": "7.4.6",
     "node-sass": "^7.0.3",
-    "sass": "^1.55.0"
+    "sass": "^1.55.0",
+    "strapi-plugin-populate-deep": "^1.1.2"
   },
   "devDependencies": {
     "concurrently": "^7.2.1"

@@ -1,50 +1,52 @@
 import create from 'zustand';
 import { User } from '../interfaces/user';
-import { ResponseError, restApiService } from '../services/rest-api.service';
+import { LoginResponse, RegisterResponse, ResponseError } from '../services/rest-api.responses';
+import { restApiService } from '../services/rest-api.service';
 
 interface UserState {
   user: User | null,
-  login: (identifier: string, password: string) => Promise<ResponseError | null>,
-  register: (email: string, username: string, password: string) => Promise<ResponseError | null>,
-  logout: () => Promise<ResponseError | null>
+  login: (identifier: string, password: string) => Promise<LoginResponse>,
+  register: (email: string, username: string, password: string) => Promise<RegisterResponse>,
+  logout: () => Promise<void>
 }
 
 
 // TODO: Remove
-(async () => {
-  console.log('Todays Daily Mood:', await restApiService.getDailyMoodOfToday());
-})();
+// (async () => {
+//   console.log('Todays Daily Mood:', await restApiService.getDailyMoodOfToday());
+// })();
 
 export const useAuthStore = create<UserState>(set => ({
   user: null,
   async login(identifier, password) {
-    const data = await restApiService.login(identifier, password);
-    if (data.error) {
-      return {
-        text: data.error.message,
-      };
+    const res = await restApiService.login(identifier, password);
+    if (res.error == null && res.user != null && res.jwt != null) {
+      set({
+        user: {
+          id: res.user.id,
+          username: res.user.username,
+          email: res.user.email,
+          jwt: res.jwt,
+        }
+      });
     }
-    set({
-      user: {
-        id: data.user.id,
-        username: data.user.username,
-        email: data.user.email,
-        jwt: data.jwt,
-      }
-    });
-    return null;
+    return res;
   },
   async register(email, username, password) {
-    const data = await restApiService.register(email, username, password);
-    if (data.error) {
-      return {
-        text: data.error.message,
-      };
+    const res = await restApiService.register(email, username, password);
+    if (res.error == null && res.user != null && res.jwt != null) {
+      set({
+        user: {
+          id: res.user.id,
+          username: res.user.username,
+          email: res.user.email,
+          jwt: res.jwt,
+        }
+      });
     }
-    return null;
+    return res;
   },
   async logout() {
     set({ user: null });
-    return null;
   },
 }));
