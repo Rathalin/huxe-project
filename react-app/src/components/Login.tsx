@@ -9,9 +9,10 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { ResponseError, useAuthStore } from '../store/authStore';
 import { LoadingError } from './ui/error/LoadingError';
 import { Loading } from './ui/loading/Loading';
+import { ResponseError } from '../services/rest-api.service';
+import { useAuthStore } from '../stores/authStore';
 
 export const Login = () => {
   const { login } = useAuthStore();

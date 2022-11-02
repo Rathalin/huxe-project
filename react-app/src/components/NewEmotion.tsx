@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useStore } from '../store/useStore';
+import { useStore } from '../stores/useStore';
 import { Button, Container, IconButton, styled, ButtonProps } from '@mui/material';
 
 export const NewEmotion = () => {

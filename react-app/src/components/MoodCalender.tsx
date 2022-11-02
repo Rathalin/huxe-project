@@ -1,4 +1,4 @@
-import { useStore } from '../store/useStore';
+import { useStore } from '../stores/useStore';
 import { Container } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { getDaysPerMonth } from '../utils/utils';
@@ -14,7 +14,7 @@ type MoodCalenderProps = {
 
 
 
-export const MoodCalender = ({ year, month } : PropsWithChildren<MoodCalenderProps>) => {
+export const MoodCalender = ({ year, month }: PropsWithChildren<MoodCalenderProps>) => {
   const { moods } = useStore();
   const daysPerMonth = getDaysPerMonth(year, month)
 
@@ -24,12 +24,12 @@ export const MoodCalender = ({ year, month } : PropsWithChildren<MoodCalenderPro
         {[...Array(daysPerMonth)].map((e, i) => (
           <Grid key={i} md={1}>
             {moods[i] ?
-                <MoodIcon moodType={moods[i].type}/>:
+              <MoodIcon moodType={moods[i].type} /> :
               <CircleIcon sx={{ color: grey[500] }} />
             }
 
           </Grid>
-      ))}
+        ))}
       </Grid>
     </Container>
   );

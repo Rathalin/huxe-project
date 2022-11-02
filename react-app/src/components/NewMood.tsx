@@ -1,4 +1,4 @@
-import { useStore } from '../store/useStore';
+import { useStore } from '../stores/useStore';
 import { Box, Checkbox, Container } from '@mui/material';
 import { MoodIcon } from './MoodIcon';
 import { MOODS } from '../utils/utils';
@@ -27,29 +27,29 @@ export const NewMood = () => {
         mt: 3, display: 'flex', flexDirection: 'column',
         alignItems: 'left'
       }}>
-      <Typography component='h3' variant='h4'>
-        Track Mood
-      </Typography>
+        <Typography component='h3' variant='h4'>
+          Track Mood
+        </Typography>
         <Box sx={{
           mt: 3, display: 'flex', flexDirection: 'row',
           alignItems: 'center'
         }}>
-      {Object.keys(MOODS).map((moodType) =>(
-        <Checkbox key={moodType} icon={<MoodIcon moodType={moodType}/>} checkedIcon={<MoodIcon moodType={moodType}/>} onChange={()=>{setSelectedMood(moodType)}} checked={selectedMood === moodType}/>
-        ))}
+          {Object.keys(MOODS).map((moodType) => (
+            <Checkbox key={moodType} icon={<MoodIcon moodType={moodType} />} checkedIcon={<MoodIcon moodType={moodType} />} onChange={() => { setSelectedMood(moodType) }} checked={selectedMood === moodType} />
+          ))}
         </Box>
         <Typography component='h3' variant='h5'>
           Priorities Satisfied today
         </Typography>
-        <Priorities/>
+        <Priorities />
         <Typography component='h3' variant='h5'>
           Strong Emotion
         </Typography>
         <Typography component='p'>
           Do you want to record a strong Emotion today?
         </Typography>
-        <AddButton Icon={() => <ThunderstormIcon  fontSize="large" />} onClick={() => { navigate("/newEmotion") }} />
-        <NewNote/>
+        <AddButton Icon={() => <ThunderstormIcon fontSize="large" />} onClick={() => { navigate("/newEmotion") }} />
+        <NewNote />
         <Button
           type='submit'
           fullWidth

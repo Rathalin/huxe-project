@@ -3,8 +3,8 @@ import { Dashboard } from '../Dashboard';
 import { StrongEmotion } from '../StrongEmotion';
 import { Register } from '../Register';
 import { Login } from '../Login';
-import { useStore } from '../../store/useStore';
-import { useAuthStore } from '../../store/authStore';
+import { useStore } from '../../stores/useStore';
+import { useAuthStore } from '../../stores/authStore';
 import { NewMood } from '../NewMood';
 import { NewEmotion } from '../NewEmotion';
 
