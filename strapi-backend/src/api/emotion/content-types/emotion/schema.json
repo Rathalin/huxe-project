@@ -18,7 +18,7 @@
       "maxLength": 20,
       "unique": true
     },
-    "emotionType": {
+    "emotion_type": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::emotion-type.emotion-type"

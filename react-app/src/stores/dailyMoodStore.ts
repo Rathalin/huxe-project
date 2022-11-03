@@ -1,6 +1,6 @@
 import create from 'zustand';
-import { DailyMood } from '../interfaces/daily-mood';
-import { ResponseError, restApiService } from '../services/rest-api.service';
+import { DailyMood, ResponseError } from '../services/rest-api.responses';
+import { restApiService } from '../services/rest-api.service';
 
 interface DailyMoodState {
   dailyMood: DailyMood | null,
