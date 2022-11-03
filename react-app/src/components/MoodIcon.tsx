@@ -6,9 +6,9 @@ import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfi
 import SentimentNeutralIcon from '@mui/icons-material/SentimentNeutral';
 
 export const moodSmileys = {
-  'veryGood': <SentimentVerySatisfiedIcon name='veryGood' type='veryGood'/>,
-  'good': <SentimentSatisfiedIcon name='good' type='good'/>,
-  'neutral': <SentimentNeutralIcon name='neutral' type='neutral'/>,
+  'veryGood': <SentimentVerySatisfiedIcon name='veryGood' type='veryGood' />,
+  'good': <SentimentSatisfiedIcon name='good' type='good' />,
+  'neutral': <SentimentNeutralIcon name='neutral' type='neutral' />,
   'bad': <SentimentDissatisfiedIcon name='bad' type='bad' />,
   'veryBad': <SentimentVeryDissatisfiedIcon name='veryBad' type='veryBad' />
 };

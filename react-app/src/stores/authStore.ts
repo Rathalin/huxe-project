@@ -1,6 +1,6 @@
 import create from 'zustand';
 import { User } from '../interfaces/user';
-import { LoginResponse, RegisterResponse, ResponseError } from '../services/rest-api.responses';
+import { LoginResponse, RegisterResponse, StrapiError } from '../services/rest-api.responses';
 import { restApiService } from '../services/rest-api.service';
 
 interface UserState {
@@ -9,12 +9,6 @@ interface UserState {
   register: (email: string, username: string, password: string) => Promise<RegisterResponse>,
   logout: () => Promise<void>
 }
-
-
-// TODO: Remove
-// (async () => {
-//   console.log('Todays Daily Mood:', await restApiService.getDailyMoodOfToday());
-// })();
 
 export const useAuthStore = create<UserState>(set => ({
   user: null,

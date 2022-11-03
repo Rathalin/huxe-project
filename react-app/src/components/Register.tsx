@@ -13,7 +13,7 @@ import { Loading } from './ui/loading/Loading';
 import { LoadingError } from './ui/error/LoadingError';
 import { LoadingSuccess } from './ui/success/LoadingSuccess';
 import { useAuthStore } from '../stores/authStore';
-import { ResponseError } from '../services/rest-api.responses';
+import { StrapiError } from '../services/rest-api.responses';
 
 export const Register = () => {
   const { register } = useAuthStore();

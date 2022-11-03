@@ -28,6 +28,11 @@
       "required": true,
       "max": 7,
       "min": 1
+    },
+    "active": {
+      "type": "boolean",
+      "default": true,
+      "required": true
     }
   }
 }

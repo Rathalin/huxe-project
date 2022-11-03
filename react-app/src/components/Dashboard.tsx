@@ -1,6 +1,6 @@
 import { MoodCalender } from './MoodCalender';
 import { MoodGraph } from './MoodGraph';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Unstable_Grid2';
 import { useNavigate } from 'react-router-dom';
@@ -12,11 +12,24 @@ import { AddButton } from './AddButton';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
 import { Priorities } from './Priorities';
-import { useDailyMoodStore } from '../stores/dailyMoodStore';
+import { useQuery } from '@tanstack/react-query';
+import request from 'graphql-request';
+import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
+import { DAILY_MOODS_QUERY } from '../graphql/queries/daily-moods';
 
 export const Dashboard = () => {
   const navigate = useNavigate();
-  useDailyMoodStore().init();
+
+  const { data } = useQuery({
+    queryKey: ['daily-mood'],
+    queryFn: () => request(GRAPHQL_ENDPOINT, DAILY_MOODS_QUERY),
+  });
+
+  if (data) {
+    console.log(data);
+  }
+
+
   const date = new Date();
   const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"

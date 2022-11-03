@@ -33,9 +33,8 @@ class RestApiService {
   public async getDailyMoodOfToday() {
     const res = await fetch(`${this.API_URL}/daily-moods?populate=deep`);
     const data = await res.json() as DailyMoodsResponse;
-    console.log('DailyMoods', data.data![0].attributes.createdAt);
-    console.log(this.getDateOfToday());
-    const dailyMood = data.data?.find(data =>
+    if (data.data == null) return null;
+    const dailyMood = data.data.find(data =>
       data.attributes.createdAt.startsWith(this.getDateOfToday()));
     return dailyMood ?? null;
   }
@@ -51,9 +50,13 @@ class RestApiService {
 
   private getDateOfToday() {
     const now = new Date();
-    return `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const day = now.getDate();
+    return `${year}-${month}-${day < 10 ? '0' + day : day}`;
   }
 
 }
 
 export const restApiService = new RestApiService();
+

@@ -1,10 +1,21 @@
-export interface ResponseError {
+export interface StrapiError {
   error?: {
     status: number,
     name: string,
     message: string,
     details?: object,
   }
+}
+
+export interface StrapiMeta {
+  meta: {
+    pagination: {
+      page: number,
+      pageSize: number,
+      pageCount: number,
+      total: number,
+    },
+  },
 }
 
 export interface AuthUser {
@@ -21,9 +32,9 @@ export interface AuthUser {
   },
 }
 
-export type LoginResponse = AuthUser & ResponseError
+export type LoginResponse = AuthUser & StrapiError
 
-export type RegisterResponse = AuthUser & ResponseError
+export type RegisterResponse = AuthUser & StrapiError
 
 export interface DailyMood {
   id: number,
@@ -97,10 +108,10 @@ export interface DailyMood {
   },
 }
 
-export type DailyMoodResponse = DailyMood & ResponseError
+export type DailyMoodResponse = DailyMood & StrapiError & StrapiMeta
 
 export type DailyMoodsResponse = {
   data: DailyMood[] | null,
-} & ResponseError
+} & StrapiError & StrapiMeta
 
 
