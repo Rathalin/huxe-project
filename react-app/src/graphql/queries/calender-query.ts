@@ -1,16 +1,22 @@
-import { graphql } from '../generated';
+import { graphql } from "../generated/gql";
 
-export const DAILY_MOODS_QUERY = graphql(`
-  query DailyMoods {
+export const CALENDER_QUERY = graphql(`
+  query DailyMoodsCalender {
     dailyMoods {
       data {
         id
         attributes {
+          createdAt
           mood {
             data {
               attributes {
                 iconName
               }
+            }
+          }
+          strong_emotions {
+            data {
+              id
             }
           }
         }

@@ -14,7 +14,8 @@ export const moodSmileys = {
 };
 
 type MoodIconProps = {
-  moodType: string
+  moodType: string,
+  strongEmotion: boolean, // TODO Display strong emotion icon when true
 };
 
 
