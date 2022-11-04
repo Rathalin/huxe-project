@@ -86,7 +86,7 @@ export const Dashboard = () => {
             <Typography component='h3' variant='h5'>
               Strong Emotion
             </Typography>
-            <AddButton Icon={() => <ThunderstormIcon fontSize='large' />} onClick={() => { navigate('/newEmotion') }} />
+            <AddButton Icon={() => <ThunderstormIcon fontSize='large' />} onClick={() => { navigate('/emotion') }} />
           </Grid>
           <Grid xs={12} md={12}>
             <Grid xs={12} md={6}>
