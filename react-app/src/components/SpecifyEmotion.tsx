@@ -17,10 +17,10 @@ export const SpecifyEmotion = () => {
 
       <Box>
         <FormControlLabel
-        label='Feeling'
-        control={<Checkbox />}
+          label='Feeling'
+          control={<Checkbox />}
         />
-        </Box>
+      </Box>
 
     </Container>
   );

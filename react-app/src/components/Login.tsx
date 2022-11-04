@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -49,7 +49,7 @@ export const Login = () => {
         <Typography component='h1' variant='h5'>
           Sign in
         </Typography>
-        <Box component="form" noValidate onSubmit={handleLogin} sx={{ mt: 1 }}>
+        <Box component='form' noValidate onSubmit={handleLogin} sx={{ mt: 1 }}>
           <TextField
             margin='normal'
             required
@@ -64,11 +64,11 @@ export const Login = () => {
             margin='normal'
             required
             fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
+            name='password'
+            label='Password'
+            type='password'
+            id='password'
+            autoComplete='current-password'
           />
           <Box sx={{ mt: 2 }}>
             <LoadingError error={error ?? undefined} />

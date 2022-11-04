@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren, Fragment } from 'react';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
 import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
@@ -25,10 +25,10 @@ function hasKey<O>(obj: O, key: PropertyKey): key is keyof O {
 
 export const MoodIcon = ({ moodType, strongEmotion = false }: PropsWithChildren<MoodIconProps>) => {
   return (
-    <React.Fragment>
+    <Fragment>
       {
-        hasKey(moodSmileys, moodType) ? moodSmileys[moodType] : ""
+        hasKey(moodSmileys, moodType) ? moodSmileys[moodType] : ''
       }
-    </React.Fragment>
+    </Fragment>
   );
 };

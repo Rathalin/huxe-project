@@ -10,20 +10,23 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NewNote } from './NewNote';
 import Button from '@mui/material/Button';
+import { useMutation } from '@tanstack/react-query';
+import request from 'graphql-request';
+import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
+import { CREATE_DAILY_MOOD_MUTATION } from '../graphql/mutations/new-daily-mood-mutation';
 
 export const NewMood = () => {
-  const { addMood } = useStore();
   const navigate = useNavigate();
-  const [selectedMood, setSelectedMood] = useState("")
+  const [selectedMood, setSelectedMood] = useState('');
 
   const handleSubmit = () => {
-    addMood(selectedMood)
-    navigate("/dashboard")
+    // addMood(selectedMood);
+    navigate('/dashboard');
   }
 
   return (
     <Container maxWidth='md' sx={{ mt: 3, display: 'flex', gap: 1 }}>
-      <Box component="form" onSubmit={handleSubmit} sx={{
+      <Box component='form' onSubmit={handleSubmit} sx={{
         mt: 3, display: 'flex', flexDirection: 'column',
         alignItems: 'left'
       }}>
@@ -48,7 +51,7 @@ export const NewMood = () => {
         <Typography component='p'>
           Do you want to record a strong Emotion today?
         </Typography>
-        <AddButton Icon={() => <ThunderstormIcon fontSize="large" />} onClick={() => { navigate("/newEmotion") }} />
+        <AddButton Icon={() => <ThunderstormIcon fontSize='large' />} onClick={() => { navigate('/newEmotion') }} />
         <NewNote />
         <Button
           type='submit'

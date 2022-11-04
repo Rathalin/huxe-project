@@ -1,4 +1,3 @@
-import { useStore } from '../stores/useStore';
 import { Container } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { request } from 'graphql-request';

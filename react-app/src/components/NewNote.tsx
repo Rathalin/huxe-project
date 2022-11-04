@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useStore } from '../stores/useStore';
 import { Button, Container, hslToRgb, TextField } from '@mui/material';
-import { emitKeypressEvents } from 'readline';
 
 export const NewNote = () => {
   const { addNote } = useStore();
@@ -18,7 +17,7 @@ export const NewNote = () => {
         multiline
         rows={4}
         fullWidth
-        color="secondary"
+        color='secondary'
         focused
         variant='filled'
         onChange={(e) => setNote(e.target.value)}
