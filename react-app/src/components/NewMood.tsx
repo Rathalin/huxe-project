@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Priorities } from './Priorities';
 import { AddButton } from './AddButton';
 import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NewNote } from './NewNote';
 import Button from '@mui/material/Button';

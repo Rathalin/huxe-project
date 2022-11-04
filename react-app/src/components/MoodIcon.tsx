@@ -15,7 +15,7 @@ export const moodSmileys = {
 
 type MoodIconProps = {
   moodType: string,
-  strongEmotion: boolean, // TODO Display strong emotion icon when true
+  strongEmotion?: boolean, // TODO Display strong emotion icon when true
 };
 
 
@@ -23,7 +23,7 @@ function hasKey<O>(obj: O, key: PropertyKey): key is keyof O {
   return key in obj
 }
 
-export const MoodIcon = ({ moodType }: PropsWithChildren<MoodIconProps>) => {
+export const MoodIcon = ({ moodType, strongEmotion = false }: PropsWithChildren<MoodIconProps>) => {
   return (
     <React.Fragment>
       {
