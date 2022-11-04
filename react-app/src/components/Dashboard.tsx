@@ -12,22 +12,20 @@ import { AddButton } from './AddButton';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
 import { Priorities } from './Priorities';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
 import { DAILY_MOODS_QUERY } from '../graphql/queries/daily-moods';
+import { Loading } from './ui/loading/Loading';
 
 export const Dashboard = () => {
   const navigate = useNavigate();
+  // const { data, isLoading } = useQuery({
+  //   queryKey: ['daily-mood'],
+  //   queryFn: () => request(GRAPHQL_ENDPOINT, DAILY_MOODS_QUERY),
+  // });
 
-  const { data } = useQuery({
-    queryKey: ['daily-mood'],
-    queryFn: () => request(GRAPHQL_ENDPOINT, DAILY_MOODS_QUERY),
-  });
-
-  if (data) {
-    console.log(data);
-  }
+  // if (isLoading) return <Loading />;
 
 
   const date = new Date();
