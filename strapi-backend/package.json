@@ -4,9 +4,10 @@
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
+    "codegen": "cd ../react-app && npm run codegen:watch",
     "client": "cd ../react-app && npm run start",
     "dev": "strapi develop",
-    "start": "concurrently -k \"npm run client\" \"npm run startstrapi\"",
+    "start": "concurrently -k \"npm run client\" \"npm run startstrapi\" \"npm run codegen\"",
     "build": "strapi build",
     "startstrapi": "strapi develop",
     "strapi": "strapi"
