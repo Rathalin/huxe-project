@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Container, Checkbox, Box, FormControlLabel } from '@mui/material';
+import { Container, Checkbox, Box, FormControlLabel, Typography } from '@mui/material';
 
 
 export const SpecifyEmotion = () => {
@@ -13,7 +13,10 @@ export const SpecifyEmotion = () => {
   return (
     <Container maxWidth='xl'>
 
-      <h5>Select the emotions you are feeling</h5>
+      <Typography component='h3' variant='h4'>
+          Select the emotions you are feeling
+      </Typography>
+
 
       <Box>
         <FormControlLabel
