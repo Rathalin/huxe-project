@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { Container, Checkbox, Box, FormControlLabel, Typography } from '@mui/material';
+import { MoodIcon } from './MoodIcon';
+import { BADEMOTIONS } from '../utils/utils';
+import { EmotionCard } from './EmotionCard';
 
 
 export const SpecifyEmotion = () => {
@@ -17,13 +20,26 @@ export const SpecifyEmotion = () => {
           Select the emotions you are feeling
       </Typography>
 
+      <Box sx={{
+        mt: 3, display: 'flex', flexDirection: 'row',
+        alignItems: 'center'
+      }}>
+        {Object.keys(BADEMOTIONS).map((emotionType) => (
+          <Checkbox key={emotionType} 
+          icon={<EmotionCard emotionType={emotionType} />} 
+          checkedIcon={<EmotionCard emotionType={emotionType} />} 
+          onChange={() => { setStrongFeeling(emotionType) }} 
+          checked={strongFeeling === emotionType} />
+        ))}
+      </Box>
 
+{/* 
       <Box>
         <FormControlLabel
         label='Feeling'
         control={<Checkbox />}
         />
-        </Box>
+        </Box> */}
 
     </Container>
   );

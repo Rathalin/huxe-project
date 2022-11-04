@@ -9,3 +9,15 @@ export const MOODS = {
   bad: 'Bad',
   veryBad: 'Very Bad',
 };
+
+export const BADEMOTIONS = {
+  sadness: 'sadness',
+  fear: 'fear',
+  anger: 'anger',
+  disgust: 'disgust',
+};
+
+export const GOODEMOTIONS = {
+  enjoyment: 'enjoyment',
+};
+
