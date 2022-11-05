@@ -11,7 +11,7 @@ export const MoodGraph = () => {
     queryFn: () => request(GRAPHQL_ENDPOINT, GRAPH_QUERY),
   });
 
-  if (isLoading || data == null) return <Loading />;
+  if (isLoading) return <Loading />;
 
   return (
     <Container maxWidth='xs'>

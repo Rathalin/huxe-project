@@ -43,8 +43,9 @@ export const Dashboard = () => {
     mutationFn: () => request(GRAPHQL_ENDPOINT, CREATE_DAILY_MOOD_MUTATION, { dailyMoodInput: {} }),
   });
 
-  if (isLoading || data == null) return <Loading />;
-  if (data.dailyMoods?.data.length === 0) {
+  if (isLoading) return <Loading />;
+
+  if (data?.dailyMoods?.data.length === 0) {
     // mutation.mutate();
     console.log('Creating Daily Mood');
   }

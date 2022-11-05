@@ -21,13 +21,13 @@ export const MoodCalender = ({ year, month }: MoodCalenderProps) => {
     queryFn: () => request(GRAPHQL_ENDPOINT, CALENDER_QUERY),
   });
 
-  if (isLoading || data == null) return <Loading />;
+  if (isLoading) return <Loading />;
 
   const daysPerMonth = getDaysPerMonth(year, month);
   const dailyMoodsPerDay = [...Array(daysPerMonth).keys()]
     .map(day => day + 1)
     .map(day => {
-      const moodOfDay = data.dailyMoods?.data?.find(mood => new Date(mood.attributes?.createdAt).getDate() === day);
+      const moodOfDay = data?.dailyMoods?.data?.find(mood => new Date(mood.attributes?.createdAt).getDate() === day);
       return moodOfDay ?? null;
     });
 

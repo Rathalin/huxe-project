@@ -18,9 +18,9 @@ export const SelectEmotionType = () => {
     queryFn: () => request(GRAPHQL_ENDPOINT, EMOTION_TYPES_QUERY),
   });
 
-  if (isLoading || data == null) return <Loading />;
+  if (isLoading) return <Loading />;
 
-  const emotionTypes = data.emotionTypes?.data
+  const emotionTypes = data?.emotionTypes?.data
     .map(emotionType => emotionType.attributes?.name)
     .filter((emotionTypeName): emotionTypeName is string => emotionTypeName != null) ?? [];
 
