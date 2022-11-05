@@ -28,7 +28,7 @@ export const StrongEmotion = () => {
   return (
     <Container maxWidth='md'>
 
-      <Typography component='h4' variant='h4'>
+      <Typography component='h1' variant='h3'>
         Strong Emotion
       </Typography>
 

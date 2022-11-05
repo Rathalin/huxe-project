@@ -16,6 +16,18 @@ export const themeOptions: ThemeOptions = {
           "&:hover": {
             backgroundColor: '#323463'
           }
+        },
+        outlined: {
+          borderRadius: '10px',
+          height: '50px',
+          color: '#FFC107',
+          borderColor: '#FFC107',
+          backgroundColor: '#323463',
+          "&:hover": {
+            backgroundColor: '#FFC107',
+            borderColor: '#422cb0',
+            color: '#422cb0',
+          }
         }
       }
     }
@@ -35,7 +47,7 @@ export const themeOptions: ThemeOptions = {
     primary: {
       main: '#7958E3', //'#3a048c',
       light: '#6e38bd',
-      dark: '#E8EAF6',
+      dark: '#422cb0',
       contrastText: '#E8EAF6'
     },
     secondary: {

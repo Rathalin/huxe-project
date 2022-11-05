@@ -7,13 +7,14 @@ export const NewNote = () => {
   const [note, setNote] = useState('');
 
   return (
-    <Container maxWidth={false}>
+    <Container maxWidth={false} sx={{ margin: '20px 0px' }}>
       <h4>Add a Note</h4>
       <TextField
-        //InputLabelProps={{shrink: false}}
-        sx={{ border: 3, borderRadius: 3, '& legend': { display: 'none' }, '& fieldset': { top: 0 } }}
+        placeholder="Note"
+        sx={{ border: 3, borderRadius: 3, '& legend': { display: 'none' }, '& fieldset': { top: 0 }, "& .MuiOutlinedInput-root": {
+          color: "#fff"}, bgcolor: '#323463', marginBottom: '30px'}}
         id='outlined-basic'
-        label='Note'
+        //label='Note'
         multiline
         rows={4}
         fullWidth
