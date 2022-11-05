@@ -21,8 +21,8 @@ export const CustomRouter = () => {
       />
       <Route path='newMood' element={!loggedIn ? <Navigate to='/login' /> : <NewMood />}
       />
-      <Route path='newEmotion' element={!loggedIn ? <Navigate to='/login' /> : <SelectEmotionType />}
-      />
+      {/* <Route path='newEmotion' element={!loggedIn ? <Navigate to='/login' /> : <SelectEmotionType />}
+      /> */}
       <Route path='register' element={loggedIn ? <Navigate to='/dashboard' /> : <Register />}
       />
     </Routes>

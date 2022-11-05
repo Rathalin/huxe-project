@@ -1,10 +1,24 @@
 import { NewNote } from './NewNote';
 import { Container, Box, Button } from '@mui/material';
 import { SelectEmotionType } from './SelectEmotionType';
-import { SpecifyEmotion } from './SpecifyEmotion';
+import { SelectEmotion } from './SelectEmotion';
 import { Notes } from './Notes';
+import { createContext, useState } from 'react';
+
+export type EmotionTypeOption = 'Good' | 'Bad';
+
+export interface EmotionTypeContext {
+  selectedEmotionType: EmotionTypeOption | null,
+  setSelectedEmotionType: (emotionType: EmotionTypeOption | null) => void,
+}
+
+export const SelectedEmotionTypeCtx = createContext<EmotionTypeContext>({
+  selectedEmotionType: null,
+  setSelectedEmotionType(emotionType) { },
+});
 
 export const StrongEmotion = () => {
+  const [selectedEmotionType, setSelectedEmotionType] = useState<EmotionTypeOption | null>(null);
 
   const handleSubmit = () => {
     //addMood(selectedMood)
@@ -18,8 +32,10 @@ export const StrongEmotion = () => {
         mt: 3, display: 'flex', flexDirection: 'column',
         alignItems: 'left'
       }}>
-        <SelectEmotionType />
-        <SpecifyEmotion emotionType='BAD' />
+        <SelectedEmotionTypeCtx.Provider value={{ selectedEmotionType, setSelectedEmotionType }}>
+          <SelectEmotionType />
+          <SelectEmotion />
+        </SelectedEmotionTypeCtx.Provider>
         <NewNote />
         <Notes />
 

@@ -47,11 +47,11 @@ export const Dashboard = () => {
 
   if (data?.dailyMoods?.data.length === 0) {
     // mutation.mutate();
-    console.log('Creating Daily Mood');
+    // console.log('Creating Daily Mood');
   }
 
   if (data) {
-    console.log('DailyMood of today', data.dailyMoods?.data[0] ?? null);
+    // console.log('DailyMood of today', data.dailyMoods?.data[0] ?? null);
   }
 
 

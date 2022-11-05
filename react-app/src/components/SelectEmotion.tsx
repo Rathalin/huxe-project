@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from 'react';
+import { useState, MouseEvent, useContext } from 'react';
 import { Container, Checkbox, Box, FormControlLabel, Typography } from '@mui/material';
 import { MoodIcon } from './MoodIcon';
 import { EmotionCard } from './EmotionCard';
@@ -7,26 +7,20 @@ import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
 import { EMOTIONS_BY_TYPE_QUERY } from '../graphql/queries/emotions-by-type-query';
 import { Loading } from './ui/loading/Loading';
+import { SelectedEmotionTypeCtx } from './StrongEmotion';
 
-type SpecifyEmotionProps = {
-  emotionType: 'GOOD' | 'BAD',
-};
-
-export const SpecifyEmotion = ({ emotionType }: SpecifyEmotionProps) => {
+export const SelectEmotion = () => {
+  const { selectedEmotionType, setSelectedEmotionType } = useContext(SelectedEmotionTypeCtx);
   const [strongFeelings, setStrongFeelings] = useState<string[]>([]);
   const { data: emotionsData, isLoading } = useQuery({
-    queryKey: ['EMOTIONS_BY_TYPE_QUERY'],
-    queryFn: () => request(GRAPHQL_ENDPOINT, EMOTIONS_BY_TYPE_QUERY, { emotionType }),
+    queryKey: ['EMOTIONS_BY_TYPE_QUERY', selectedEmotionType],
+    queryFn: () => request(GRAPHQL_ENDPOINT, EMOTIONS_BY_TYPE_QUERY, { emotionType: selectedEmotionType ?? '' }),
   });
-  if (isLoading || emotionsData == null) return <Loading />;
+  if (isLoading) return <Loading />;
 
-  console.log(emotionsData);
-
-  const emotionOptions = emotionsData.emotions?.data
+  const emotionOptions = emotionsData?.emotions?.data
     .map(data => data.attributes?.name)
     .filter((emotion): emotion is string => emotion != null) ?? [];
-
-  console.log(emotionOptions);
 
   function addStrongFeeling(feeling: string): void {
     if (strongFeelings.every(existingFeeling => existingFeeling !== feeling)) {
