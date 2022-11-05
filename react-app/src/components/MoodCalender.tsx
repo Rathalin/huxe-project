@@ -41,7 +41,7 @@ export const MoodCalender = ({ year, month }: MoodCalenderProps) => {
                 moodType={mood.attributes?.mood?.data?.attributes?.iconName ?? ''}
                 strongEmotion={(mood.attributes?.strongEmotions?.data?.length ?? 0) > 0}
               /> :
-              <CircleIcon sx={{ color: grey[500] }} />
+              <CircleIcon sx={{ color: '#323463', transform: 'scale(1.5)' }} />
             }
           </Grid>
         ))}

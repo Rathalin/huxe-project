@@ -55,13 +55,16 @@ export const Register = () => {
         <Typography component='h1' variant='h5'>
           Sign up
         </Typography>
-        <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 3, minHeight: '80vh' }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+                sx={{ border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
+                color: "#fff"}, bgcolor: '#323463'}}
+                placeholder="Username"
                 id='username'
                 name='username'
-                label='Username'
+                //label='Username'
                 type='text'
                 autoComplete='new-username'
                 fullWidth
@@ -71,9 +74,12 @@ export const Register = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                sx={{ border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
+                color: "#fff"}, bgcolor: '#323463'}}
+                placeholder="Email Address"
                 id='email'
                 name='email'
-                label='Email Address'
+                //label='Email Address'
                 type='email'
                 autoComplete='new-email'
                 fullWidth
@@ -82,9 +88,12 @@ export const Register = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                sx={{ border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
+                color: "#fff"}, bgcolor: '#323463'}}
+                placeholder="Password"
                 id='password'
                 name='password'
-                label='Password'
+                //label='Password'
                 type='password'
                 autoComplete='new-password'
                 fullWidth
@@ -107,9 +116,9 @@ export const Register = () => {
           </Button>
           <Grid container justifyContent='flex-end'>
             <Grid item>
-              <Link to='/login'>
-                Already have an account? Sign in
-              </Link>
+            <Button color='secondary' to="/login" component={Link}>
+              Already have an account? Sign in
+            </Button>
             </Grid>
           </Grid>
         </Box>

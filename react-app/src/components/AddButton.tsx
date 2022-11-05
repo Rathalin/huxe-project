@@ -14,7 +14,7 @@ export const AddButton = ({ Icon, onClick }: PropsWithChildren<AddButtonProps>) 
       alignItems: 'center'
     }}>
       <Icon />
-      <IconButton color='primary' aria-label='add' onClick={onClick}>
+      <IconButton color='secondary' aria-label='add' onClick={onClick}>
         <AddBoxIcon />
       </IconButton>
     </Box>

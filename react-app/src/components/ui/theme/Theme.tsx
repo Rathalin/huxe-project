@@ -1,45 +1,80 @@
+import { Height } from '@mui/icons-material';
 import { createTheme, ThemeOptions } from '@mui/material/styles';
 
 export const themeOptions: ThemeOptions = {
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        contained: {
+          borderRadius: '50px',
+          height: '60px',
+          "&:hover": {
+            backgroundColor: '#873CC9'
+          }
+        },
+        text: {
+          "&:hover": {
+            backgroundColor: '#323463'
+          }
+        }
+      }
+    }
+  },
   palette: {
+    action: {
+      active: '#FFC107',
+      activatedOpacity: 1,
+      hover: '#fff350',
+      hoverOpacity: 0.7,
+      focus: '#c79100',
+      focusOpacity: 1,
+      selected: '#c79100',
+      selectedOpacity: 1
+    },
     mode: 'light',
     primary: {
-      main: '#3a048c',
+      main: '#7958E3', //'#3a048c',
       light: '#6e38bd',
-      dark: '#00005d',
-      contrastText: '#fff'
+      dark: '#E8EAF6',
+      contrastText: '#E8EAF6'
     },
     secondary: {
-      main: '#ffb300',
-      light: '#ffe54c',
-      dark: '#c68400',
-      contrastText: '#000036'
+      main: '#FFC107',
+      light: '#fff350',
+      dark: '#c79100',
+      contrastText: '#E8EAF6'
     },
     background: {
-      default: '#F6F2F7',
+      default: '#1C1F53',//'#F6F2F7',
     },
     text: {
-      primary: '#00005d',
-      secondary: '#3F3E40',
+      primary: '#E8EAF6', //'#00005d',
+      secondary: '#FFC107',
     },
   },
   typography: {
     fontSize: 16,
     h1: {
-      fontFamily: 'Amiri'
+      fontFamily: 'Amiri',
+      fontWeight: 700
     },
     h2: {
-      fontFamily: 'Amiri'
+      fontFamily: 'Amiri',
+      fontWeight: 700
     },
     h3: {
-      fontFamily: 'Amiri'
+      fontFamily: 'Amiri',
+      fontWeight: 700,
+      margin: '40px',
     },
     h4: {
       fontFamily: 'Amiri',
       fontWeight: 700
     },
     h5: {
-      fontFamily: 'Mulish'
+      fontFamily: 'Mulish',
+      fontWeight: 500,
+      margin: '30px 0px 20px 0px',
     },
   },
 };

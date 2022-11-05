@@ -1,5 +1,5 @@
 import { NewNote } from './NewNote';
-import { Container, Box, Button } from '@mui/material';
+import { Container, Box, Button, Typography } from '@mui/material';
 import { SelectEmotionType } from './SelectEmotionType';
 import { SelectEmotion } from './SelectEmotion';
 import { Notes } from './Notes';
@@ -27,6 +27,11 @@ export const StrongEmotion = () => {
 
   return (
     <Container maxWidth='md'>
+
+      <Typography component='h4' variant='h4'>
+        Strong Emotion
+      </Typography>
+
       <Box component="form" onSubmit={handleSubmit} sx={{
         mt: 3, display: 'flex', flexDirection: 'column',
         alignItems: 'left'

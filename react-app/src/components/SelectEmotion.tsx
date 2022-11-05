@@ -42,7 +42,7 @@ export const SelectEmotion = () => {
 
   return (
     <Container maxWidth='xl'>
-      <Typography component='h3' variant='h4'>
+      <Typography component='h5' variant='h5'>
         Select the emotions you are feeling
       </Typography>
 
