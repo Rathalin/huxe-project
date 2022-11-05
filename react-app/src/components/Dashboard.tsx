@@ -16,7 +16,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
 import { CREATE_DAILY_MOOD_MUTATION } from '../graphql/mutations/new-daily-mood-mutation';
-import { DAILY_MOODS_BETWEEN_QUERY } from '../graphql/queries/daily-moods-between-query';
+import { DAILY_MOODS_BETWEEN_QUERY } from '../graphql/queries/daily-moods-between.query';
 import { Loading } from './ui/loading/Loading';
 import { graphql } from '../graphql/generated';
 

@@ -7,7 +7,7 @@ import { MoodIcon } from './MoodIcon';
 import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
-import { CALENDER_QUERY } from '../graphql/queries/calender-query';
+import { CALENDER_QUERY } from '../graphql/queries/calender.query';
 import { Loading } from './ui/loading/Loading';
 
 type MoodCalenderProps = {
@@ -39,7 +39,7 @@ export const MoodCalender = ({ year, month }: MoodCalenderProps) => {
             {mood != null ?
               <MoodIcon
                 moodType={mood.attributes?.mood?.data?.attributes?.iconName ?? ''}
-                strongEmotion={(mood.attributes?.strong_emotions?.data?.length ?? 0) > 0}
+                strongEmotion={(mood.attributes?.strongEmotions?.data?.length ?? 0) > 0}
               /> :
               <CircleIcon sx={{ color: grey[500] }} />
             }

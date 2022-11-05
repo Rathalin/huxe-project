@@ -13,12 +13,12 @@ export const CustomRouter = () => {
   return (
     <Routes>
       <Route path='/' element={loggedIn ? <Navigate to='/dashboard' /> : <Login />} />
+      <Route path='login' element={loggedIn ? <Navigate to='/dashboard' /> : <Login />} />
+      <Route path='register' element={loggedIn ? <Navigate to='/dashboard' /> : <Register />} />
       <Route path='dashboard' element={!loggedIn ? <Navigate to='/login' /> : <Dashboard />} />
       <Route path='emotion' element={!loggedIn ? <Navigate to='/login' /> : <StrongEmotion />} />
-      <Route path='login' element={loggedIn ? <Navigate to='/dashboard' /> : <Login />} />
       <Route path='newMood' element={!loggedIn ? <Navigate to='/login' /> : <NewMood />} />
       <Route path='newEmotion' element={!loggedIn ? <Navigate to='/login' /> : <SelectEmotionType />} />
-      <Route path='register' element={loggedIn ? <Navigate to='/dashboard' /> : <Register />} />
     </Routes>
   );
 };
