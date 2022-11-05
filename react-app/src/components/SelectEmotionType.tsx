@@ -31,7 +31,6 @@ export const SelectEmotionType = () => {
 
   return (
     <Container maxWidth='xl'>
-
       <Typography component='h3' variant='h4'>
         Is your strong emotion good or bad?
       </Typography>
@@ -62,7 +61,6 @@ export const SelectEmotionType = () => {
         <img
           src={`${process.env.PUBLIC_URL}/mood4.png`}
           alt={'good'} /></MoodButton> */}
-
     </Container>
   );
 };

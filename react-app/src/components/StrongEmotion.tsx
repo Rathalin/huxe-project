@@ -14,7 +14,7 @@ export interface EmotionTypeContext {
 
 export const SelectedEmotionTypeCtx = createContext<EmotionTypeContext>({
   selectedEmotionType: null,
-  setSelectedEmotionType(emotionType) { },
+  setSelectedEmotionType(_emotionType) { },
 });
 
 export const StrongEmotion = () => {
@@ -27,7 +27,6 @@ export const StrongEmotion = () => {
 
   return (
     <Container maxWidth='md'>
-
       <Box component="form" onSubmit={handleSubmit} sx={{
         mt: 3, display: 'flex', flexDirection: 'column',
         alignItems: 'left'
@@ -47,7 +46,6 @@ export const StrongEmotion = () => {
         >
           Finish
         </Button>
-
       </Box>
     </Container>
   );

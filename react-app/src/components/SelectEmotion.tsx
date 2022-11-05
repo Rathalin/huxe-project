@@ -1,6 +1,5 @@
 import { useState, MouseEvent, useContext } from 'react';
-import { Container, Checkbox, Box, FormControlLabel, Typography } from '@mui/material';
-import { MoodIcon } from './MoodIcon';
+import { Container, Checkbox, Box, Typography } from '@mui/material';
 import { EmotionCard } from './EmotionCard';
 import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
@@ -10,12 +9,13 @@ import { Loading } from './ui/loading/Loading';
 import { SelectedEmotionTypeCtx } from './StrongEmotion';
 
 export const SelectEmotion = () => {
-  const { selectedEmotionType, setSelectedEmotionType } = useContext(SelectedEmotionTypeCtx);
+  const { selectedEmotionType } = useContext(SelectedEmotionTypeCtx);
   const [strongFeelings, setStrongFeelings] = useState<string[]>([]);
   const { data: emotionsData, isLoading } = useQuery({
     queryKey: ['EMOTIONS_BY_TYPE_QUERY', selectedEmotionType],
     queryFn: () => request(GRAPHQL_ENDPOINT, EMOTIONS_BY_TYPE_QUERY, { emotionType: selectedEmotionType ?? '' }),
   });
+
   if (isLoading) return <Loading />;
 
   const emotionOptions = emotionsData?.emotions?.data
@@ -40,14 +40,8 @@ export const SelectEmotion = () => {
     }
   }
 
-  const strongSelect = (e: MouseEvent<HTMLButtonElement>) => {
-    console.dir(e.currentTarget.value)
-    //setStrongFeeling(e.currentTarget.value)
-  };
-
   return (
     <Container maxWidth='xl'>
-
       <Typography component='h3' variant='h4'>
         Select the emotions you are feeling
       </Typography>
@@ -64,15 +58,6 @@ export const SelectEmotion = () => {
             checked={strongFeelings.includes(emotion)} />
         ))}
       </Box>
-
-      {/*
-      <Box>
-        <FormControlLabel
-          label='Feeling'
-          control={<Checkbox />}
-        />
-      </Box> */}
-
     </Container>
   );
 };
