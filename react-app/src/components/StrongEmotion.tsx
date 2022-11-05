@@ -1,6 +1,6 @@
 import { NewNote } from './NewNote';
 import { Container, Box, Button } from '@mui/material';
-import { NewEmotion } from './NewEmotion';
+import { SelectEmotionType } from './SelectEmotionType';
 import { SpecifyEmotion } from './SpecifyEmotion';
 import { Notes } from './Notes';
 
@@ -18,7 +18,7 @@ export const StrongEmotion = () => {
         mt: 3, display: 'flex', flexDirection: 'column',
         alignItems: 'left'
       }}>
-        <NewEmotion />
+        <SelectEmotionType />
         <SpecifyEmotion emotionType='BAD' />
         <NewNote />
         <Notes />

@@ -6,7 +6,7 @@ import { Login } from '../Login';
 import { useStore } from '../../stores/useStore';
 import { useAuthStore } from '../../stores/authStore';
 import { NewMood } from '../NewMood';
-import { NewEmotion } from '../NewEmotion';
+import { SelectEmotionType } from '../SelectEmotionType';
 
 export const CustomRouter = () => {
   const loggedIn = useAuthStore().user != null;
@@ -21,7 +21,7 @@ export const CustomRouter = () => {
       />
       <Route path='newMood' element={!loggedIn ? <Navigate to='/login' /> : <NewMood />}
       />
-      <Route path='newEmotion' element={!loggedIn ? <Navigate to='/login' /> : <NewEmotion />}
+      <Route path='newEmotion' element={!loggedIn ? <Navigate to='/login' /> : <SelectEmotionType />}
       />
       <Route path='register' element={loggedIn ? <Navigate to='/dashboard' /> : <Register />}
       />
