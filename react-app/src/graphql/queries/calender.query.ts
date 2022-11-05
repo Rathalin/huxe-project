@@ -14,7 +14,7 @@ export const CALENDER_QUERY = graphql(`
               }
             }
           }
-          strong_emotions {
+          strongEmotions {
             data {
               id
             }
