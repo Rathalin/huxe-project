@@ -19,7 +19,7 @@ export const StrongEmotion = () => {
         alignItems: 'left'
       }}>
         <NewEmotion />
-        <SpecifyEmotion />
+        <SpecifyEmotion emotionType='BAD' />
         <NewNote />
         <Notes />
 
