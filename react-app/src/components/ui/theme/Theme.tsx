@@ -25,7 +25,22 @@ export const themeOptions: ThemeOptions = {
   },
   typography: {
     fontSize: 16,
-    fontFamily: 'Lato',
+    h1: {
+      fontFamily: 'Amiri'
+    },
+    h2: {
+      fontFamily: 'Amiri'
+    },
+    h3: {
+      fontFamily: 'Amiri'
+    },
+    h4: {
+      fontFamily: 'Amiri',
+      fontWeight: 700
+    },
+    h5: {
+      fontFamily: 'Mulish'
+    },
   },
 };
 
