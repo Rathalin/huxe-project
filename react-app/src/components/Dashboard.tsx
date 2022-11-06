@@ -6,56 +6,69 @@ import { useNavigate } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import { Notes } from './Notes';
 import Typography from '@mui/material/Typography';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { AddButton } from './AddButton';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
 import { Priorities } from './Priorities';
-import { useEffect } from 'react';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
-import { CREATE_DAILY_MOOD_MUTATION } from '../graphql/mutations/new-daily-mood-mutation';
 import { DAILY_MOODS_BETWEEN_QUERY } from '../graphql/queries/daily-moods-between.query';
-import { Loading } from './ui/loading/Loading';
-import { graphql } from '../graphql/generated';
+import { DailyMoodsBetweenQuery } from '../graphql/generated/graphql';
 
 export const Dashboard = () => {
   const navigate = useNavigate();
-
-  // Create empty daily mood if none exists today
+  const queryClient = useQueryClient();
   const now = new Date();
-  const { data, isLoading } = useQuery({
-    queryKey: ['DAILY_MOODS_BETWEEN_QUERY'],
-    queryFn: () => {
-      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-      // console.log('Today', today);
-      // console.log('Tomorrow', tomorrow);
-      return request(GRAPHQL_ENDPOINT, DAILY_MOODS_BETWEEN_QUERY, {
-        startDate: today,
-        endDate: tomorrow,
+  const todayDate = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+  // const todayDailyMoodQueryKey = ['DAILY_MOODS_BETWEEN_QUERY', todayDate];
+  const todayDailyMoodQueryKey = ['testkey'];
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+  const {
+    data: dailyMoodData,
+    isSuccess: isSuccessDailyMood,
+    isLoading: isLoadingDailyMood,
+    isFetching: isFetchingDailyMood,
+  } = useQuery({
+    queryKey: todayDailyMoodQueryKey,
+    queryFn: () => request(GRAPHQL_ENDPOINT, DAILY_MOODS_BETWEEN_QUERY, {
+      startDate: today,
+      endDate: tomorrow,
+    }),
+  });
+  const { mutate: createEmptyDailyMood, isLoading: isLoadingCreate } = useMutation({
+    mutationKey: ['CREATE_DAILY_MOOD_MUTATION'],
+    // mutationFn: () => request(GRAPHQL_ENDPOINT, CREATE_DAILY_MOOD_MUTATION, { dailyMoodInput: {} }),
+    mutationFn: async () => {
+      return {};
+    },
+    onSuccess: (data, _variables) => {
+      console.log('data', data);
+      queryClient.setQueryData(todayDailyMoodQueryKey, (): DailyMoodsBetweenQuery => {
+        return data;
+        // return {
+        //   dailyMoods: {
+        //     data: [
+        //       { id: data.createDailyMood?.data?.id },
+        //     ],
+        //   },
+        // };
       });
     },
   });
-  const mutation = useMutation({
-    mutationKey: ['CREATE_DAILY_MOOD'],
-    mutationFn: () => request(GRAPHQL_ENDPOINT, CREATE_DAILY_MOOD_MUTATION, { dailyMoodInput: {} }),
-  });
 
-  if (isLoading) return <Loading />;
+  // if (isSuccessDailyMood && !isLoadingDailyMood && !isFetchingDailyMood) {
+  // Create empty daily mood if none exists today
+  //   const dailyMoodToday = dailyMoodData?.dailyMoods?.data[0] ?? null;
+  //   if (dailyMoodToday == null) {
+  //     console.log('DailyMoodData', dailyMoodData);
+  //     console.count('Create empty daily mood');
+  //     createEmptyDailyMood();
+  //   }
+  // }
 
-  if (data?.dailyMoods?.data.length === 0) {
-    // mutation.mutate();
-    // console.log('Creating Daily Mood');
-  }
-
-  if (data) {
-    // console.log('DailyMood of today', data.dailyMoods?.data[0] ?? null);
-  }
-
-
-  const date = new Date();
   const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
@@ -92,9 +105,9 @@ export const Dashboard = () => {
           <Grid xs={12} md={12}>
             <Grid xs={12} md={6}>
               <Typography component='h3' variant='h5'>
-                {monthNames[date.getMonth()]}
+                {monthNames[now.getMonth()]}
               </Typography>
-              <MoodCalender year={date.getFullYear()} month={date.getMonth() + 1} />
+              <MoodCalender year={now.getFullYear()} month={now.getMonth() + 1} />
             </Grid>
             <Grid xs={12} md={6}>
               <MoodGraph />
@@ -106,6 +119,7 @@ export const Dashboard = () => {
             </Typography>
             <Notes />
           </Grid>
+          <Button onClick={() => createEmptyDailyMood()}>Debug Mutate</Button>
         </Grid>
       </Box>
     </Container>

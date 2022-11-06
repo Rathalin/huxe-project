@@ -11,12 +11,10 @@ import { SelectedEmotionTypeCtx } from './StrongEmotion';
 export const SelectEmotion = () => {
   const { selectedEmotionType } = useContext(SelectedEmotionTypeCtx);
   const [strongFeelings, setStrongFeelings] = useState<string[]>([]);
-  const { data: emotionsData, isLoading } = useQuery({
+  const { data: emotionsData, isLoading, isSuccess } = useQuery({
     queryKey: ['EMOTIONS_BY_TYPE_QUERY', selectedEmotionType],
     queryFn: () => request(GRAPHQL_ENDPOINT, EMOTIONS_BY_TYPE_QUERY, { emotionType: selectedEmotionType ?? '' }),
   });
-
-  if (isLoading) return <Loading />;
 
   const emotionOptions = emotionsData?.emotions?.data
     .map(data => data.attributes?.name)
@@ -50,7 +48,8 @@ export const SelectEmotion = () => {
         mt: 3, display: 'flex', flexDirection: 'row',
         alignItems: 'center'
       }}>
-        {emotionOptions.map((emotion) => (
+        {isLoading && <Loading />}
+        {isSuccess && emotionOptions.map((emotion) => (
           <Checkbox key={emotion}
             icon={<EmotionCard emotion={emotion} />}
             checkedIcon={<EmotionCard emotion={emotion} />}

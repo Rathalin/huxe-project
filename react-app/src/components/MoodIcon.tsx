@@ -1,34 +1,38 @@
-import { PropsWithChildren, Fragment } from 'react';
-import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
-import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
-import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
-import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
-import SentimentNeutralIcon from '@mui/icons-material/SentimentNeutral';
-
-export const moodSmileys = {
-  'veryGood': <SentimentVerySatisfiedIcon name='veryGood' type='veryGood' />,
-  'good': <SentimentSatisfiedIcon name='good' type='good' />,
-  'neutral': <SentimentNeutralIcon name='neutral' type='neutral' />,
-  'bad': <SentimentDissatisfiedIcon name='bad' type='bad' />,
-  'veryBad': <SentimentVeryDissatisfiedIcon name='veryBad' type='veryBad' />
-};
+import { grey } from '@mui/material/colors';
+import {
+  SentimentVeryDissatisfied,
+  SentimentDissatisfied,
+  SentimentSatisfied,
+  SentimentVerySatisfied,
+  SentimentNeutral,
+  Circle,
+} from '@mui/icons-material';
 
 type MoodIconProps = {
   moodType: string,
   strongEmotion?: boolean, // TODO Display strong emotion icon when true
 };
 
-
-function hasKey<O>(obj: O, key: PropertyKey): key is keyof O {
-  return key in obj
-}
-
-export const MoodIcon = ({ moodType, strongEmotion = false }: PropsWithChildren<MoodIconProps>) => {
-  return (
-    <Fragment>
-      {
-        hasKey(moodSmileys, moodType) ? moodSmileys[moodType] : ''
-      }
-    </Fragment>
-  );
+export const MoodIcon = ({ moodType, strongEmotion = false }: MoodIconProps) => {
+  let icon: JSX.Element | null;
+  switch (moodType) {
+    case ('veryGood'):
+      icon = <SentimentVerySatisfied name='veryGood' type='veryGood' />;
+      break;
+    case ('good'):
+      icon = <SentimentSatisfied name='good' type='good' />;
+      break;
+    case ('neutral'):
+      icon = <SentimentNeutral name='neutral' type='neutral' />;
+      break;
+    case ('bad'):
+      icon = <SentimentDissatisfied name='bad' type='bad' />;
+      break;
+    case ('veryBad'):
+      icon = <SentimentVeryDissatisfied name='veryBad' type='veryBad' />;
+      break;
+    default:
+      icon = <Circle sx={{ color: grey[500] }} />;
+  }
+  return icon;
 };

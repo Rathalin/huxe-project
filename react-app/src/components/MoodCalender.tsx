@@ -1,8 +1,6 @@
 import { Container } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { getDaysPerMonth } from '../utils/utils';
-import CircleIcon from '@mui/icons-material/Circle';
-import { grey } from '@mui/material/colors';
 import { MoodIcon } from './MoodIcon';
 import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
@@ -24,25 +22,21 @@ export const MoodCalender = ({ year, month }: MoodCalenderProps) => {
   if (isLoading) return <Loading />;
 
   const daysPerMonth = getDaysPerMonth(year, month);
-  const dailyMoodsPerDay = [...Array(daysPerMonth).keys()]
-    .map(day => day + 1)
-    .map(day => {
-      const moodOfDay = data?.dailyMoods?.data?.find(mood => new Date(mood.attributes?.createdAt).getDate() === day);
-      return moodOfDay ?? null;
-    });
+  const dailyMoodsPerDay = [...Array(daysPerMonth).keys()].map(day =>
+    data?.dailyMoods?.data?.find(mood =>
+      new Date(mood.attributes?.createdAt).getDate() === day + 1
+    ) ?? null
+  );
 
   return (
     <Container maxWidth='xs'>
       <Grid container spacing={1} columns={7}>
         {dailyMoodsPerDay.map((mood, i) => (
           <Grid key={i} md={1}>
-            {mood != null ?
-              <MoodIcon
-                moodType={mood.attributes?.mood?.data?.attributes?.iconName ?? ''}
-                strongEmotion={(mood.attributes?.strongEmotions?.data?.length ?? 0) > 0}
-              /> :
-              <CircleIcon sx={{ color: grey[500] }} />
-            }
+            <MoodIcon
+              moodType={mood?.attributes?.mood?.data?.attributes?.iconName ?? ''}
+              strongEmotion={(mood?.attributes?.strongEmotions?.data?.length ?? 0) > 0}
+            />
           </Grid>
         ))}
       </Grid>

@@ -6,20 +6,32 @@ import Typography from '@mui/material/Typography';
 import { Priorities } from './Priorities';
 import { AddButton } from './AddButton';
 import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NewNote } from './NewNote';
 import Button from '@mui/material/Button';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
-import { CREATE_DAILY_MOOD_MUTATION } from '../graphql/mutations/new-daily-mood-mutation';
+import { MOODS_QUERY } from '../graphql/queries/moods.query';
+import { Loading } from './ui/loading/Loading';
 
 export const NewMood = () => {
   const navigate = useNavigate();
   const [selectedMood, setSelectedMood] = useState('');
+  const { data: moodsData, isLoading: isLoadingMoods, isSuccess: isSuccessMoods } = useQuery({
+    queryKey: ['MOODS_QUERY'],
+    queryFn: () => request(GRAPHQL_ENDPOINT, MOODS_QUERY),
+  });
 
-  const handleSubmit = () => {
+  const moods = moodsData?.moods?.data.map(moodData => ({
+    id: moodData.id,
+    displayOrder: moodData.attributes?.displayOrder ?? 0,
+    iconName: moodData.attributes?.iconName ?? '',
+  })) ?? [];
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     // addMood(selectedMood);
     navigate('/dashboard');
   }
@@ -37,21 +49,21 @@ export const NewMood = () => {
           mt: 3, display: 'flex', flexDirection: 'row',
           alignItems: 'center'
         }}>
-          {Object.keys(MOODS).map((moodType) => (
-            <Checkbox key={moodType} icon={<MoodIcon moodType={moodType} />} checkedIcon={<MoodIcon moodType={moodType} />} onChange={() => { setSelectedMood(moodType) }} checked={selectedMood === moodType} />
+          {isLoadingMoods && <Loading />}
+          {isSuccessMoods && moods.map((mood) => (
+            <Checkbox
+              key={mood.displayOrder}
+              icon={<MoodIcon moodType={mood.iconName} />}
+              checkedIcon={<MoodIcon moodType={mood.iconName} />}
+              onChange={() => { setSelectedMood(mood.iconName) }}
+              checked={selectedMood === mood.iconName}
+            />
           ))}
         </Box>
         <Typography component='h3' variant='h5'>
           Priorities Satisfied today
         </Typography>
         <Priorities />
-        <Typography component='h3' variant='h5'>
-          Strong Emotion
-        </Typography>
-        <Typography component='p'>
-          Do you want to record a strong Emotion today?
-        </Typography>
-        <AddButton Icon={() => <ThunderstormIcon fontSize='large' />} onClick={() => { navigate('/newEmotion') }} />
         <NewNote />
         <Button
           type='submit'

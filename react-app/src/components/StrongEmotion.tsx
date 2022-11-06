@@ -3,7 +3,7 @@ import { Container, Box, Button } from '@mui/material';
 import { SelectEmotionType } from './SelectEmotionType';
 import { SelectEmotion } from './SelectEmotion';
 import { Notes } from './Notes';
-import { createContext, useState } from 'react';
+import { createContext, FormEvent, useState } from 'react';
 
 export type EmotionTypeOption = 'Good' | 'Bad';
 
@@ -20,9 +20,10 @@ export const SelectedEmotionTypeCtx = createContext<EmotionTypeContext>({
 export const StrongEmotion = () => {
   const [selectedEmotionType, setSelectedEmotionType] = useState<EmotionTypeOption | null>(null);
 
-  const handleSubmit = () => {
-    //addMood(selectedMood)
-    //navigate("/dashboard")
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    //addMood(selectedMood);
+    //navigate("/dashboard");
   }
 
   return (

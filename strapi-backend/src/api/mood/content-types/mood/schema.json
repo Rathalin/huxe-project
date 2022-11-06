@@ -16,6 +16,12 @@
       "type": "string",
       "required": true,
       "maxLength": 20
+    },
+    "displayOrder": {
+      "type": "integer",
+      "required": true,
+      "default": 0,
+      "unique": false
     }
   }
 }

@@ -18,7 +18,6 @@ export const CustomRouter = () => {
       <Route path='dashboard' element={!loggedIn ? <Navigate to='/login' /> : <Dashboard />} />
       <Route path='emotion' element={!loggedIn ? <Navigate to='/login' /> : <StrongEmotion />} />
       <Route path='newMood' element={!loggedIn ? <Navigate to='/login' /> : <NewMood />} />
-      <Route path='newEmotion' element={!loggedIn ? <Navigate to='/login' /> : <SelectEmotionType />} />
     </Routes>
   );
 };

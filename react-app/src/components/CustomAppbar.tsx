@@ -34,7 +34,9 @@ export const CustomAppbar = () => {
     <AppBar position='static'>
       <Toolbar>
         <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-          Mood Tracking
+          <Link to='/dashboard' style={{ textDecoration: 'none', color: 'inherit' }}>
+            Mood Tracking
+          </Link>
         </Typography>
         {loggedIn && (
           <div>
