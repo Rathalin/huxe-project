@@ -1,30 +1,53 @@
-import { useStore } from '../stores/useStore';
 import { Box, Checkbox, Container } from '@mui/material';
 import { MoodIcon } from './MoodIcon';
-import { MOODS } from '../utils/utils';
 import Typography from '@mui/material/Typography';
 import { Priorities } from './Priorities';
-import { AddButton } from './AddButton';
-import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NewNote } from './NewNote';
 import Button from '@mui/material/Button';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
 import { MOODS_QUERY } from '../graphql/queries/moods.query';
 import { Loading } from './ui/loading/Loading';
+import { SET_MOOD_MUTATION } from '../graphql/mutations/set-mood.mutation';
+import { SELECTED_MOOD_QUERY } from '../graphql/queries/selected-mood.query';
+import { SelectedMoodQuery } from '../graphql/generated/graphql';
 
 export const NewMood = () => {
   const navigate = useNavigate();
-  const [selectedMood, setSelectedMood] = useState('');
-  const { data: moodsData, isLoading: isLoadingMoods, isSuccess: isSuccessMoods } = useQuery({
+  const queryClient = useQueryClient();
+  const TEMP_DAILY_MOOD_ID = '1';
+  const { data: moodOptionsData, isSuccess: isSuccessMoodOptions } = useQuery({
     queryKey: ['MOODS_QUERY'],
     queryFn: () => request(GRAPHQL_ENDPOINT, MOODS_QUERY),
   });
+  const selectedMoodQueryKey = ['SELECTED_MOOD_QUERY', TEMP_DAILY_MOOD_ID];
+  const { data: selectedMoodData, isSuccess: isSuccessSelctedMood } = useQuery({
+    queryKey: selectedMoodQueryKey,
+    queryFn: () => request(GRAPHQL_ENDPOINT, SELECTED_MOOD_QUERY, { dailyMoodId: TEMP_DAILY_MOOD_ID }),
+  });
+  const { mutate: setSelectedMood } = useMutation({
+    mutationFn: ({ moodId }: { moodId: string, }) => {
+      console.log('Set mood id to ', moodId);
+      return request(GRAPHQL_ENDPOINT, SET_MOOD_MUTATION, {
+        dailyMoodId: TEMP_DAILY_MOOD_ID,
+        dailyMoodInput: {
+          mood: moodId,
+        },
+      })
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(selectedMoodQueryKey);
+      // queryClient.setQueryData(selectedMoodQueryKey, (): SelectedMoodQuery => ({
+      //   dailyMood: { data: { attributes: { mood: { data: { id: variables.moodId } } } } }
+      // }));
+    }
+  });
 
-  const moods = moodsData?.moods?.data.map(moodData => ({
+  const selectedMood = selectedMoodData?.dailyMood?.data?.attributes?.mood?.data;
+  const moodOptions = moodOptionsData?.moods?.data.map(moodData => ({
     id: moodData.id,
     displayOrder: moodData.attributes?.displayOrder ?? 0,
     iconName: moodData.attributes?.iconName ?? '',
@@ -49,14 +72,13 @@ export const NewMood = () => {
           mt: 3, display: 'flex', flexDirection: 'row',
           alignItems: 'center'
         }}>
-          {isLoadingMoods && <Loading />}
-          {isSuccessMoods && moods.map((mood) => (
+          {isSuccessMoodOptions && isSuccessSelctedMood && moodOptions.map((mood) => (
             <Checkbox
               key={mood.displayOrder}
               icon={<MoodIcon moodType={mood.iconName} />}
               checkedIcon={<MoodIcon moodType={mood.iconName} />}
-              onChange={() => { setSelectedMood(mood.iconName) }}
-              checked={selectedMood === mood.iconName}
+              onChange={() => { setSelectedMood({ moodId: mood.id ?? '' }) }}
+              checked={selectedMood?.attributes?.iconName === mood.iconName}
             />
           ))}
         </Box>

@@ -33,7 +33,7 @@ export const MoodIcon = ({ moodType, strongEmotion = false }: MoodIconProps) => 
       break;
     default:
       // icon = <Circle sx={{ color: grey[500] }} />;
-      icon = <Circle sx={{ color: '#323463', transform: 'scale(1.5)' }} />;
+      icon = <Circle sx={{ color: '#323463' }} />;
   }
   return icon;
 };
