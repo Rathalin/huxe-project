@@ -42,7 +42,7 @@ export const NewMood = () => {
         mt: 3, display: 'flex', flexDirection: 'column',
         alignItems: 'left'
       }}>
-        <Typography component='h3' variant='h4'>
+        <Typography component='h1' variant='h3'>
           Track Mood
         </Typography>
         <Box sx={{

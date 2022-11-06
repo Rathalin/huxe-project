@@ -77,10 +77,10 @@ export const Dashboard = () => {
     <Container component='main' maxWidth='md'>
       <CssBaseline />
       <Box sx={{
-        mt: 3, display: 'flex', flexDirection: 'column',
-        alignItems: 'center'
+        mt: 5, display: 'flex', flexDirection: 'column',
+        alignItems: 'center', minHeight: '80vh'
       }}>
-        <Typography component='h1' variant='h4'>
+        <Typography component='h1' variant='h3'>
           Dashboard
         </Typography>
         <Grid container spacing={1}>

@@ -31,7 +31,7 @@ export const SelectEmotionType = () => {
 
   return (
     <Container maxWidth='xl'>
-      <Typography component='h3' variant='h4'>
+      <Typography component='h5' variant='h5'>
         Is your strong emotion good or bad?
       </Typography>
 
