@@ -1,5 +1,3 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import { useStore } from '../stores/useStore';
 import { Box, IconButton, TextField, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
@@ -20,7 +18,7 @@ export const AddPriorityField = ({ title, weekGoal, setTitle, setWeekGoal }: Pri
         alignItems: 'center', justifyContent: 'center'}}>
       <Box sx={{border: '1px solid', borderRadius: 3, padding: 5, mx: 2, display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
         <IconButton color='primary' aria-label='upload picture' component='label'>
-          <input hidden accept='image/*' type='file' />
+          <input accept='image/*' type='file' />
           <AddIcon />
         </IconButton>
         <Typography component='p' sx={{ flexGrow: 1}}>

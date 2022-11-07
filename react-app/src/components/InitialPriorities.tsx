@@ -11,13 +11,9 @@ export const InitialPriorities = () => {
   const loggedIn = user != null;
   const navigate = useNavigate();
 
-  const [priorities, setPriorities] = useState([{
-    "title": "",
-    "weekGoal": ""
-  }]);
-
-  const [title, setTitle] = useState("")
-  const [weekGoal, setWeekGoal] = useState("")
+  const [priorities, setPriorities] = useState<{title: string; weekGoal: string}[]>([])
+  const [title, setTitle] = useState('');
+  const [weekGoal, setWeekGoal] = useState("3");
 
   const handleAddPriorities = () => {
     priorities.map((priority) => {
@@ -42,7 +38,7 @@ export const InitialPriorities = () => {
             Enter your top 3 priorities at the moment
           </Typography>
           {[...Array(3)].map((e, i) => (
-            <AddPriorityField key={i} title={priorities[i].title} weekGoal={priorities[i].weekGoal} setTitle={setTitle} setWeekGoal={setWeekGoal}/>
+            <AddPriorityField key={i} title={priorities[i].title} weekGoal={priorities[i].weekGoal} setTitle={setTitle} setWeekGoal={setWeekGoal} />
           ))}
           <Button variant='contained' onClick={handleAddPriorities}>Finish</Button>
         </Box>
