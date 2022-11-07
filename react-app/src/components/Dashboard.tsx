@@ -16,8 +16,8 @@ import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
 import { DAILY_MOODS_BETWEEN_QUERY } from '../graphql/queries/daily-moods-between.query';
 import { useDailyMoodIdStore } from '../stores/dailyMoodStore';
-import { useEffect } from 'react';
 import { now, today, todayDateString, tomorrow } from '../utils/date.util';
+import SwitchAccessShortcutAddIcon from '@mui/icons-material/SwitchAccessShortcutAdd';
 import { CREATE_DAILY_MOOD_MUTATION } from '../graphql/mutations/new-daily-mood-mutation';
 
 export const Dashboard = () => {
@@ -76,6 +76,7 @@ export const Dashboard = () => {
               Priorities
             </Typography>
             <Priorities />
+            <AddButton Icon={() => <SwitchAccessShortcutAddIcon fontSize='large' />} onClick={() => { navigate('/newPriority') }} />
           </Grid>
           <Grid xs={12} md={6}>
             <Typography component='h3' variant='h5'>
