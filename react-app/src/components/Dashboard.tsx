@@ -107,7 +107,6 @@ export const Dashboard = () => {
             </Typography>
             <Notes />
           </Grid>
-          <Button onClick={() => createEmptyDailyMood()}>Debug Mutate</Button>
         </Grid>
       </Box>
     </Container>
