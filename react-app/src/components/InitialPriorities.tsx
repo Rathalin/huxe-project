@@ -1,8 +1,8 @@
 import { useStore } from '../stores/useStore';
 import { Box, Button, Container, Typography } from '@mui/material';
 import { useAuthStore } from '../stores/auth.store';
-import { NewPriority } from './NewPriority';
 import { useNavigate } from 'react-router-dom';
+import { AddPriorityField } from './AddPriorityField';
 
 export const InitialPriorities = () => {
   const { addPriority } = useStore();
@@ -32,7 +32,7 @@ export const InitialPriorities = () => {
             Enter your top 3 priorities at the moment
           </Typography>
           {[...Array(3)].map((e, i) => (
-            <NewPriority key={i}/>
+            <AddPriorityField key={i}/>
           ))}
           <Button variant='contained' onClick={handleAddPriorities}>Finish</Button>
         </Box>
