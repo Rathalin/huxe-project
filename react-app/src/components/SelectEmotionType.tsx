@@ -3,19 +3,14 @@ import { MoodIcon } from './MoodIcon';
 import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
-import { EMOTION_TYPES_QUERY } from '../graphql/queries/emotion-types.query';
 import { Loading } from './ui/loading/Loading';
 import { useContext } from 'react';
-import { SelectedEmotionTypeCtx } from './StrongEmotion';
+import { EmotionType, SelectedEmotionTypeCtx } from './StrongEmotion';
+
+const emotionTypes: EmotionType[] = ['Good', 'Bad'];
 
 export const SelectEmotionType = () => {
   const { selectedEmotionType, setSelectedEmotionType } = useContext(SelectedEmotionTypeCtx);
-  const { data, isLoading } = useQuery({
-    queryKey: ['EMOTION_TYPES_QUERY'],
-    queryFn: () => request(GRAPHQL_ENDPOINT, EMOTION_TYPES_QUERY),
-  });
-
-  if (isLoading) return <Loading />;
 
   function onEmotionTypeChange(emotionType: string): void {
     if (emotionType === 'Good' || emotionType === 'Bad') {
@@ -24,10 +19,6 @@ export const SelectEmotionType = () => {
       setSelectedEmotionType(null);
     }
   }
-
-  const emotionTypes = data?.emotionTypes?.data
-    .map(emotionType => emotionType.attributes?.name)
-    .filter((emotionTypeName): emotionTypeName is string => emotionTypeName != null) ?? [];
 
   return (
     <Container maxWidth='xl'>

@@ -5,11 +5,11 @@ import { SelectEmotion } from './SelectEmotion';
 import { Notes } from './Notes';
 import { createContext, FormEvent, useState } from 'react';
 
-export type EmotionTypeOption = 'Good' | 'Bad';
+export type EmotionType = 'Good' | 'Bad';
 
 export interface EmotionTypeContext {
-  selectedEmotionType: EmotionTypeOption | null,
-  setSelectedEmotionType: (emotionType: EmotionTypeOption | null) => void,
+  selectedEmotionType: EmotionType | null,
+  setSelectedEmotionType: (emotionType: EmotionType | null) => void,
 }
 
 export const SelectedEmotionTypeCtx = createContext<EmotionTypeContext>({
@@ -18,7 +18,7 @@ export const SelectedEmotionTypeCtx = createContext<EmotionTypeContext>({
 });
 
 export const StrongEmotion = () => {
-  const [selectedEmotionType, setSelectedEmotionType] = useState<EmotionTypeOption | null>(null);
+  const [selectedEmotionType, setSelectedEmotionType] = useState<EmotionType | null>(null);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();

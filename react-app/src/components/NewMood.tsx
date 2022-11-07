@@ -38,22 +38,6 @@ export const NewMood = () => {
     },
     onSuccess: (_data, _variables) => {
       queryClient.invalidateQueries(selectedMoodQueryKey);
-      // queryClient.setQueryData(selectedMoodQueryKey, (): SelectedMoodQuery => ({
-      //   dailyMood: {
-      //     data: {
-      //       attributes: {
-      //         mood: {
-      //           data: {
-      //             id: data.updateDailyMood?.data?.attributes?.mood?.data?.id ?? '',
-      //             attributes: {
-      //               iconName: data.updateDailyMood?.data?.attributes?.mood?.data?.attributes?.iconName ?? '',
-      //             }
-      //           }
-      //         }
-      //       }
-      //     }
-      //   }
-      // }));
     },
   });
 
