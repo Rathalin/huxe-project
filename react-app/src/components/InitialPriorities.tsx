@@ -3,6 +3,7 @@ import { Box, Button, Container, Typography } from '@mui/material';
 import { useAuthStore } from '../stores/auth.store';
 import { useNavigate } from 'react-router-dom';
 import { AddPriorityField } from './AddPriorityField';
+import { useState } from 'react';
 
 export const InitialPriorities = () => {
   const { addPriority } = useStore();
@@ -10,9 +11,18 @@ export const InitialPriorities = () => {
   const loggedIn = user != null;
   const navigate = useNavigate();
 
+  const [priorities, setPriorities] = useState([{
+    "title": "",
+    "weekGoal": ""
+  }]);
+
+  const [title, setTitle] = useState("")
+  const [weekGoal, setWeekGoal] = useState("")
 
   const handleAddPriorities = () => {
-    addPriority("test", 3)
+    priorities.map((priority) => {
+      addPriority(priority.title, parseInt(priority.weekGoal));
+    })
     navigate('/dashboard')
   }
 
@@ -32,7 +42,7 @@ export const InitialPriorities = () => {
             Enter your top 3 priorities at the moment
           </Typography>
           {[...Array(3)].map((e, i) => (
-            <AddPriorityField key={i}/>
+            <AddPriorityField key={i} title={priorities[i].title} weekGoal={priorities[i].weekGoal} setTitle={setTitle} setWeekGoal={setWeekGoal}/>
           ))}
           <Button variant='contained' onClick={handleAddPriorities}>Finish</Button>
         </Box>
