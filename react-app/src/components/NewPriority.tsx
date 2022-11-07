@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useStore } from '../stores/useStore';
-import { Button, Container} from '@mui/material';
+import { Button, Container } from '@mui/material';
 import { AddPriorityField } from './AddPriorityField';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,8 +17,8 @@ export const NewPriority = () => {
   }
 
   return (
-    <Container maxWidth={false} sx={{textAlign: "center"}}>
-      <AddPriorityField title={title} weekGoal={weekGoal} setTitle={setTitle} setWeekGoal={setWeekGoal}/>
+    <Container maxWidth={false} sx={{ textAlign: "center" }}>
+      <AddPriorityField title={title} weekGoal={weekGoal} setTitle={setTitle} setWeekGoal={setWeekGoal} />
       <Button variant='contained' onClick={handleAdd}>Finish</Button>
     </Container>
   );
