@@ -1,29 +1,28 @@
 import { useStore } from '../stores/useStore';
-import { Card, CardContent, Container, Typography } from '@mui/material';
+import {Container } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
+import { PriorityCard } from './PriorityCard';
+import InterestsIcon from '@mui/icons-material/Interests';
+import { AddButton } from './AddButton';
+import { useNavigate } from 'react-router-dom';
 
 export const Priorities = () => {
   const { priorities } = useStore();
+  const navigate = useNavigate();
 
   return (
     <Container maxWidth='xs'>
       <Grid container spacing={3}>
         {priorities.map((priority) => (
-          <Grid key={priority.id} xs={6} md={4}>
-            <Card variant='outlined'>
-              <CardContent>
-                <Typography gutterBottom variant='h5' component='div'>
-                  {priority.title}
-                </Typography>
-                <Typography variant='body2' color='text.secondary'>
-                  {priority.weeklyGoal}
-                </Typography>
-              </CardContent>
-            </Card>
+          <Grid key={priority.id} xs={4} md={3}>
+            <PriorityCard priority={priority}/>
           </Grid>
         ))}
+        <Grid xs={6} md={4}>
+          <AddButton Icon={() => <InterestsIcon fontSize='large' />} onClick={() => { navigate('/newPriority') }} />
+        </Grid>
       </Grid>
-    </Container>
-  );
 
+    </Container>
+  )
 };

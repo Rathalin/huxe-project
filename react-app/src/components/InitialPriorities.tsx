@@ -11,13 +11,9 @@ export const InitialPriorities = () => {
   const loggedIn = user != null;
   const navigate = useNavigate();
 
-  const [priorities, setPriorities] = useState([{
-    "title": "",
-    "weekGoal": ""
-  }]);
-
-  const [title, setTitle] = useState("")
-  const [weekGoal, setWeekGoal] = useState("")
+  const [priorities, setPriorities] = useState<{title: string; weekGoal: string}[]>([])
+  const [title, setTitle] = useState('');
+  const [weekGoal, setWeekGoal] = useState("3");
 
   const handleAddPriorities = () => {
     priorities.map((priority) => {
