@@ -6,6 +6,7 @@ import { Notes } from './Notes';
 import { createContext, FormEvent, useState } from 'react';
 import { Enum_Emotion_Emotiontype } from '../graphql/generated/graphql';
 import { useNavigate } from 'react-router-dom';
+import { BackButton } from './ui/buttons/BackButton';
 
 export interface EmotionTypeContext {
   selectedEmotionType: Enum_Emotion_Emotiontype | null,
@@ -48,15 +49,7 @@ export const StrongEmotion = () => {
         </SelectedEmotionTypeCtx.Provider>
         <NewNote />
         <Notes />
-
-        <Button
-          type='submit'
-          fullWidth
-          variant='contained'
-          sx={{ mt: 3, mb: 2 }}
-        >
-          Finish
-        </Button>
+        <BackButton />
       </Box>
     </Container>
   );

@@ -13,6 +13,8 @@ import { SET_MOOD_MUTATION } from '../graphql/mutations/set-mood.mutation';
 import { SELECTED_MOOD_QUERY } from '../graphql/queries/selected-mood.query';
 import { useDailyMoodIdStore } from '../stores/dailyMoodStore';
 import { Enum_Dailymood_Mood } from '../graphql/generated/graphql';
+import { ArrowBack, Backspace } from '@mui/icons-material';
+import { BackButton } from './ui/buttons/BackButton';
 
 const moodOptions: Enum_Dailymood_Mood[] = [
   Enum_Dailymood_Mood.VeryGood,
@@ -47,17 +49,10 @@ export const NewMood = () => {
 
   const selectedMood = selectedMoodData?.dailyMood?.data?.attributes?.mood;
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    // addMood(selectedMood);
-    navigate('/dashboard');
-  }
-
   return (
-    <Container maxWidth='md' sx={{ mt: 3, display: 'flex', gap: 1 }}>
-      <Box component='form' onSubmit={handleSubmit} sx={{
-        mt: 3, display: 'flex', flexDirection: 'column',
-        alignItems: 'left'
+    <Container sx={{ mt: 3, display: 'flex', gap: 1 }}>
+      <Box sx={{
+        mt: 3, display: 'flex', flexDirection: 'column'
       }}>
         <Typography component='h1' variant='h3'>
           Track Mood
@@ -81,14 +76,7 @@ export const NewMood = () => {
         </Typography>
         <Priorities />
         <NewNote />
-        <Button
-          type='submit'
-          fullWidth
-          variant='contained'
-          sx={{ mt: 3, mb: 2 }}
-        >
-          Finish
-        </Button>
+        <BackButton />
       </Box>
     </Container>
   );

@@ -42,7 +42,7 @@ export const InitialPriorities = () => {
             Enter your top 3 priorities at the moment
           </Typography>
           {[...Array(3)].map((e, i) => (
-            <AddPriorityField key={i} title={priorities[i].title} weekGoal={priorities[i].weekGoal} setTitle={setTitle} setWeekGoal={setWeekGoal}/>
+            <AddPriorityField key={i} title={priorities[i].title} weekGoal={priorities[i].weekGoal} setTitle={setTitle} setWeekGoal={setWeekGoal} />
           ))}
           <Button variant='contained' onClick={handleAddPriorities}>Finish</Button>
         </Box>
