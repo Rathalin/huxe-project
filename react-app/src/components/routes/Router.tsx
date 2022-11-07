@@ -7,6 +7,7 @@ import { useAuthStore } from '../../stores/auth.store';
 import { NewMood } from '../NewMood';
 import { SelectEmotionType } from '../SelectEmotionType';
 import { InitialPriorities } from '../InitialPriorities';
+import { NewPriority } from '../NewPriority';
 
 export const CustomRouter = () => {
   const loggedIn = useAuthStore().user != null;
@@ -23,6 +24,8 @@ export const CustomRouter = () => {
       <Route path='newMood' element={!loggedIn ? <Navigate to='/login' /> : <NewMood />}
       />
       <Route path='initialPriorities' element={!loggedIn ? <Navigate to='/login' /> : <InitialPriorities />}
+      />
+      <Route path='newPriority' element={!loggedIn ? <Navigate to='/login' /> : <NewPriority />}
       />
       <Route path='register' element={loggedIn ? <Navigate to='/dashboard' /> : <Register />}
       />

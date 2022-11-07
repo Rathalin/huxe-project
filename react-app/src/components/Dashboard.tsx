@@ -19,6 +19,7 @@ import { DailyMoodsBetweenQuery } from '../graphql/generated/graphql';
 import { useDailyMoodIdStore } from '../stores/dailyMoodStore';
 import { useEffect } from 'react';
 import { now, today, todayDateString, tomorrow } from '../utils/date.util';
+import SwitchAccessShortcutAddIcon from '@mui/icons-material/SwitchAccessShortcutAdd';
 
 export const Dashboard = () => {
   const navigate = useNavigate();
@@ -91,6 +92,7 @@ export const Dashboard = () => {
               Priorities
             </Typography>
             <Priorities />
+            <AddButton Icon={() => <SwitchAccessShortcutAddIcon fontSize='large' />} onClick={() => { navigate('/newPriority') }} />
           </Grid>
           <Grid xs={12} md={6}>
             <Typography component='h3' variant='h5'>
