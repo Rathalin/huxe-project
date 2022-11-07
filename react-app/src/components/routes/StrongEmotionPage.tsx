@@ -1,12 +1,12 @@
-import { NewNote } from './NewNote';
+import { NewNote } from '../NewNote';
 import { Container, Box, Button, Typography } from '@mui/material';
-import { SelectEmotionType } from './SelectEmotionType';
-import { SelectEmotion } from './SelectEmotion';
-import { Notes } from './Notes';
+import { SelectEmotionType } from '../SelectEmotionType';
+import { SelectEmotion } from '../SelectEmotion';
+import { Notes } from '../Notes';
 import { createContext, FormEvent, useState } from 'react';
-import { Enum_Emotion_Emotiontype } from '../graphql/generated/graphql';
+import { Enum_Emotion_Emotiontype } from '../../graphql/generated/graphql';
 import { useNavigate } from 'react-router-dom';
-import { BackButton } from './ui/buttons/BackButton';
+import { BackButton } from '../ui/buttons/BackButton';
 
 export interface EmotionTypeContext {
   selectedEmotionType: Enum_Emotion_Emotiontype | null,
@@ -23,7 +23,7 @@ export const SelectedEmotionTypeCtx = createContext<EmotionTypeContext>({
   setSelectedEmotionType(_emotionType) { },
 });
 
-export const StrongEmotion = () => {
+export const StrongEmotionPage = () => {
   const navigate = useNavigate();
   const [selectedEmotionType, setSelectedEmotionType] = useState<Enum_Emotion_Emotiontype | null>(null);
 

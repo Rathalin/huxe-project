@@ -9,12 +9,12 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { FormEvent, useRef, useState } from 'react';
-import { Loading } from './ui/loading/Loading';
-import { LoadingError } from './ui/error/LoadingError';
-import { LoadingSuccess } from './ui/success/LoadingSuccess';
-import { useAuthStore } from '../stores/auth.store';
+import { Loading } from '../ui/loading/Loading';
+import { LoadingError } from '../ui/error/LoadingError';
+import { LoadingSuccess } from '../ui/success/LoadingSuccess';
+import { useAuthStore } from '../../stores/auth.store';
 
-export const Register = () => {
+export const RegisterPage = () => {
   const { register } = useAuthStore();
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);

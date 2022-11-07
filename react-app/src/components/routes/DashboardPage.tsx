@@ -1,25 +1,25 @@
-import { MoodCalender } from './MoodCalender';
-import { MoodGraph } from './MoodGraph';
+import { MoodCalender } from '../MoodCalender';
+import { MoodGraph } from '../MoodGraph';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Unstable_Grid2';
 import { useNavigate } from 'react-router-dom';
 import Container from '@mui/material/Container';
-import { Notes } from './Notes';
+import { Notes } from '../Notes';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
-import { AddButton } from './AddButton';
+import { AddButton } from '../ui/buttons/AddButton';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
-import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
-import { DAILY_MOODS_BETWEEN_QUERY } from '../graphql/queries/daily-moods-between.query';
-import { useDailyMoodIdStore } from '../stores/dailyMoodStore';
-import { now, today, todayDateString, tomorrow } from '../utils/date.util';
-import { CREATE_DAILY_MOOD_MUTATION } from '../graphql/mutations/new-daily-mood-mutation';
-import { DashboardPriorities } from './DashboardPriorities';
+import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
+import { DAILY_MOODS_BETWEEN_QUERY } from '../../graphql/queries/daily-moods-between.query';
+import { useDailyMoodIdStore } from '../../stores/dailyMoodStore';
+import { now, today, todayDateString, tomorrow } from '../../utils/date.util';
+import { CREATE_DAILY_MOOD_MUTATION } from '../../graphql/mutations/new-daily-mood-mutation';
+import { DashboardPriorities } from '../DashboardPriorities';
 
-export const Dashboard = () => {
+export const DashboardPage = () => {
   const navigate = useNavigate();
   const { setDailyMoodId } = useDailyMoodIdStore();
 
@@ -71,7 +71,7 @@ export const Dashboard = () => {
             <Typography component='h3' variant='h5'>
               Priorities
             </Typography>
-            <DashboardPriorities/>
+            <DashboardPriorities />
           </Grid>
           <Grid xs={12} md={6}>
             <Typography component='h3' variant='h5'>

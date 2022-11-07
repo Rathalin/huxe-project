@@ -1,17 +1,17 @@
-import { useStore } from '../stores/useStore';
+import { useStore } from '../../stores/useStore';
 import { Box, Button, Container, Typography } from '@mui/material';
-import { useAuthStore } from '../stores/auth.store';
+import { useAuthStore } from '../../stores/auth.store';
 import { useNavigate } from 'react-router-dom';
-import { AddPriorityField } from './AddPriorityField';
+import { AddPriorityField } from '../AddPriorityField';
 import { useState } from 'react';
 
-export const InitialPriorities = () => {
+export const InitialPrioritiesPage = () => {
   const { addPriority } = useStore();
   const { user } = useAuthStore();
   const loggedIn = user != null;
   const navigate = useNavigate();
 
-  const [priorities, setPriorities] = useState<{title: string; weekGoal: string}[]>([])
+  const [priorities, setPriorities] = useState<{ title: string; weekGoal: string }[]>([])
   const [title, setTitle] = useState('');
   const [weekGoal, setWeekGoal] = useState("3");
 

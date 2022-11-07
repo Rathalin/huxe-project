@@ -1,35 +1,30 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { Dashboard } from '../Dashboard';
-import { StrongEmotion } from '../StrongEmotion';
-import { Register } from '../Register';
-import { Login } from '../Login';
+import { DashboardPage } from './DashboardPage';
+import { StrongEmotionPage } from './StrongEmotionPage';
+import { RegisterPage } from './RegisterPage';
+import { LoginPage } from './LoginPage';
 import { useAuthStore } from '../../stores/auth.store';
-import { NewMood } from '../NewMood';
-import { InitialPriorities } from '../InitialPriorities';
-import { NewPriority } from '../NewPriority';
-import { Priorities } from '../Priorities';
+import { NewMoodPage } from './NewMoodPage';
+import { InitialPrioritiesPage } from './InitialPrioritiesPage';
+import { NewPriorityPage } from './NewPriorityPage';
+import { PrioritiesPage } from './PrioritiesPage';
 
 export const CustomRouter = () => {
   const loggedIn = useAuthStore().user != null;
 
   return (
     <Routes>
-      <Route path='/' element={loggedIn ? <Navigate to='/dashboard' /> : <Login />} />
-      <Route path='login' element={loggedIn ? <Navigate to='/dashboard' /> : <Login />} />
-      <Route path='register' element={loggedIn ? <Navigate to='/dashboard' /> : <Register />} />
-      <Route path='dashboard' element={!loggedIn ? <Navigate to='/login' /> : <Dashboard />} />
-      <Route path='emotion' element={<StrongEmotion />} />
-      <Route path='login' element={loggedIn ? <Navigate to='/dashboard' /> : <Login />}
-      />
-      <Route path='newMood' element={!loggedIn ? <Navigate to='/login' /> : <NewMood />}
-      />
-      <Route path='initialPriorities' element={!loggedIn ? <Navigate to='/login' /> : <InitialPriorities />}
-      />
-      <Route path='newPriority' element={!loggedIn ? <Navigate to='/login' /> : <NewPriority />}/>
-      <Route path='priorities' element={!loggedIn ? <Navigate to='/login' /> : <Priorities />}
-      />
-      <Route path='register' element={loggedIn ? <Navigate to='/dashboard' /> : <Register />}
-      />
+      <Route path='/' element={loggedIn ? <Navigate to='/dashboard' /> : <LoginPage />} />
+      <Route path='login' element={loggedIn ? <Navigate to='/dashboard' /> : <LoginPage />} />
+      <Route path='register' element={loggedIn ? <Navigate to='/dashboard' /> : <RegisterPage />} />
+      <Route path='dashboard' element={!loggedIn ? <Navigate to='/login' /> : <DashboardPage />} />
+      <Route path='emotion' element={<StrongEmotionPage />} />
+      <Route path='login' element={loggedIn ? <Navigate to='/dashboard' /> : <LoginPage />} />
+      <Route path='newMood' element={!loggedIn ? <Navigate to='/login' /> : <NewMoodPage />} />
+      <Route path='initialPriorities' element={!loggedIn ? <Navigate to='/login' /> : <InitialPrioritiesPage />} />
+      <Route path='newPriority' element={!loggedIn ? <Navigate to='/login' /> : <NewPriorityPage />} />
+      <Route path='priorities' element={!loggedIn ? <Navigate to='/login' /> : <PrioritiesPage />} />
+      <Route path='register' element={loggedIn ? <Navigate to='/dashboard' /> : <RegisterPage />} />
     </Routes>
   );
 };

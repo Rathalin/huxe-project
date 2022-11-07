@@ -5,7 +5,7 @@ import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
 import { Loading } from './ui/loading/Loading';
 import { useContext } from 'react';
-import { emotionTypeOptions, SelectedEmotionTypeCtx } from './StrongEmotion';
+import { emotionTypeOptions, SelectedEmotionTypeCtx } from './routes/StrongEmotionPage';
 import { Enum_Emotion_Emotiontype } from '../graphql/generated/graphql';
 
 export const SelectEmotionType = () => {

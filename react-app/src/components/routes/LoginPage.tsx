@@ -9,11 +9,11 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { LoadingError } from './ui/error/LoadingError';
-import { Loading } from './ui/loading/Loading';
-import { useAuthStore } from '../stores/auth.store';
+import { LoadingError } from '../ui/error/LoadingError';
+import { Loading } from '../ui/loading/Loading';
+import { useAuthStore } from '../../stores/auth.store';
 
-export const Login = () => {
+export const LoginPage = () => {
   const { login } = useAuthStore();
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);

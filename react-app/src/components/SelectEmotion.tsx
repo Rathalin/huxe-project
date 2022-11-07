@@ -6,7 +6,7 @@ import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
 import { EMOTIONS_BY_TYPE_QUERY } from '../graphql/queries/emotions-by-type.query';
 import { Loading } from './ui/loading/Loading';
-import { SelectedEmotionTypeCtx } from './StrongEmotion';
+import { SelectedEmotionTypeCtx } from './routes/StrongEmotionPage';
 
 export const SelectEmotion = () => {
   const { selectedEmotionType } = useContext(SelectedEmotionTypeCtx);
