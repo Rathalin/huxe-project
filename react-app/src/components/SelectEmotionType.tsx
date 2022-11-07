@@ -3,31 +3,17 @@ import { MoodIcon } from './MoodIcon';
 import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
-import { EMOTION_TYPES_QUERY } from '../graphql/queries/emotion-types.query';
 import { Loading } from './ui/loading/Loading';
 import { useContext } from 'react';
-import { SelectedEmotionTypeCtx } from './StrongEmotion';
+import { emotionTypeOptions, SelectedEmotionTypeCtx } from './StrongEmotion';
+import { Enum_Emotion_Emotiontype } from '../graphql/generated/graphql';
 
 export const SelectEmotionType = () => {
   const { selectedEmotionType, setSelectedEmotionType } = useContext(SelectedEmotionTypeCtx);
-  const { data, isLoading } = useQuery({
-    queryKey: ['EMOTION_TYPES_QUERY'],
-    queryFn: () => request(GRAPHQL_ENDPOINT, EMOTION_TYPES_QUERY),
-  });
 
-  if (isLoading) return <Loading />;
-
-  function onEmotionTypeChange(emotionType: string): void {
-    if (emotionType === 'Good' || emotionType === 'Bad') {
-      setSelectedEmotionType(emotionType);
-    } else {
-      setSelectedEmotionType(null);
-    }
+  function onEmotionTypeChange(emotionType: Enum_Emotion_Emotiontype | null): void {
+    setSelectedEmotionType(emotionType);
   }
-
-  const emotionTypes = data?.emotionTypes?.data
-    .map(emotionType => emotionType.attributes?.name)
-    .filter((emotionTypeName): emotionTypeName is string => emotionTypeName != null) ?? [];
 
   return (
     <Container maxWidth='xl'>
@@ -39,10 +25,10 @@ export const SelectEmotionType = () => {
         mt: 3, display: 'flex', flexDirection: 'row',
         alignItems: 'center'
       }}>
-        {emotionTypes.map(emotionType => (
+        {emotionTypeOptions.map(emotionType => (
           <Checkbox key={emotionType}
-            icon={<MoodIcon moodType={emotionType.toLowerCase()} />}
-            checkedIcon={<MoodIcon moodType={emotionType.toLowerCase()} />}
+            icon={<MoodIcon moodType={emotionType} />}
+            checkedIcon={<MoodIcon moodType={emotionType} />}
             onChange={() => onEmotionTypeChange(emotionType)}
             checked={selectedEmotionType === emotionType} />
         ))}

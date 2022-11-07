@@ -4,7 +4,9 @@ export const SET_MOOD_MUTATION = graphql(`
   mutation SetMood($dailyMoodId: ID!, $dailyMoodInput: DailyMoodInput!) {
     updateDailyMood(id: $dailyMoodId, data: $dailyMoodInput) {
       data {
-        id
+        attributes {
+          mood
+        }
       }
     }
   }

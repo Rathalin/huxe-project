@@ -19,9 +19,12 @@
       "unique": true
     },
     "emotionType": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::emotion-type.emotion-type"
+      "type": "enumeration",
+      "enum": [
+        "Good",
+        "Bad"
+      ],
+      "required": false
     }
   }
 }

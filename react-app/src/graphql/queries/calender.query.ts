@@ -7,13 +7,7 @@ export const CALENDER_QUERY = graphql(`
         id
         attributes {
           createdAt
-          mood {
-            data {
-              attributes {
-                iconName
-              }
-            }
-          }
+          mood
           strongEmotions {
             data {
               id
