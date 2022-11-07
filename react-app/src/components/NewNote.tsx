@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { useStore } from '../stores/useStore';
-import { Button, Container, hslToRgb, TextField } from '@mui/material';
-import { useMutation } from '@tanstack/react-query';
+import { useState } from 'react';
+import { Box, Button, Container, TextField } from '@mui/material';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
 import { CREATE_NOTE_MUTATION } from '../graphql/mutations/create-note.mutation';
 import { SET_NOTE_OF_DAILY_MOOD_MUTATION } from '../graphql/mutations/set-note-of-daily-mood.mutation';
 import { useDailyMoodIdStore } from '../stores/dailyMoodStore';
+import { Loading } from './ui/loading/Loading';
 
 export const NewNote = () => {
-  const { addNote } = useStore();
   const { dailyMoodId } = useDailyMoodIdStore();
   const [note, setNote] = useState('');
-  const { mutate: createNote } = useMutation({
+  const queryClient = useQueryClient();
+  const { mutate: createNote, isLoading } = useMutation({
     mutationKey: ['CREATE_NOTE_MUTATION'],
     mutationFn: (text: string) => request(GRAPHQL_ENDPOINT, CREATE_NOTE_MUTATION, { note: { text } }),
     onSuccess: (data, _variables) => {
@@ -25,6 +25,9 @@ export const NewNote = () => {
       dailyMoodId: dailyMoodId ?? '',
       dailyMoodInput: { note: noteId },
     }),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['NOTE_EXISTS_QUERY', dailyMoodId]);
+    },
   });
 
   return (
@@ -48,13 +51,15 @@ export const NewNote = () => {
         onChange={(e) => setNote(e.target.value)}
         value={note} />
 
-      <Button variant='outlined' onClick={() => {
-        if (note.trim().length > 0) {
-          createNote(note);
-          setNote('');
-        }
-      }}>Add Note</Button>
-
+      <Box sx={{ display: 'flex' }}>
+        <Button variant='outlined' onClick={() => {
+          if (note.trim().length > 0) {
+            createNote(note);
+            setNote('');
+          }
+        }}>Add Note</Button>
+        {isLoading && <Loading />}
+      </Box>
     </Container>
   );
 };

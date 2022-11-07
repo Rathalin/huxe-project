@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { LoadingError } from '../ui/error/LoadingError';
+import { LoadingError } from '../ui/loading/LoadingError';
 import { Loading } from '../ui/loading/Loading';
 import { useAuthStore } from '../../stores/auth.store';
 
