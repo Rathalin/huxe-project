@@ -10,10 +10,8 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
 import { MOODS_QUERY } from '../graphql/queries/moods.query';
-import { Loading } from './ui/loading/Loading';
 import { SET_MOOD_MUTATION } from '../graphql/mutations/set-mood.mutation';
 import { SELECTED_MOOD_QUERY } from '../graphql/queries/selected-mood.query';
-import { SelectedMoodQuery } from '../graphql/generated/graphql';
 import { useDailyMoodIdStore } from '../stores/dailyMoodStore';
 
 export const NewMood = () => {
@@ -31,7 +29,6 @@ export const NewMood = () => {
   });
   const { mutate: setSelectedMood } = useMutation({
     mutationFn: ({ moodId }: { moodId: string, }) => {
-      console.log('Set mood id to ', moodId);
       return request(GRAPHQL_ENDPOINT, SET_MOOD_MUTATION, {
         dailyMoodId: dailyMoodId ?? '',
         dailyMoodInput: {
@@ -39,12 +36,25 @@ export const NewMood = () => {
         },
       })
     },
-    onSuccess: () => {
+    onSuccess: (_data, _variables) => {
       queryClient.invalidateQueries(selectedMoodQueryKey);
       // queryClient.setQueryData(selectedMoodQueryKey, (): SelectedMoodQuery => ({
-      //   dailyMood: { data: { attributes: { mood: { data: { id: variables.moodId } } } } }
+      //   dailyMood: {
+      //     data: {
+      //       attributes: {
+      //         mood: {
+      //           data: {
+      //             id: data.updateDailyMood?.data?.attributes?.mood?.data?.id ?? '',
+      //             attributes: {
+      //               iconName: data.updateDailyMood?.data?.attributes?.mood?.data?.attributes?.iconName ?? '',
+      //             }
+      //           }
+      //         }
+      //       }
+      //     }
+      //   }
       // }));
-    }
+    },
   });
 
   const selectedMood = selectedMoodData?.dailyMood?.data?.attributes?.mood?.data;

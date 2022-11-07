@@ -11,65 +11,50 @@ import { AddButton } from './AddButton';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
 import { Priorities } from './Priorities';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
 import { DAILY_MOODS_BETWEEN_QUERY } from '../graphql/queries/daily-moods-between.query';
-import { DailyMoodsBetweenQuery } from '../graphql/generated/graphql';
 import { useDailyMoodIdStore } from '../stores/dailyMoodStore';
 import { useEffect } from 'react';
 import { now, today, todayDateString, tomorrow } from '../utils/date.util';
+import { CREATE_DAILY_MOOD_MUTATION } from '../graphql/mutations/new-daily-mood-mutation';
 
 export const Dashboard = () => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const { setDailyMoodId } = useDailyMoodIdStore();
-  useEffect(() => {
-    setDailyMoodId('1'); // TODO Implement fetching from db
-  }, []);
+
   const todayDailyMoodQueryKey = ['DAILY_MOODS_BETWEEN_QUERY', todayDateString];
-  const {
-    data: dailyMoodData,
-    isSuccess: isSuccessDailyMood,
-    isLoading: isLoadingDailyMood,
-    isFetching: isFetchingDailyMood,
-  } = useQuery({
+  useQuery({
     queryKey: todayDailyMoodQueryKey,
-    queryFn: () => request(GRAPHQL_ENDPOINT, DAILY_MOODS_BETWEEN_QUERY, {
-      startDate: today,
-      endDate: tomorrow,
-    }),
-  });
-  const { mutate: createEmptyDailyMood, isLoading: isLoadingCreate } = useMutation({
-    mutationKey: ['CREATE_DAILY_MOOD_MUTATION'],
-    // mutationFn: () => request(GRAPHQL_ENDPOINT, CREATE_DAILY_MOOD_MUTATION, { dailyMoodInput: {} }),
-    mutationFn: async () => {
-      return {};
-    },
-    onSuccess: (_data, _variables) => {
-      // console.log('data', data);
-      queryClient.setQueryData(todayDailyMoodQueryKey, (): DailyMoodsBetweenQuery => {
-        return {};
-        // return {
-        //   dailyMoods: {
-        //     data: [
-        //       { id: data.createDailyMood?.data?.id },
-        //     ],
-        //   },
-        // };
+    queryFn: () => {
+      return request(GRAPHQL_ENDPOINT, DAILY_MOODS_BETWEEN_QUERY, {
+        startDate: today,
+        endDate: tomorrow,
       });
+    },
+    onSuccess: (data) => {
+      const dailyMoodDataId = data?.dailyMoods?.data[0]?.id;
+      const dailyMoodExistsToday = dailyMoodDataId != null;
+      if (dailyMoodExistsToday) {
+        setDailyMoodId(dailyMoodDataId);
+      } else {
+        createEmptyDailyMood();
+      }
     },
   });
 
-  const dailyMoodToday = dailyMoodData?.dailyMoods?.data[0] ?? null;
-  // if (isSuccessDailyMood && !isLoadingDailyMood && !isFetchingDailyMood) {
-  //   // Create empty daily mood if none exists today
-  //   if (dailyMoodToday == null) {
-  //     console.log('DailyMoodData', dailyMoodData);
-  //     console.count('Create empty daily mood');
-  //     createEmptyDailyMood();
-  //   }
-  // }
+  const { mutate: createEmptyDailyMood } = useMutation({
+    mutationKey: ['CREATE_DAILY_MOOD_MUTATION'],
+    mutationFn: () => request(GRAPHQL_ENDPOINT, CREATE_DAILY_MOOD_MUTATION, { dailyMoodInput: {} }),
+    onSuccess: (data, _variables) => {
+      const dailyMoodId = data.createDailyMood?.data?.id;
+      if (dailyMoodId != null) {
+        console.log('Created DailyMood with id')
+        setDailyMoodId(dailyMoodId);
+      }
+    },
+  });
 
   const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
