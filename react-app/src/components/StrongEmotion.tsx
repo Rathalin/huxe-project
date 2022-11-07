@@ -4,13 +4,18 @@ import { SelectEmotionType } from './SelectEmotionType';
 import { SelectEmotion } from './SelectEmotion';
 import { Notes } from './Notes';
 import { createContext, FormEvent, useState } from 'react';
-
-export type EmotionType = 'Good' | 'Bad';
+import { Enum_Emotion_Emotiontype } from '../graphql/generated/graphql';
+import { useNavigate } from 'react-router-dom';
 
 export interface EmotionTypeContext {
-  selectedEmotionType: EmotionType | null,
-  setSelectedEmotionType: (emotionType: EmotionType | null) => void,
+  selectedEmotionType: Enum_Emotion_Emotiontype | null,
+  setSelectedEmotionType: (emotionType: Enum_Emotion_Emotiontype | null) => void,
 }
+
+export const emotionTypeOptions: Enum_Emotion_Emotiontype[] = [
+  Enum_Emotion_Emotiontype.Good,
+  Enum_Emotion_Emotiontype.Bad,
+];
 
 export const SelectedEmotionTypeCtx = createContext<EmotionTypeContext>({
   selectedEmotionType: null,
@@ -18,12 +23,12 @@ export const SelectedEmotionTypeCtx = createContext<EmotionTypeContext>({
 });
 
 export const StrongEmotion = () => {
-  const [selectedEmotionType, setSelectedEmotionType] = useState<EmotionType | null>(null);
+  const navigate = useNavigate();
+  const [selectedEmotionType, setSelectedEmotionType] = useState<Enum_Emotion_Emotiontype | null>(null);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    //addMood(selectedMood);
-    //navigate("/dashboard");
+    navigate('/dashboard');
   }
 
   return (

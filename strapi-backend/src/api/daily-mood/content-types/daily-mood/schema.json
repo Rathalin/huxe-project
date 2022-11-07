@@ -17,11 +17,6 @@
       "relation": "oneToMany",
       "target": "api::priority.priority"
     },
-    "mood": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::mood.mood"
-    },
     "note": {
       "type": "relation",
       "relation": "oneToOne",
@@ -36,6 +31,17 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::strong-emotion.strong-emotion"
+    },
+    "mood": {
+      "type": "enumeration",
+      "enum": [
+        "VeryGood",
+        "Good",
+        "Neutral",
+        "Bad",
+        "VeryBad"
+      ],
+      "required": false
     }
   }
 }

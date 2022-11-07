@@ -5,19 +5,14 @@ import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
 import { Loading } from './ui/loading/Loading';
 import { useContext } from 'react';
-import { EmotionType, SelectedEmotionTypeCtx } from './StrongEmotion';
-
-const emotionTypes: EmotionType[] = ['Good', 'Bad'];
+import { emotionTypeOptions, SelectedEmotionTypeCtx } from './StrongEmotion';
+import { Enum_Emotion_Emotiontype } from '../graphql/generated/graphql';
 
 export const SelectEmotionType = () => {
   const { selectedEmotionType, setSelectedEmotionType } = useContext(SelectedEmotionTypeCtx);
 
-  function onEmotionTypeChange(emotionType: string): void {
-    if (emotionType === 'Good' || emotionType === 'Bad') {
-      setSelectedEmotionType(emotionType);
-    } else {
-      setSelectedEmotionType(null);
-    }
+  function onEmotionTypeChange(emotionType: Enum_Emotion_Emotiontype | null): void {
+    setSelectedEmotionType(emotionType);
   }
 
   return (
@@ -30,10 +25,10 @@ export const SelectEmotionType = () => {
         mt: 3, display: 'flex', flexDirection: 'row',
         alignItems: 'center'
       }}>
-        {emotionTypes.map(emotionType => (
+        {emotionTypeOptions.map(emotionType => (
           <Checkbox key={emotionType}
-            icon={<MoodIcon moodType={emotionType.toLowerCase()} />}
-            checkedIcon={<MoodIcon moodType={emotionType.toLowerCase()} />}
+            icon={<MoodIcon moodType={emotionType} />}
+            checkedIcon={<MoodIcon moodType={emotionType} />}
             onChange={() => onEmotionTypeChange(emotionType)}
             checked={selectedEmotionType === emotionType} />
         ))}

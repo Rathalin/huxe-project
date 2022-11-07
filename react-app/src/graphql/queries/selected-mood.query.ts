@@ -5,14 +5,7 @@ export const SELECTED_MOOD_QUERY = graphql(`
     dailyMood(id: $dailyMoodId) {
       data {
         attributes {
-          mood {
-            data {
-              id
-              attributes {
-                iconName
-              }
-            }
-          }
+          mood
         }
       }
     }

@@ -7,13 +7,7 @@ export const GRAPH_QUERY = graphql(`
         id
         attributes {
           createdAt
-          mood {
-            data {
-              attributes {
-                iconName
-              }
-            }
-          }
+          mood
         }
       }
     }

@@ -34,7 +34,7 @@ export const MoodCalender = ({ year, month }: MoodCalenderProps) => {
         {dailyMoodsPerDay.map((mood, i) => (
           <Grid key={i} md={1}>
             <MoodIcon
-              moodType={mood?.attributes?.mood?.data?.attributes?.iconName ?? ''}
+              moodType={mood?.attributes?.mood ?? null}
               strongEmotion={(mood?.attributes?.strongEmotions?.data?.length ?? 0) > 0}
             />
           </Grid>
