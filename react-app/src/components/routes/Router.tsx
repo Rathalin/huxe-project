@@ -3,9 +3,9 @@ import { Dashboard } from '../Dashboard';
 import { StrongEmotion } from '../StrongEmotion';
 import { Register } from '../Register';
 import { Login } from '../Login';
-import { useStore } from '../../stores/useStore';
-import { useAuthStore } from '../../stores/authStore';
+import { useAuthStore } from '../../stores/auth.store';
 import { NewMood } from '../NewMood';
+import { SelectEmotionType } from '../SelectEmotionType';
 import { NewEmotion } from '../NewEmotion';
 import { InitialPriorities } from '../InitialPriorities';
 
@@ -14,8 +14,9 @@ export const CustomRouter = () => {
 
   return (
     <Routes>
-      <Route path='/' element={loggedIn ? <Navigate to='/dashboard' /> : <Login />}
-      />
+      <Route path='/' element={loggedIn ? <Navigate to='/dashboard' /> : <Login />} />
+      <Route path='login' element={loggedIn ? <Navigate to='/dashboard' /> : <Login />} />
+      <Route path='register' element={loggedIn ? <Navigate to='/dashboard' /> : <Register />} />
       <Route path='dashboard' element={!loggedIn ? <Navigate to='/login' /> : <Dashboard />} />
       <Route path='emotion' element={<StrongEmotion />} />
       <Route path='login' element={loggedIn ? <Navigate to='/dashboard' /> : <Login />}

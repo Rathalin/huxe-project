@@ -9,20 +9,20 @@ export const Notes = () => {
     <Container maxWidth='xl'>
       {notes.map((notes) => (
         <Card
-          variant="outlined"
+          variant='outlined'
           sx={{
             border: 3,
             borderColor: '#fff',
             borderRadius: 3,
-            //backgroundColor: '#91B7ED',
-            margin: '1em'
+            backgroundColor: '#323463',
+            margin: '1em 0px'
           }}>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography gutterBottom variant='h5' component='div'>
               {notes.note}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {notes.date.toString()}
+            <Typography variant='body2' color='text.secondary'>
+              {notes.date.toLocaleString()}
             </Typography>
           </CardContent>
         </Card>

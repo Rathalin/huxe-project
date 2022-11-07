@@ -1,25 +1,17 @@
 import create from 'zustand';
-import { DailyMood, StrapiError } from '../services/rest-api.responses';
-import { restApiService } from '../services/rest-api.service';
 
-interface DailyMoodState {
-  dailyMood: DailyMood | null,
-  init: () => Promise<void>,
-  addDailyMood: (dailyMood: DailyMood) => Promise<StrapiError | null>,
+interface DailyMoodIdState {
+  dailyMoodId: string | null,
+  setDailyMoodId: (id: string) => void,
+  resetDailyMoodId: () => void,
 }
 
-export const useDailyMoodStore = create<DailyMoodState>(set => ({
-  dailyMood: null,
-  async init() {
-    const data = await restApiService.getDailyMoodOfToday();
-    console.log('Setting DailyMood to', data);
-    if (data != null) {
-      set({
-        dailyMood: data,
-      });
-    }
+export const useDailyMoodIdStore = create<DailyMoodIdState>(set => ({
+  dailyMoodId: null,
+  setDailyMoodId(id) {
+    set({ dailyMoodId: id });
   },
-  async addDailyMood(dailyMood) {
-    return restApiService.addDailyMood(dailyMood);
+  resetDailyMoodId() {
+    set({ dailyMoodId: null });
   },
 }));

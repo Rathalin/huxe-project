@@ -12,8 +12,7 @@ import { FormEvent, useRef, useState } from 'react';
 import { Loading } from './ui/loading/Loading';
 import { LoadingError } from './ui/error/LoadingError';
 import { LoadingSuccess } from './ui/success/LoadingSuccess';
-import { useAuthStore } from '../stores/authStore';
-import { StrapiError } from '../services/rest-api.responses';
+import { useAuthStore } from '../stores/auth.store';
 
 export const Register = () => {
   const { register } = useAuthStore();
@@ -41,7 +40,7 @@ export const Register = () => {
   }
 
   return (
-    <Container component="main" maxWidth="sm">
+    <Container component='main' maxWidth='sm'>
       <CssBaseline />
       <Box
         sx={{
@@ -54,18 +53,24 @@ export const Register = () => {
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component='h1' variant='h5'>
           Sign up
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 3, minHeight: '80vh' }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                id="username"
-                name="username"
-                label="Username"
-                type="text"
-                autoComplete="new-username"
+                sx={{
+                  border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
+                    color: "#fff"
+                  }, bgcolor: '#323463'
+                }}
+                placeholder="Username"
+                id='username'
+                name='username'
+                //label='Username'
+                type='text'
+                autoComplete='new-username'
                 fullWidth
                 required
                 autoFocus
@@ -73,22 +78,34 @@ export const Register = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                id="email"
-                name="email"
-                label="Email Address"
-                type="email"
-                autoComplete="new-email"
+                sx={{
+                  border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
+                    color: "#fff"
+                  }, bgcolor: '#323463'
+                }}
+                placeholder="Email Address"
+                id='email'
+                name='email'
+                //label='Email Address'
+                type='email'
+                autoComplete='new-email'
                 fullWidth
                 required
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                id="password"
-                name="password"
-                label="Password"
-                type="password"
-                autoComplete="new-password"
+                sx={{
+                  border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
+                    color: "#fff"
+                  }, bgcolor: '#323463'
+                }}
+                placeholder="Password"
+                id='password'
+                name='password'
+                //label='Password'
+                type='password'
+                autoComplete='new-password'
                 fullWidth
                 required
               />
@@ -100,18 +117,18 @@ export const Register = () => {
             <LoadingSuccess success={success ? 'Sucessfully registered.' : undefined} />
           </Box>
           <Button
-            type="submit"
+            type='submit'
             fullWidth
-            variant="contained"
+            variant='contained'
             sx={{ mt: 3, mb: 2 }}
           >
             Sign Up
           </Button>
-          <Grid container justifyContent="flex-end">
+          <Grid container justifyContent='flex-end'>
             <Grid item>
-              <Link to="/login">
+              <Button color='secondary' to="/login" component={Link}>
                 Already have an account? Sign in
-              </Link>
+              </Button>
             </Grid>
           </Grid>
         </Box>

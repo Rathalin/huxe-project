@@ -9,8 +9,7 @@ import {
 import { useState, MouseEvent } from 'react';
 import { AccountCircle } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
-import { useStore } from '../stores/useStore';
-import { useAuthStore } from '../stores/authStore';
+import { useAuthStore } from '../stores/auth.store';
 
 export const CustomAppbar = () => {
   const { user, logout } = useAuthStore();
@@ -32,29 +31,31 @@ export const CustomAppbar = () => {
   }
 
   return (
-    <AppBar position="static">
+    <AppBar position='static'>
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Mood Tracking
+        <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+          <Link to='/dashboard' style={{ textDecoration: 'none', color: 'inherit' }}>
+            Mood Tracking
+          </Link>
         </Typography>
         {loggedIn && (
           <div>
             <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
+              size='large'
+              aria-label='account of current user'
+              aria-controls='menu-appbar'
+              aria-haspopup='true'
               onClick={handleMenu}
-              color="inherit"
+              color='inherit'
               sx={{ gap: 1 }}
             >
               <AccountCircle />
-              <Typography variant="h6" component="span" sx={{ flexGrow: 1 }}>
+              <Typography variant='h6' component='span' sx={{ flexGrow: 1 }}>
                 Hello, {user.username}
               </Typography>
             </IconButton>
             <Menu
-              id="menu-appbar"
+              id='menu-appbar'
               anchorEl={anchorEl}
               anchorOrigin={{
                 vertical: 'top',
@@ -70,7 +71,7 @@ export const CustomAppbar = () => {
             >
               <MenuItem onClick={handleClose}>My Priorities</MenuItem>
               <MenuItem onClick={handleClose}>
-                <Link to="/">Dashboard</Link></MenuItem>
+                <Link to='/'>Dashboard</Link></MenuItem>
               <MenuItem onClick={() => { handleClose(); handleLogout(); }}>Logout</MenuItem>
             </Menu>
           </div>

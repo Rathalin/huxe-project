@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { LoadingError } from './ui/error/LoadingError';
 import { Loading } from './ui/loading/Loading';
-import { useAuthStore } from '../stores/authStore';
+import { useAuthStore } from '../stores/auth.store';
 
 export const Login = () => {
   const { login } = useAuthStore();
@@ -49,44 +49,57 @@ export const Login = () => {
         <Typography component='h1' variant='h5'>
           Sign in
         </Typography>
-        <Box component="form" noValidate onSubmit={handleLogin} sx={{ mt: 1 }}>
+        <Box component='form'
+          noValidate onSubmit={handleLogin} sx={{ mt: 1, minHeight: '80vh' }}>
           <TextField
+            sx={{
+              border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
+                color: "#fff"
+              }, bgcolor: '#323463'
+            }}
+            placeholder="Email Address"
             margin='normal'
             required
             fullWidth
             id='email'
-            label='Email Address'
+            //label='Email Address'
             name='email'
             autoComplete='email'
             autoFocus
           />
           <TextField
+            sx={{
+              border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
+                color: "#fff"
+              }, bgcolor: '#323463'
+            }}
+            placeholder="Password"
             margin='normal'
             required
             fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
+            name='password'
+            //label='Password'
+            type='password'
+            id='password'
+            autoComplete='current-password'
           />
           <Box sx={{ mt: 2 }}>
             <LoadingError error={error ?? undefined} />
             <Loading loading={isLoading} />
           </Box>
           <Button
+            variant='contained'
             type='submit'
             fullWidth
-            variant='contained'
             sx={{ mt: 3, mb: 2 }}
           >
             Sign In
           </Button>
           <Grid container>
             <Grid item>
-              <Link to='/register'>
-                {'Don\'t have an account? Sign Up'}
-              </Link>
+              <Button color='secondary' to="/register" component={Link}>
+                Don't have an account? Sign Up
+              </Button>
             </Grid>
           </Grid>
         </Box>

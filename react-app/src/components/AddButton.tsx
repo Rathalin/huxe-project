@@ -8,13 +8,13 @@ type AddButtonProps = {
 
 export const AddButton = ({ Icon, onClick }: PropsWithChildren<AddButtonProps>) => {
 
-  return(
+  return (
     <Box sx={{
       mt: 3, display: 'flex', flexDirection: 'row',
       alignItems: 'center'
     }}>
-    <Icon />
-      <IconButton color="primary" aria-label="add" onClick={onClick}>
+      <Icon />
+      <IconButton color='secondary' aria-label='add' onClick={onClick}>
         <AddBoxIcon />
       </IconButton>
     </Box>

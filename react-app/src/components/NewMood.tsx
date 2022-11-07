@@ -1,54 +1,92 @@
-import { useStore } from '../stores/useStore';
 import { Box, Checkbox, Container } from '@mui/material';
 import { MoodIcon } from './MoodIcon';
-import { MOODS } from '../utils/utils';
 import Typography from '@mui/material/Typography';
 import { Priorities } from './Priorities';
-import { AddButton } from './AddButton';
-import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
-import React, { useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NewNote } from './NewNote';
 import Button from '@mui/material/Button';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import request from 'graphql-request';
+import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
+import { MOODS_QUERY } from '../graphql/queries/moods.query';
+import { Loading } from './ui/loading/Loading';
+import { SET_MOOD_MUTATION } from '../graphql/mutations/set-mood.mutation';
+import { SELECTED_MOOD_QUERY } from '../graphql/queries/selected-mood.query';
+import { SelectedMoodQuery } from '../graphql/generated/graphql';
+import { useDailyMoodIdStore } from '../stores/dailyMoodStore';
 
 export const NewMood = () => {
-  const { addMood } = useStore();
   const navigate = useNavigate();
-  const [selectedMood, setSelectedMood] = useState("")
+  const queryClient = useQueryClient();
+  const { dailyMoodId } = useDailyMoodIdStore();
+  const { data: moodOptionsData, isSuccess: isSuccessMoodOptions } = useQuery({
+    queryKey: ['MOODS_QUERY'],
+    queryFn: () => request(GRAPHQL_ENDPOINT, MOODS_QUERY),
+  });
+  const selectedMoodQueryKey = ['SELECTED_MOOD_QUERY', dailyMoodId];
+  const { data: selectedMoodData, isSuccess: isSuccessSelctedMood } = useQuery({
+    queryKey: selectedMoodQueryKey,
+    queryFn: () => request(GRAPHQL_ENDPOINT, SELECTED_MOOD_QUERY, { dailyMoodId }),
+  });
+  const { mutate: setSelectedMood } = useMutation({
+    mutationFn: ({ moodId }: { moodId: string, }) => {
+      console.log('Set mood id to ', moodId);
+      return request(GRAPHQL_ENDPOINT, SET_MOOD_MUTATION, {
+        dailyMoodId: dailyMoodId ?? '',
+        dailyMoodInput: {
+          mood: moodId,
+        },
+      })
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(selectedMoodQueryKey);
+      // queryClient.setQueryData(selectedMoodQueryKey, (): SelectedMoodQuery => ({
+      //   dailyMood: { data: { attributes: { mood: { data: { id: variables.moodId } } } } }
+      // }));
+    }
+  });
 
-  const handleSubmit = () => {
-    addMood(selectedMood)
-    navigate("/dashboard")
+  const selectedMood = selectedMoodData?.dailyMood?.data?.attributes?.mood?.data;
+  const moodOptions = moodOptionsData?.moods?.data.map(moodData => ({
+    id: moodData.id,
+    displayOrder: moodData.attributes?.displayOrder ?? 0,
+    iconName: moodData.attributes?.iconName ?? '',
+  })) ?? [];
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    // addMood(selectedMood);
+    navigate('/dashboard');
   }
 
   return (
     <Container maxWidth='md' sx={{ mt: 3, display: 'flex', gap: 1 }}>
-      <Box component="form" onSubmit={handleSubmit} sx={{
+      <Box component='form' onSubmit={handleSubmit} sx={{
         mt: 3, display: 'flex', flexDirection: 'column',
         alignItems: 'left'
       }}>
-        <Typography component='h3' variant='h4'>
+        <Typography component='h1' variant='h3'>
           Track Mood
         </Typography>
         <Box sx={{
           mt: 3, display: 'flex', flexDirection: 'row',
           alignItems: 'center'
         }}>
-          {Object.keys(MOODS).map((moodType) => (
-            <Checkbox key={moodType} icon={<MoodIcon moodType={moodType} />} checkedIcon={<MoodIcon moodType={moodType} />} onChange={() => { setSelectedMood(moodType) }} checked={selectedMood === moodType} />
+          {isSuccessMoodOptions && isSuccessSelctedMood && moodOptions.map((mood) => (
+            <Checkbox
+              key={mood.displayOrder}
+              icon={<MoodIcon moodType={mood.iconName} />}
+              checkedIcon={<MoodIcon moodType={mood.iconName} />}
+              onChange={() => { setSelectedMood({ moodId: mood.id ?? '' }) }}
+              checked={selectedMood?.attributes?.iconName === mood.iconName}
+            />
           ))}
         </Box>
         <Typography component='h3' variant='h5'>
           Priorities Satisfied today
         </Typography>
         <Priorities />
-        <Typography component='h3' variant='h5'>
-          Strong Emotion
-        </Typography>
-        <Typography component='p'>
-          Do you want to record a strong Emotion today?
-        </Typography>
-        <AddButton Icon={() => <ThunderstormIcon fontSize="large" />} onClick={() => { navigate("/newEmotion") }} />
         <NewNote />
         <Button
           type='submit'

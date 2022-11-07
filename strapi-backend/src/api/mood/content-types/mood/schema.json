@@ -4,23 +4,24 @@
   "info": {
     "singularName": "mood",
     "pluralName": "moods",
-    "displayName": "Mood"
+    "displayName": "Mood",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
-      "type": "string",
-      "required": true,
-      "unique": true,
-      "maxLength": 20
-    },
     "iconName": {
       "type": "string",
       "required": true,
       "maxLength": 20
+    },
+    "displayOrder": {
+      "type": "integer",
+      "required": true,
+      "default": 0,
+      "unique": false
     }
   }
 }

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "priority-note",
     "pluralName": "priority-notes",
-    "displayName": "PriorityNote"
+    "displayName": "PriorityNote",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -16,9 +17,9 @@
       "relation": "oneToOne",
       "target": "api::priority.priority"
     },
-    "note": {
+    "notes": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::note.note"
     }
   }
