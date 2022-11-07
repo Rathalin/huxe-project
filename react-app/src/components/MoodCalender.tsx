@@ -1,6 +1,6 @@
 import { Container } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
-import { getDaysPerMonth } from '../utils/utils';
+import { getDaysPerMonth } from '../utils/date.util';
 import { MoodIcon } from './MoodIcon';
 import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';

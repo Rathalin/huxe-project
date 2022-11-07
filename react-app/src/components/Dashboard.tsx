@@ -16,16 +16,18 @@ import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../graphql/endpoint';
 import { DAILY_MOODS_BETWEEN_QUERY } from '../graphql/queries/daily-moods-between.query';
 import { DailyMoodsBetweenQuery } from '../graphql/generated/graphql';
+import { useDailyMoodIdStore } from '../stores/dailyMoodStore';
+import { useEffect } from 'react';
+import { now, today, todayDateString, tomorrow } from '../utils/date.util';
 
 export const Dashboard = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const now = new Date();
-  const todayDate = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
-  // const todayDailyMoodQueryKey = ['DAILY_MOODS_BETWEEN_QUERY', todayDate];
-  const todayDailyMoodQueryKey = ['testkey'];
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+  const { setDailyMoodId } = useDailyMoodIdStore();
+  useEffect(() => {
+    setDailyMoodId('1'); // TODO Implement fetching from db
+  }, []);
+  const todayDailyMoodQueryKey = ['DAILY_MOODS_BETWEEN_QUERY', todayDateString];
   const {
     data: dailyMoodData,
     isSuccess: isSuccessDailyMood,
@@ -44,10 +46,10 @@ export const Dashboard = () => {
     mutationFn: async () => {
       return {};
     },
-    onSuccess: (data, _variables) => {
-      console.log('data', data);
+    onSuccess: (_data, _variables) => {
+      // console.log('data', data);
       queryClient.setQueryData(todayDailyMoodQueryKey, (): DailyMoodsBetweenQuery => {
-        return data;
+        return {};
         // return {
         //   dailyMoods: {
         //     data: [
@@ -59,9 +61,9 @@ export const Dashboard = () => {
     },
   });
 
+  const dailyMoodToday = dailyMoodData?.dailyMoods?.data[0] ?? null;
   // if (isSuccessDailyMood && !isLoadingDailyMood && !isFetchingDailyMood) {
-  // Create empty daily mood if none exists today
-  //   const dailyMoodToday = dailyMoodData?.dailyMoods?.data[0] ?? null;
+  //   // Create empty daily mood if none exists today
   //   if (dailyMoodToday == null) {
   //     console.log('DailyMoodData', dailyMoodData);
   //     console.count('Create empty daily mood');

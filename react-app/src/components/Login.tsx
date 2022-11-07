@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { LoadingError } from './ui/error/LoadingError';
 import { Loading } from './ui/loading/Loading';
-import { useAuthStore } from '../stores/authStore';
+import { useAuthStore } from '../stores/auth.store';
 
 export const Login = () => {
   const { login } = useAuthStore();
@@ -49,11 +49,14 @@ export const Login = () => {
         <Typography component='h1' variant='h5'>
           Sign in
         </Typography>
-        <Box component='form' 
+        <Box component='form'
           noValidate onSubmit={handleLogin} sx={{ mt: 1, minHeight: '80vh' }}>
           <TextField
-            sx={{ border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
-              color: "#fff"}, bgcolor: '#323463'}}
+            sx={{
+              border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
+                color: "#fff"
+              }, bgcolor: '#323463'
+            }}
             placeholder="Email Address"
             margin='normal'
             required
@@ -65,8 +68,11 @@ export const Login = () => {
             autoFocus
           />
           <TextField
-            sx={{ border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
-            color: "#fff"}, bgcolor: '#323463'}}
+            sx={{
+              border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
+                color: "#fff"
+              }, bgcolor: '#323463'
+            }}
             placeholder="Password"
             margin='normal'
             required
@@ -91,9 +97,9 @@ export const Login = () => {
           </Button>
           <Grid container>
             <Grid item>
-            <Button color='secondary' to="/register" component={Link}>
-              Don't have an account? Sign Up
-            </Button>
+              <Button color='secondary' to="/register" component={Link}>
+                Don't have an account? Sign Up
+              </Button>
             </Grid>
           </Grid>
         </Box>

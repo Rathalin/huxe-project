@@ -12,7 +12,7 @@ import { FormEvent, useRef, useState } from 'react';
 import { Loading } from './ui/loading/Loading';
 import { LoadingError } from './ui/error/LoadingError';
 import { LoadingSuccess } from './ui/success/LoadingSuccess';
-import { useAuthStore } from '../stores/authStore';
+import { useAuthStore } from '../stores/auth.store';
 
 export const Register = () => {
   const { register } = useAuthStore();
@@ -59,8 +59,11 @@ export const Register = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                sx={{ border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
-                color: "#fff"}, bgcolor: '#323463'}}
+                sx={{
+                  border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
+                    color: "#fff"
+                  }, bgcolor: '#323463'
+                }}
                 placeholder="Username"
                 id='username'
                 name='username'
@@ -74,8 +77,11 @@ export const Register = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                sx={{ border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
-                color: "#fff"}, bgcolor: '#323463'}}
+                sx={{
+                  border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
+                    color: "#fff"
+                  }, bgcolor: '#323463'
+                }}
                 placeholder="Email Address"
                 id='email'
                 name='email'
@@ -88,8 +94,11 @@ export const Register = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                sx={{ border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
-                color: "#fff"}, bgcolor: '#323463'}}
+                sx={{
+                  border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
+                    color: "#fff"
+                  }, bgcolor: '#323463'
+                }}
                 placeholder="Password"
                 id='password'
                 name='password'
@@ -116,9 +125,9 @@ export const Register = () => {
           </Button>
           <Grid container justifyContent='flex-end'>
             <Grid item>
-            <Button color='secondary' to="/login" component={Link}>
-              Already have an account? Sign in
-            </Button>
+              <Button color='secondary' to="/login" component={Link}>
+                Already have an account? Sign in
+              </Button>
             </Grid>
           </Grid>
         </Box>

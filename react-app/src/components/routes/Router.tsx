@@ -3,7 +3,7 @@ import { Dashboard } from '../Dashboard';
 import { StrongEmotion } from '../StrongEmotion';
 import { Register } from '../Register';
 import { Login } from '../Login';
-import { useAuthStore } from '../../stores/authStore';
+import { useAuthStore } from '../../stores/auth.store';
 import { NewMood } from '../NewMood';
 import { SelectEmotionType } from '../SelectEmotionType';
 

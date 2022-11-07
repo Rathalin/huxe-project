@@ -9,7 +9,7 @@ import {
 import { useState, MouseEvent } from 'react';
 import { AccountCircle } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../stores/authStore';
+import { useAuthStore } from '../stores/auth.store';
 
 export const CustomAppbar = () => {
   const { user, logout } = useAuthStore();

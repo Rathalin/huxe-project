@@ -3,6 +3,7 @@ import { useStore } from '../stores/useStore';
 import { Button, Container, hslToRgb, TextField } from '@mui/material';
 
 export const NewNote = () => {
+
   const { addNote } = useStore();
   const [note, setNote] = useState('');
 
@@ -11,8 +12,11 @@ export const NewNote = () => {
       <h4>Add a Note</h4>
       <TextField
         placeholder="Note"
-        sx={{ border: 3, borderRadius: 3, '& legend': { display: 'none' }, '& fieldset': { top: 0 }, "& .MuiOutlinedInput-root": {
-          color: "#fff"}, bgcolor: '#323463', marginBottom: '30px'}}
+        sx={{
+          border: 3, borderRadius: 3, '& legend': { display: 'none' }, '& fieldset': { top: 0 }, "& .MuiOutlinedInput-root": {
+            color: "#fff"
+          }, bgcolor: '#323463', marginBottom: '30px'
+        }}
         id='outlined-basic'
         //label='Note'
         multiline

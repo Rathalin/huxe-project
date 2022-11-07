@@ -2,7 +2,7 @@ import { Box, Checkbox, Container } from '@mui/material';
 import { MoodIcon } from './MoodIcon';
 import Typography from '@mui/material/Typography';
 import { Priorities } from './Priorities';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NewNote } from './NewNote';
 import Button from '@mui/material/Button';
@@ -14,25 +14,26 @@ import { Loading } from './ui/loading/Loading';
 import { SET_MOOD_MUTATION } from '../graphql/mutations/set-mood.mutation';
 import { SELECTED_MOOD_QUERY } from '../graphql/queries/selected-mood.query';
 import { SelectedMoodQuery } from '../graphql/generated/graphql';
+import { useDailyMoodIdStore } from '../stores/dailyMoodStore';
 
 export const NewMood = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const TEMP_DAILY_MOOD_ID = '1';
+  const { dailyMoodId } = useDailyMoodIdStore();
   const { data: moodOptionsData, isSuccess: isSuccessMoodOptions } = useQuery({
     queryKey: ['MOODS_QUERY'],
     queryFn: () => request(GRAPHQL_ENDPOINT, MOODS_QUERY),
   });
-  const selectedMoodQueryKey = ['SELECTED_MOOD_QUERY', TEMP_DAILY_MOOD_ID];
+  const selectedMoodQueryKey = ['SELECTED_MOOD_QUERY', dailyMoodId];
   const { data: selectedMoodData, isSuccess: isSuccessSelctedMood } = useQuery({
     queryKey: selectedMoodQueryKey,
-    queryFn: () => request(GRAPHQL_ENDPOINT, SELECTED_MOOD_QUERY, { dailyMoodId: TEMP_DAILY_MOOD_ID }),
+    queryFn: () => request(GRAPHQL_ENDPOINT, SELECTED_MOOD_QUERY, { dailyMoodId }),
   });
   const { mutate: setSelectedMood } = useMutation({
     mutationFn: ({ moodId }: { moodId: string, }) => {
       console.log('Set mood id to ', moodId);
       return request(GRAPHQL_ENDPOINT, SET_MOOD_MUTATION, {
-        dailyMoodId: TEMP_DAILY_MOOD_ID,
+        dailyMoodId: dailyMoodId ?? '',
         dailyMoodInput: {
           mood: moodId,
         },
