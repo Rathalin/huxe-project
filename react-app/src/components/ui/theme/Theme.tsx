@@ -33,16 +33,6 @@ export const themeOptions: ThemeOptions = {
     }
   },
   palette: {
-    action: {
-      active: '#FFC107',
-      activatedOpacity: 1,
-      hover: '#fff350',
-      hoverOpacity: 0.7,
-      focus: '#c79100',
-      focusOpacity: 1,
-      selected: '#c79100',
-      selectedOpacity: 1
-    },
     mode: 'light',
     primary: {
       main: '#7958E3', //'#3a048c',
