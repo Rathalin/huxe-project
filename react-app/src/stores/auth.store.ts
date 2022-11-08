@@ -1,7 +1,7 @@
 import create from 'zustand';
 import { User } from '../interfaces/user';
-import { LoginResponse, RegisterResponse, StrapiError } from '../services/rest-api.responses';
-import { restApiService } from '../services/rest-api.service';
+import { LoginResponse, RegisterResponse, StrapiError } from '../services/auth.responses';
+import { authService } from '../services/auth.service';
 
 interface UserState {
   user: User | null,
@@ -13,7 +13,7 @@ interface UserState {
 export const useAuthStore = create<UserState>(set => ({
   user: null,
   async login(identifier, password) {
-    const res = await restApiService.login(identifier, password);
+    const res = await authService.login(identifier, password);
     if (res.error == null && res.user != null && res.jwt != null) {
       set({
         user: {
@@ -27,7 +27,7 @@ export const useAuthStore = create<UserState>(set => ({
     return res;
   },
   async register(email, username, password) {
-    const res = await restApiService.register(email, username, password);
+    const res = await authService.register(email, username, password);
     if (res.error == null && res.user != null && res.jwt != null) {
       set({
         user: {
