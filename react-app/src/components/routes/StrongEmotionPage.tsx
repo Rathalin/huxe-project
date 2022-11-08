@@ -34,23 +34,30 @@ export const StrongEmotionPage = () => {
 
   return (
     <Container maxWidth='md'>
-
-      <Typography component='h1' variant='h3'>
-        Strong Emotion
-      </Typography>
-
-      <Box component="form" onSubmit={handleSubmit} sx={{
-        mt: 3, display: 'flex', flexDirection: 'column',
-        alignItems: 'left'
+      <Box sx={{
+        mt: 5, display: 'flex', flexDirection: 'column',
+        alignItems: 'center', minHeight: '80vh'
       }}>
-        <SelectedEmotionTypeCtx.Provider value={{ selectedEmotionType, setSelectedEmotionType }}>
-          <SelectEmotionType />
-          <SelectEmotion />
-        </SelectedEmotionTypeCtx.Provider>
-        {/* <NewNote /> */}
-        <ShowNotes noteIds={[]} />
-        <BackButton />
+        <Typography component='h1' variant='h3'>
+          Strong Emotion
+        </Typography>
+
+        <Box component="form" onSubmit={handleSubmit} sx={{
+          mt: 3, display: 'flex', flexDirection: 'column',
+          alignItems: 'left'
+        }}>
+          <SelectedEmotionTypeCtx.Provider value={{ selectedEmotionType, setSelectedEmotionType }}>
+            <SelectEmotionType />
+            <SelectEmotion />
+          </SelectedEmotionTypeCtx.Provider>
+          {/* <NewNote /> */}
+          <ShowNotes noteIds={[]} />
+          <BackButton />
+        </Box>
       </Box>
     </Container>
+      
+
+      
   );
 };

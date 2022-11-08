@@ -20,7 +20,7 @@ export const themeOptions: ThemeOptions = {
         outlined: {
           borderRadius: '10px',
           height: '50px',
-          color: '#FFC107',
+          color: '#E8EAF6',
           borderColor: '#FFC107',
           backgroundColor: '#323463',
           "&:hover": {
@@ -55,7 +55,7 @@ export const themeOptions: ThemeOptions = {
     },
   },
   typography: {
-    fontSize: 16,
+    fontSize: 14,
     h1: {
       fontFamily: 'Amiri',
       fontWeight: 700

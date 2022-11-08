@@ -68,6 +68,9 @@ export const DashboardPage = () => {
         mt: 5, display: 'flex', flexDirection: 'column',
         alignItems: 'center', minHeight: '80vh'
       }}>
+        <Typography component='h1' variant='h3'>
+              Dashboard
+        </Typography>
         <Grid container spacing={1}>
           <Grid xs={12} md={12}>
             <Typography component='h3' variant='h5'>

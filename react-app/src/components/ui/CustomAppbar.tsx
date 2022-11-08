@@ -10,6 +10,7 @@ import { useState, MouseEvent } from 'react';
 import { AccountCircle } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../stores/auth.store';
+import '../../assets/styles/styles.scss';
 
 export const CustomAppbar = () => {
   const { user, logout } = useAuthStore();
@@ -69,7 +70,7 @@ export const CustomAppbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>My Priorities</MenuItem>
+              <MenuItem onClick={handleClose} >My Priorities</MenuItem>
               <MenuItem onClick={handleClose}>
                 <Link to='/'>Dashboard</Link></MenuItem>
               <MenuItem onClick={() => { handleClose(); handleLogout(); }}>Logout</MenuItem>

@@ -11,7 +11,7 @@ export const BackButton = ({ children, ...props }: BackButtonProps) => {
   return (
     <Button {...props}
       variant='contained'
-      sx={{ mt: 3, mb: 2, gap: 1 }}
+      sx={{ mt: 3, mb: 2, gap: 1, width: '250px' }}
       onClick={() => navigate(-1)}
     >
       <ArrowBack />

@@ -17,7 +17,7 @@ export const AddPriorityField = ({ title, weekGoal, setTitle, setWeekGoal }: Pri
       mt: 3, display: 'flex', flexDirection: 'row',
       alignItems: 'center', justifyContent: 'center'
     }}>
-      <Box sx={{ border: '1px solid', borderRadius: 3, padding: 5, mx: 2, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+      <Box sx={{ border: 3, borderRadius: 3, padding: 5, mx: 2, display: 'flex', alignItems: 'center', flexDirection: 'column', bgcolor: '#323463' }}>
         <IconButton color='primary' aria-label='upload picture' component='label'>
           <input accept='image/*' type='file' />
           <AddIcon />
@@ -31,9 +31,14 @@ export const AddPriorityField = ({ title, weekGoal, setTitle, setWeekGoal }: Pri
         alignItems: 'left', mx: 2
       }}>
         <TextField
-          sx={{ borderRadius: 3 }}
+          sx={{
+            border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
+              color: "#fff"
+            }, bgcolor: '#323463'
+          }}
           id='outlined-basic'
-          label='Title'
+          placeholder='Title'
+          //label='Title'
           color='secondary'
           variant='outlined'
           onChange={(e) => setTitle(e.target.value)}
@@ -42,9 +47,14 @@ export const AddPriorityField = ({ title, weekGoal, setTitle, setWeekGoal }: Pri
           How many days do you want to allocate per week?
         </Typography>
         <TextField
-          sx={{ borderRadius: 3 }}
+          sx={{
+            border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
+              color: "#fff"
+            }, bgcolor: '#323463'
+          }}
           id="outlined-number"
-          label="Weekly Goal"
+          placeholder='Weekly Goal'
+          //label="Weekly Goal"
           type="number"
           inputProps={{ min: 1, max: 7 }}
           color='secondary'
