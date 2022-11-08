@@ -34,7 +34,7 @@ export const RegisterPage = () => {
       setError(res.error.message);
     } else {
       setSuccess(true);
-      navigate("/initialPriorities")
+      navigate("/initial-priorities")
     }
     setIsLoading(false);
   }

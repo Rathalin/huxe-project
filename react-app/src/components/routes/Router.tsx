@@ -4,7 +4,7 @@ import { StrongEmotionPage } from './StrongEmotionPage';
 import { RegisterPage } from './RegisterPage';
 import { LoginPage } from './LoginPage';
 import { useAuthStore } from '../../stores/auth.store';
-import { NewMoodPage } from './NewMoodPage';
+import { TrackMoodPage } from './TrackMoodPage';
 import { InitialPrioritiesPage } from './InitialPrioritiesPage';
 import { NewPriorityPage } from './NewPriorityPage';
 import { PrioritiesPage } from './PrioritiesPage';
@@ -20,9 +20,9 @@ export const CustomRouter = () => {
       <Route path='dashboard' element={!loggedIn ? <Navigate to='/login' /> : <DashboardPage />} />
       <Route path='emotion' element={<StrongEmotionPage />} />
       <Route path='login' element={loggedIn ? <Navigate to='/dashboard' /> : <LoginPage />} />
-      <Route path='newMood' element={!loggedIn ? <Navigate to='/login' /> : <NewMoodPage />} />
-      <Route path='initialPriorities' element={!loggedIn ? <Navigate to='/login' /> : <InitialPrioritiesPage />} />
-      <Route path='newPriority' element={!loggedIn ? <Navigate to='/login' /> : <NewPriorityPage />} />
+      <Route path='track-mood' element={!loggedIn ? <Navigate to='/login' /> : <TrackMoodPage />} />
+      <Route path='initial-priorities' element={!loggedIn ? <Navigate to='/login' /> : <InitialPrioritiesPage />} />
+      <Route path='new-priority' element={!loggedIn ? <Navigate to='/login' /> : <NewPriorityPage />} />
       <Route path='priorities' element={!loggedIn ? <Navigate to='/login' /> : <PrioritiesPage />} />
       <Route path='register' element={loggedIn ? <Navigate to='/dashboard' /> : <RegisterPage />} />
     </Routes>

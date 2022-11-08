@@ -11,7 +11,7 @@ import { NOTE_EXISTS_QUERY } from '../../graphql/queries/note-exists.query';
 import { useDailyMoodIdStore } from '../../stores/dailyMoodStore';
 import { ShowNote } from '../ShowNote';
 
-export const NewMoodPage = () => {
+export const TrackMoodPage = () => {
   const { dailyMoodId } = useDailyMoodIdStore();
   const { data } = useQuery({
     queryKey: ['NOTE_EXISTS_QUERY', dailyMoodId],

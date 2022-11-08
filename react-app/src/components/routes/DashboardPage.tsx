@@ -77,7 +77,7 @@ export const DashboardPage = () => {
             <Typography component='h3' variant='h5'>
               Track Mood
             </Typography>
-            <AddButton Icon={() => <SentimentSatisfiedAltIcon fontSize='large' />} onClick={() => { navigate('/newMood') }} />
+            <AddButton Icon={() => <SentimentSatisfiedAltIcon fontSize='large' />} onClick={() => { navigate('/track-mood') }} />
           </Grid>
           <Grid xs={12} md={6}>
             <Typography component='h3' variant='h5'>

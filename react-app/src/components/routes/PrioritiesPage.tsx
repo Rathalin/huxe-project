@@ -19,7 +19,7 @@ export const PrioritiesPage = () => {
           </Grid>
         ))}
         <Grid xs={6} md={4}>
-          <AddButton Icon={() => <InterestsIcon fontSize='large' />} onClick={() => { navigate('/newPriority') }} />
+          <AddButton Icon={() => <InterestsIcon fontSize='large' />} onClick={() => { navigate('/new-priority') }} />
         </Grid>
       </Grid>
 
