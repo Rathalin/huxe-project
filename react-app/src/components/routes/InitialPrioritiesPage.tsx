@@ -2,7 +2,7 @@ import { useStore } from '../../stores/useStore';
 import { Box, Button, Container, Typography } from '@mui/material';
 import { useAuthStore } from '../../stores/auth.store';
 import { useNavigate } from 'react-router-dom';
-import { AddPriorityField } from '../AddPriorityField';
+import { AddPriorityField } from '../ui/AddPriorityField';
 import { useState } from 'react';
 
 export const InitialPrioritiesPage = () => {

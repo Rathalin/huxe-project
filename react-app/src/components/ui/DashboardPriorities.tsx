@@ -1,4 +1,4 @@
-import { useStore } from '../stores/useStore';
+import { useStore } from '../../stores/useStore';
 import { Box, IconButton, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { PriorityCard } from './PriorityCard';
@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import SwitchAccessShortcutAddIcon from '@mui/icons-material/SwitchAccessShortcutAdd';
 import { BorderLinearProgress } from './Progressbar';
-import { AddNoteButton } from './ui/buttons/AddNoteButton';
+import { AddNoteButton } from '../ui/buttons/AddNoteButton';
 
 export const DashboardPriorities = () => {
   const { priorities } = useStore();

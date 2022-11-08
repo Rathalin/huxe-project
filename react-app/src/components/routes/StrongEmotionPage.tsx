@@ -1,8 +1,8 @@
-import { NewNote } from '../NewNote';
+import { NewNote } from '../notes/NewNote';
 import { Container, Box, Button, Typography } from '@mui/material';
-import { SelectEmotionType } from '../SelectEmotionType';
-import { SelectEmotion } from '../SelectEmotion';
-import { Notes } from '../Notes';
+import { SelectEmotionType } from '../ui/SelectEmotionType';
+import { SelectEmotion } from '../ui/SelectEmotion';
+import { ShowNotes } from '../notes/ShowNotes';
 import { createContext, FormEvent, useState } from 'react';
 import { Enum_Emotion_Emotiontype } from '../../graphql/generated/graphql';
 import { useNavigate } from 'react-router-dom';
@@ -47,8 +47,8 @@ export const StrongEmotionPage = () => {
           <SelectEmotionType />
           <SelectEmotion />
         </SelectedEmotionTypeCtx.Provider>
-        <NewNote />
-        <Notes />
+        {/* <NewNote /> */}
+        <ShowNotes noteIds={[]} />
         <BackButton />
       </Box>
     </Container>

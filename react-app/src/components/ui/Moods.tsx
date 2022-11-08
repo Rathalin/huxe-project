@@ -1,4 +1,4 @@
-import { useStore } from '../stores/useStore';
+import { useStore } from '../../stores/useStore';
 import { Card, CardContent, Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 

@@ -1,6 +1,6 @@
 import { ArrowBack } from "@mui/icons-material";
 import { Button, ButtonProps } from "@mui/material";
-import { ButtonHTMLAttributes, DetailedHTMLProps, FunctionComponent, HTMLProps, PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 import { useNavigate } from "react-router-dom";
 
 type BackButtonProps = PropsWithChildren<{}> & ButtonProps;

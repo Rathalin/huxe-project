@@ -1,11 +1,11 @@
 import { Card, CardContent, Typography } from '@mui/material';
-import { Priority } from '../interfaces/priority';
+import { Priority } from '../../interfaces/priority';
 
 type PriorityProps = {
   priority: Priority;
 }
 
-export const PriorityCard = ({priority}: PriorityProps) => {
+export const PriorityCard = ({ priority }: PriorityProps) => {
 
   return (
     <Card variant='outlined'>
@@ -14,7 +14,7 @@ export const PriorityCard = ({priority}: PriorityProps) => {
           {priority.title}
         </Typography>
         <Typography variant='body2' color='text.secondary'>
-          {(priority.weeklyGoal/7) *100}%
+          {(priority.weeklyGoal / 7) * 100}%
         </Typography>
       </CardContent>
     </Card>

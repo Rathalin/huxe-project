@@ -1,7 +1,7 @@
 import { useStore } from '../../stores/useStore';
 import { Container } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
-import { PriorityCard } from '../PriorityCard';
+import { PriorityCard } from '../ui/PriorityCard';
 import InterestsIcon from '@mui/icons-material/Interests';
 import { AddButton } from '../ui/buttons/AddButton';
 import { useNavigate } from 'react-router-dom';

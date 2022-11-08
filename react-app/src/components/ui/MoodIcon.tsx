@@ -7,7 +7,7 @@ import {
   SentimentNeutral,
   Circle,
 } from '@mui/icons-material';
-import { Enum_Dailymood_Mood, Enum_Emotion_Emotiontype } from '../graphql/generated/graphql';
+import { Enum_Dailymood_Mood, Enum_Emotion_Emotiontype } from '../../graphql/generated/graphql';
 
 type MoodIconProps = {
   moodType: Enum_Dailymood_Mood | Enum_Emotion_Emotiontype | null,

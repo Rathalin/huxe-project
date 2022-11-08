@@ -7,6 +7,7 @@ export const NOTE_QUERY = graphql(`
         id
         attributes {
           text
+          createdAt
         }
       }
     }
