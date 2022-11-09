@@ -4,9 +4,10 @@ import { Box, Button, Container, TextField } from '@mui/material';
 type NewNoteProps = {
   onAddNote(text: string): void,
   hidden?: boolean,
+  buttonLabel?: string,
 };
 
-export const NewNote = ({ onAddNote, hidden = false }: NewNoteProps) => {
+export const NewNote = ({ onAddNote, hidden = false, buttonLabel = 'Add Note' }: NewNoteProps) => {
   const [note, setNote] = useState('');
 
   if (hidden) return null;
@@ -38,7 +39,7 @@ export const NewNote = ({ onAddNote, hidden = false }: NewNoteProps) => {
             onAddNote(note);
             setNote('');
           }
-        }}>Add Note</Button>
+        }}>{buttonLabel}</Button>
       </Box>
     </Container>
   );
