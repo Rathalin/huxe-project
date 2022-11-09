@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { useDailyMoodIdStore } from '../../stores/dailyMoodStore';
 import { now } from '../../utils/date.util';
@@ -18,20 +18,23 @@ import { MoodGraph } from '../ui/MoodGraph';
 import { ShowNotes } from '../ui/notes/ShowNotes';
 import { RECENT_NOTES_QUERY } from '../../graphql/queries/recent-notes.query';
 import { dataService } from '../../services/data.service';
+import { useEffect } from 'react';
 
 export const DashboardPage = () => {
   const navigate = useNavigate();
   const { dailyMoodId, setDailyMoodId } = useDailyMoodIdStore();
-  // Create Emotions in db if none exist
-  dataService.seedEmotions();
-  // Create DailyMood in db if none exists
-  if (dailyMoodId == null) {
-    dataService.initDailyMood().then(id => {
-      if (id != null) {
-        setDailyMoodId(id);
-      }
-    });
-  }
+  useEffect(() => {
+    // Create Emotions in db if none exist
+    dataService.seedEmotions();
+    // Create DailyMood in db if none exists
+    if (dailyMoodId == null) {
+      dataService.initDailyMood().then(id => {
+        if (id != null) {
+          setDailyMoodId(id);
+        }
+      });
+    }
+  }, []);
   const { data: recentNotesData } = useQuery({
     queryKey: ['RECENT_NOTES_QUERY'],
     queryFn: () => request(GRAPHQL_ENDPOINT, RECENT_NOTES_QUERY, { limit: 3 }),
@@ -53,7 +56,7 @@ export const DashboardPage = () => {
         alignItems: 'center', minHeight: '80vh'
       }}>
         <Typography component='h1' variant='h3'>
-              Dashboard
+          Dashboard
         </Typography>
         <Grid container spacing={1}>
           <Grid xs={12} md={12}>

@@ -26,7 +26,6 @@ export const SelectEmotion = () => {
     }
   }
 
-
   function removeStrongFeeling(feeling: string): void {
     setStrongFeelings(strongFeelings.filter(existingFeeling => existingFeeling !== feeling));
   }
