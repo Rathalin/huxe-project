@@ -1,4 +1,3 @@
-import { grey } from '@mui/material/colors';
 import {
   SentimentVeryDissatisfied,
   SentimentDissatisfied,

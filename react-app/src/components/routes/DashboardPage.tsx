@@ -65,13 +65,13 @@ export const DashboardPage = () => {
             </Typography>
             <DashboardPriorities />
           </Grid>
-          <Grid xs={12} md={6}>
+          <Grid xs={6}>
             <Typography component='h3' variant='h5'>
               Track Mood
             </Typography>
             <AddButton Icon={() => <SentimentSatisfiedAltIcon fontSize='large' />} onClick={() => { navigate('/track-mood') }} />
           </Grid>
-          <Grid xs={12} md={6}>
+          <Grid xs={6}>
             <Typography component='h3' variant='h5'>
               Strong Emotion
             </Typography>
