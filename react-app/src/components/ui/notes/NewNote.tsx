@@ -9,7 +9,7 @@ export const NewNote = ({ onAddNote }: NewNoteProps) => {
   const [note, setNote] = useState('');
 
   return (
-    <Container maxWidth={false} sx={{ margin: '20px 0px' }}>
+    <Container maxWidth='sm' sx={{ margin: '20px 0px' }}>
       <h4>Add a Note</h4>
       <TextField
         placeholder="Note"

@@ -42,9 +42,10 @@ export const TrackMoodPage = () => {
   const noteExists = noteId != null;
 
   return (
-    <Container sx={{ mt: 3, display: 'flex', gap: 1 }}>
+    <Container>
       <Box sx={{
-        mt: 3, display: 'flex', flexDirection: 'column'
+        mt: 5, display: 'flex', flexDirection: 'column',
+        alignItems: 'center', minHeight: '80vh'
       }}>
         <SelectMood />
         <Typography component='h3' variant='h5'>
