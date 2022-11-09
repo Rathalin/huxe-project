@@ -70,7 +70,7 @@ export const CustomAppbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose} >My Priorities</MenuItem>
+              <MenuItem onClick={handleClose} > <Link to='/priorities'>My Priorities</Link></MenuItem>
               <MenuItem onClick={handleClose}>
                 <Link to='/'>Dashboard</Link></MenuItem>
               <MenuItem onClick={() => { handleClose(); handleLogout(); }}>Logout</MenuItem>

@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { getDaysPerMonth } from '../../utils/date.util';
-import { MoodIcon } from './MoodIcon';
+import { MoodIconButton } from './buttons/MoodIconButton';
 import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
@@ -35,7 +35,7 @@ export const MoodCalender = ({ year, month }: MoodCalenderProps) => {
       <Grid container spacing={1} columns={7}>
         {dailyMoodsPerDay.map((mood, i) => (
           <Grid key={i} md={1}>
-            <MoodIcon
+            <MoodIconButton onClick={()=>navigate(`/daily-summary/${i}-${month}`)}
               moodType={mood?.attributes?.mood ?? null}
               strongEmotion={(mood?.attributes?.strongEmotions?.data?.length ?? 0) > 0}
             />
