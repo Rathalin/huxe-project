@@ -1,5 +1,5 @@
-import { Container } from '@mui/material';
-import { ShowNote } from './ShowNote';
+import { Box } from '@mui/material';
+import { NoteCard } from './NoteCard';
 
 type ShowNotesProps = {
   noteIds: string[],
@@ -7,10 +7,10 @@ type ShowNotesProps = {
 
 export const ShowNotes = ({ noteIds }: ShowNotesProps) => {
   return (
-    <Container maxWidth='xl'>
+    <Box sx={{ flexGrow: 1, justifyContent: "center", alignItems: 'center' }}>
       {noteIds.map((id) => (
-        <ShowNote key={id} noteId={id} />
+        <NoteCard key={id} noteId={id} />
       ))}
-    </Container>
+    </Box>
   );
 }

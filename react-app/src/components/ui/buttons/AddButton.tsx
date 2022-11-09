@@ -9,8 +9,7 @@ type AddButtonProps = {
 export const AddButton = ({ Icon, onClick }: PropsWithChildren<AddButtonProps>) => {
 
   return (
-    <Box sx={{
-      mt: 3, display: 'flex', flexDirection: 'row',
+    <Box sx={{ display: 'flex', flexDirection: 'row',
       alignItems: 'center'
     }}>
       <Icon />

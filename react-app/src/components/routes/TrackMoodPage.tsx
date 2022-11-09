@@ -1,7 +1,5 @@
 import { Box, Container } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import { PrioritiesPage } from './PrioritiesPage';
-import { NewNote } from '../ui/notes/NewNote';
 import { BackButton } from '../ui/buttons/BackButton';
 import { SelectMood } from '../ui/SelectMood';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -9,10 +7,12 @@ import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
 import { NOTE_EXISTS_QUERY } from '../../graphql/queries/note-exists.query';
 import { useDailyMoodIdStore } from '../../stores/dailyMoodStore';
-import { ShowNote } from '../ui/notes/ShowNote';
+import { NoteCard } from '../ui/notes/NoteCard';
 import { CREATE_NOTE_MUTATION } from '../../graphql/mutations/create-note.mutation';
 import { SET_NOTE_OF_DAILY_MOOD_MUTATION } from '../../graphql/mutations/set-note-of-daily-mood.mutation';
+import { SatisfiedPriorities } from '../ui/SatisfiedPriorities';
 import { Loading } from '../ui/loading/Loading';
+import { NewNote } from '../ui/notes/NewNote';
 
 export const TrackMoodPage = () => {
   const { dailyMoodId } = useDailyMoodIdStore();
@@ -53,10 +53,10 @@ export const TrackMoodPage = () => {
         <Typography component='h3' variant='h5'>
           Priorities Satisfied today
         </Typography>
-        <PrioritiesPage />
+        <SatisfiedPriorities />
         {isLoading && <Loading />}
         {(!isLoading && noteExists) ?
-          <ShowNote noteId={noteId} /> :
+          <NoteCard noteId={noteId} /> :
           <NewNote onAddNote={createNote} buttonLabel={'Save note'} hidden={isLoading} />
         }
         <BackButton />

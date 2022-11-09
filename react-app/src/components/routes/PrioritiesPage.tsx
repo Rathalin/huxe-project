@@ -1,34 +1,31 @@
 import { useStore } from '../../stores/useStore';
-import { Container, Box, Typography } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { PriorityCard } from '../ui/PriorityCard';
 import InterestsIcon from '@mui/icons-material/Interests';
 import { AddButton } from '../ui/buttons/AddButton';
 import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 export const PrioritiesPage = () => {
   const { priorities } = useStore();
   const navigate = useNavigate();
 
   return (
-    <Container maxWidth='md'>
-      <Box sx={{
-        mt: 5, display: 'flex', flexDirection: 'column',
-        alignItems: 'center'
-      }}>
-        <Grid container spacing={3}>
+    <Container component='main' maxWidth='md'>
+        <Grid container spacing={4} sx={{mt:1}}>
           {priorities.map((priority) => (
-            <Grid key={priority.id} xs={4} md={3}>
+            <Grid key={priority.id} xs={6} md={3}>
               <PriorityCard priority={priority} />
             </Grid>
           ))}
-          <Grid xs={6} md={4}>
+          <Grid display='flex' justifyContent='center' alignItems='center' xs={12}>
             <AddButton Icon={() => <InterestsIcon fontSize='large' />} onClick={() => { navigate('/new-priority') }} />
+            <Typography component='p'>
+              Add Priority
+            </Typography>
           </Grid>
         </Grid>
-      </Box>
-      
-
     </Container>
   )
 };

@@ -1,4 +1,3 @@
-import { Height } from '@mui/icons-material';
 import { createTheme, ThemeOptions } from '@mui/material/styles';
 
 export const themeOptions: ThemeOptions = {
@@ -67,7 +66,7 @@ export const themeOptions: ThemeOptions = {
     h3: {
       fontFamily: 'Amiri',
       fontWeight: 700,
-      margin: '40px',
+      margin: '20px',
     },
     h4: {
       fontFamily: 'Amiri',
