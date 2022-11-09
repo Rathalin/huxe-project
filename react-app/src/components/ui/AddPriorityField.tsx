@@ -1,5 +1,6 @@
 import { Box, IconButton, TextField, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import { ChangeEvent, useState } from 'react';
 
 
 type PriorityFieldProps = {
@@ -10,7 +11,15 @@ type PriorityFieldProps = {
 };
 
 export const AddPriorityField = ({ title, weekGoal, setTitle, setWeekGoal }: PriorityFieldProps) => {
+  const [imageName, setImageName] = useState("Add picture")
 
+  const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    if(!e.target || !e.target.files || !e.target.files[0] ){
+      setImageName("Add picture")
+    } else {
+      setImageName(e.target.files[0].name)
+    }
+  }
 
   return (
     <Box sx={{
@@ -19,11 +28,11 @@ export const AddPriorityField = ({ title, weekGoal, setTitle, setWeekGoal }: Pri
     }}>
       <Box sx={{ border: 3, borderRadius: 3, padding: 5, mx: 2, display: 'flex', alignItems: 'center', flexDirection: 'column', bgcolor: '#323463' }}>
         <IconButton color='primary' aria-label='upload picture' component='label'>
-          <input accept='image/*' type='file' />
+          <input accept='image/*' type='file' hidden onChange={handleFileUpload}/>
           <AddIcon />
         </IconButton>
         <Typography component='p' sx={{ flexGrow: 1 }}>
-          Add Picture
+          {imageName}
         </Typography>
       </Box>
       <Box sx={{

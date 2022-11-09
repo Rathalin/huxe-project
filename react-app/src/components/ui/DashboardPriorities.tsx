@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import SwitchAccessShortcutAddIcon from '@mui/icons-material/SwitchAccessShortcutAdd';
 import { BorderLinearProgress } from './Progressbar';
-import { AddNoteButton } from '../ui/buttons/AddNoteButton';
+import { AddNoteButton } from './buttons/AddNoteButton';
 
 export const DashboardPriorities = () => {
   const { priorities } = useStore();

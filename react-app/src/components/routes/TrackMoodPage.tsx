@@ -1,6 +1,5 @@
 import { Box, Container } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import { PrioritiesPage } from './PrioritiesPage';
 import { NewNote } from '../notes/NewNote';
 import { BackButton } from '../ui/buttons/BackButton';
 import { SelectMood } from '../ui/SelectMood';
@@ -9,9 +8,10 @@ import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
 import { NOTE_EXISTS_QUERY } from '../../graphql/queries/note-exists.query';
 import { useDailyMoodIdStore } from '../../stores/dailyMoodStore';
-import { ShowNote } from '../notes/ShowNote';
+import { NoteCard } from '../notes/NoteCard';
 import { CREATE_NOTE_MUTATION } from '../../graphql/mutations/create-note.mutation';
 import { SET_NOTE_OF_DAILY_MOOD_MUTATION } from '../../graphql/mutations/set-note-of-daily-mood.mutation';
+import { SatisfiedPriorities } from '../ui/SatisfiedPriorities';
 
 export const TrackMoodPage = () => {
   const { dailyMoodId } = useDailyMoodIdStore();
@@ -51,9 +51,9 @@ export const TrackMoodPage = () => {
         <Typography component='h3' variant='h5'>
           Priorities Satisfied today
         </Typography>
-        <PrioritiesPage />
+        <SatisfiedPriorities />
         {noteExists ?
-          <ShowNote noteId={noteId} /> :
+          <NoteCard noteId={noteId} /> :
           <NewNote onAddNote={createNote} />
         }
         <BackButton />

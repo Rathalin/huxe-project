@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, CardHeader, CardMedia, Typography } from '@mui/material';
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import request from "graphql-request";
 import { Fragment } from "react";
@@ -9,7 +9,7 @@ type ShowNoteProps = {
   noteId: string,
 }
 
-export const ShowNote = ({ noteId }: ShowNoteProps) => {
+export const NoteCard = ({ noteId }: ShowNoteProps) => {
   const { data } = useQuery({
     queryKey: ['NOTE_QUERY', noteId],
     queryFn: () => request(GRAPHQL_ENDPOINT, NOTE_QUERY, { noteId }),
@@ -22,21 +22,16 @@ export const ShowNote = ({ noteId }: ShowNoteProps) => {
   }
 
   return (
-    <Card
-      variant='outlined'
-      sx={{
-        border: 3,
-        borderColor: '#fff',
-        borderRadius: 3,
-        backgroundColor: '#323463',
-        margin: '1em 0px'
-      }}>
-      <CardContent>
-        <Typography gutterBottom variant='h5' component='div'>
+    <Card variant='outlined'
+          sx={{
+            border: 3,
+            borderColor: '#fff',
+            borderRadius: 3,
+            backgroundColor: '#323463'
+          }}>
+      <CardContent sx={{ textAlign: 'left'}}>
+        <Typography component="p" color='text.primary'>
           {note.text}
-        </Typography>
-        <Typography variant='body2' color='text.secondary'>
-          {note.createdAt?.toLocaleString()}
         </Typography>
       </CardContent>
     </Card>
