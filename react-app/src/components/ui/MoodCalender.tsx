@@ -35,7 +35,7 @@ export const MoodCalender = ({ year, month }: MoodCalenderProps) => {
       <Grid container spacing={1} columns={7}>
         {dailyMoodsPerDay.map((mood, i) => (
           <Grid key={i} md={1}>
-            <MoodIconButton onClick={()=>navigate(`/daily-summary/${i}-${month}`)}
+            <MoodIconButton onClick={() => navigate(`/daily-summary/${mood?.id ?? null}`)}
               moodType={mood?.attributes?.mood ?? null}
               strongEmotion={(mood?.attributes?.strongEmotions?.data?.length ?? 0) > 0}
             />

@@ -26,7 +26,7 @@ export const CustomRouter = () => {
       <Route path='new-priority' element={!loggedIn ? <Navigate to='/login' /> : <NewPriorityPage />} />
       <Route path='priorities' element={!loggedIn ? <Navigate to='/login' /> : <PrioritiesPage />} />
       <Route path='register' element={loggedIn ? <Navigate to='/dashboard' /> : <RegisterPage />} />
-      <Route path='/daily-summary/:date' element={!loggedIn ? <Navigate to='/login' /> : <DailySummaryPage />} />
+      <Route path='/daily-summary/:id' element={!loggedIn ? <Navigate to='/login' /> : <DailySummaryPage />} />
     </Routes>
   );
 };
