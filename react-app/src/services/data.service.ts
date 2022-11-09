@@ -60,7 +60,8 @@ class DataService {
       startDate: today,
       endDate: tomorrow,
     });
-    if (foundDailyMoodsData.dailyMoods?.data?.length === 0) {
+    const foundId = foundDailyMoodsData.dailyMoods?.data[0]?.id;
+    if (foundId == null) {
       console.log('Created DailyMood');
       const dailyMoodIdData = await request(GRAPHQL_ENDPOINT, graphql(`
         mutation CreateEmDailyMood($dailyMoodInput: DailyMoodInput!) {
@@ -73,9 +74,9 @@ class DataService {
       `), {
         dailyMoodInput: {}
       });
-      return dailyMoodIdData.createDailyMood?.data?.id ?? null
+      return dailyMoodIdData.createDailyMood?.data?.id ?? null;
     }
-    return null;
+    return foundId;
   }
 }
 
