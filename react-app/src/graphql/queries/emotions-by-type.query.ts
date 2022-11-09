@@ -1,4 +1,4 @@
-import { graphql } from "../generated/gql";
+import { graphql } from '../generated';
 
 export const EMOTIONS_BY_TYPE_QUERY = graphql(`
   query EmotionsByType($emotionType: String!) {

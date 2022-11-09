@@ -1,8 +1,8 @@
-import { NewNote } from '../notes/NewNote';
+import { NewNote } from '../ui/notes/NewNote';
 import { Container, Box, Button, Typography } from '@mui/material';
 import { SelectEmotionType } from '../ui/SelectEmotionType';
 import { SelectEmotion } from '../ui/SelectEmotion';
-import { ShowNotes } from '../notes/ShowNotes';
+import { ShowNotes } from '../ui/notes/ShowNotes';
 import { createContext, FormEvent, useState } from 'react';
 import { Enum_Emotion_Emotiontype } from '../../graphql/generated/graphql';
 import { useNavigate } from 'react-router-dom';

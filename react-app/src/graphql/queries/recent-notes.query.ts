@@ -1,4 +1,4 @@
-import { graphql } from "../generated/gql";
+import { graphql } from '../generated';
 
 export const RECENT_NOTES_QUERY = graphql(`
   query RecentNote($limit: Int) {

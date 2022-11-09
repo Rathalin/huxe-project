@@ -2,8 +2,8 @@ import { Card, CardContent, Typography } from "@mui/material";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import request from "graphql-request";
 import { Fragment } from "react";
-import { GRAPHQL_ENDPOINT } from "../../graphql/endpoint";
-import { NOTE_QUERY } from "../../graphql/queries/note.query";
+import { GRAPHQL_ENDPOINT } from "../../../graphql/endpoint";
+import { NOTE_QUERY } from "../../../graphql/queries/note.query";
 
 type ShowNoteProps = {
   noteId: string,

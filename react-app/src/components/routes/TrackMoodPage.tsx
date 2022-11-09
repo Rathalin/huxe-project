@@ -1,7 +1,7 @@
 import { Box, Container } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { PrioritiesPage } from './PrioritiesPage';
-import { NewNote } from '../notes/NewNote';
+import { NewNote } from '../ui/notes/NewNote';
 import { BackButton } from '../ui/buttons/BackButton';
 import { SelectMood } from '../ui/SelectMood';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -9,7 +9,7 @@ import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
 import { NOTE_EXISTS_QUERY } from '../../graphql/queries/note-exists.query';
 import { useDailyMoodIdStore } from '../../stores/dailyMoodStore';
-import { ShowNote } from '../notes/ShowNote';
+import { ShowNote } from '../ui/notes/ShowNote';
 import { CREATE_NOTE_MUTATION } from '../../graphql/mutations/create-note.mutation';
 import { SET_NOTE_OF_DAILY_MOOD_MUTATION } from '../../graphql/mutations/set-note-of-daily-mood.mutation';
 
