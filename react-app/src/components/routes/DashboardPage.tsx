@@ -37,7 +37,7 @@ export const DashboardPage = () => {
   }, []);
   const { data: recentNotesData } = useQuery({
     queryKey: ['RECENT_NOTES_QUERY'],
-    queryFn: () => request(GRAPHQL_ENDPOINT, RECENT_NOTES_QUERY, { limit: 3 }),
+    queryFn: () => request(GRAPHQL_ENDPOINT, RECENT_NOTES_QUERY, { limit: 3 })
   });
   const recentNoteIds: string[] = recentNotesData?.notes?.data
     .map(n => n.id)
@@ -69,25 +69,28 @@ export const DashboardPage = () => {
             <Typography component='h3' variant='h5'>
               Track Mood
             </Typography>
-            <AddButton Icon={() => <SentimentSatisfiedAltIcon fontSize='large' />} onClick={() => { navigate('/track-mood') }} />
+            <AddButton Icon={() => <SentimentSatisfiedAltIcon fontSize='large' />} onClick={() => {
+              navigate('/track-mood');
+            }} />
           </Grid>
           <Grid xs={6}>
             <Typography component='h3' variant='h5'>
               Strong Emotion
             </Typography>
-            <AddButton Icon={() => <ThunderstormIcon fontSize='large' />} onClick={() => { navigate('/emotion') }} />
+            <AddButton Icon={() => <ThunderstormIcon fontSize='large' />} onClick={() => {
+              navigate('/emotion');
+            }} />
           </Grid>
-          <Grid xs={12} md={12}>
-            <Grid xs={12} md={6}>
-              <Typography component='h3' variant='h5'>
-                {monthNames[now.getMonth()]}
-              </Typography>
-              <MoodCalender year={now.getFullYear()} month={now.getMonth() + 1} />
-            </Grid>
-            <Grid xs={12} md={6}>
-              <MoodGraph />
-            </Grid>
+          <Grid xs={12} md={6} >
+            <Typography component='h3' variant='h5'>
+              {monthNames[now.getMonth()]}
+            </Typography>
+            <MoodCalender year={now.getFullYear()} month={now.getMonth() + 1} />
           </Grid>
+          <Grid xs={12} md={6} sx={{display:'flex', justifyContent:'center', alignItems: 'center'}}>
+            <MoodGraph />
+          </Grid>
+
           <Grid xs={12} md={12}>
             <Typography component='h3' variant='h5'>
               Recent Notes
