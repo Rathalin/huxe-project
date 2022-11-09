@@ -1,4 +1,4 @@
-import { graphql } from "../generated/gql";
+import { graphql } from '../generated';
 
 export const NOTE_QUERY = graphql(`
   query Note($noteId: ID!) {

@@ -1,6 +1,6 @@
 import create from 'zustand';
 import { User } from '../interfaces/user';
-import { LoginResponse, RegisterResponse, StrapiError } from '../services/auth.responses';
+import { LoginResponse, RegisterResponse } from '../services/auth.service';
 import { authService } from '../services/auth.service';
 
 interface UserState {

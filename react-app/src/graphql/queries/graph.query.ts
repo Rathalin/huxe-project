@@ -1,4 +1,4 @@
-import { graphql } from "../generated/gql";
+import { graphql } from '../generated';
 
 export const GRAPH_QUERY = graphql(`
   query DailyMoodsGraph {

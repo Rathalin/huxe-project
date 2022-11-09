@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
 import { CALENDER_QUERY } from '../../graphql/queries/calender.query';
-import { Loading } from '../ui/loading/Loading';
+import { Loading } from './loading/Loading';
 import { useNavigate } from 'react-router-dom';
 
 type MoodCalenderProps = {

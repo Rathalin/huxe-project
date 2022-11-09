@@ -1,4 +1,4 @@
-import { graphql } from "../generated/gql";
+import { graphql } from '../generated';
 
 export const NOTE_EXISTS_QUERY = graphql(`
   query DailyMoodHasNote($dailyMoodId: ID!) {

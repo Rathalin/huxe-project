@@ -1,6 +1,5 @@
 import { Box, Container } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import { NewNote } from '../notes/NewNote';
 import { BackButton } from '../ui/buttons/BackButton';
 import { SelectMood } from '../ui/SelectMood';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -8,26 +7,28 @@ import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
 import { NOTE_EXISTS_QUERY } from '../../graphql/queries/note-exists.query';
 import { useDailyMoodIdStore } from '../../stores/dailyMoodStore';
-import { NoteCard } from '../notes/NoteCard';
+import { NoteCard } from '../ui/notes/NoteCard';
 import { CREATE_NOTE_MUTATION } from '../../graphql/mutations/create-note.mutation';
 import { SET_NOTE_OF_DAILY_MOOD_MUTATION } from '../../graphql/mutations/set-note-of-daily-mood.mutation';
 import { SatisfiedPriorities } from '../ui/SatisfiedPriorities';
+import { Loading } from '../ui/loading/Loading';
+import { NewNote } from '../ui/notes/NewNote';
 
 export const TrackMoodPage = () => {
   const { dailyMoodId } = useDailyMoodIdStore();
   const queryClient = useQueryClient();
-  const { data } = useQuery({
+  const { data, isLoading: isLoadingNoteExists } = useQuery({
     queryKey: ['NOTE_EXISTS_QUERY', dailyMoodId],
     queryFn: () => request(GRAPHQL_ENDPOINT, NOTE_EXISTS_QUERY, { dailyMoodId: dailyMoodId ?? '' }),
   });
-  const { mutate: createNote, isLoading } = useMutation({
+  const { mutate: createNote, isLoading: isLoadingCreateNote } = useMutation({
     mutationKey: ['CREATE_NOTE_MUTATION'],
     mutationFn: (text: string) => request(GRAPHQL_ENDPOINT, CREATE_NOTE_MUTATION, { note: { text } }),
     onSuccess: (data, _variables) => {
       setNoteOfDailyMood(data.createNote?.data?.id ?? '');
     },
   });
-  const { mutate: setNoteOfDailyMood } = useMutation({
+  const { mutate: setNoteOfDailyMood, isLoading: isLoadingSetNote } = useMutation({
     mutationKey: ['SET_NOTE_OF_DAILY_MOOD_MUTATION'],
     mutationFn: (noteId: string) => request(GRAPHQL_ENDPOINT, SET_NOTE_OF_DAILY_MOOD_MUTATION, {
       dailyMoodId: dailyMoodId ?? '',
@@ -37,6 +38,7 @@ export const TrackMoodPage = () => {
       queryClient.invalidateQueries(['NOTE_EXISTS_QUERY', dailyMoodId]);
     },
   });
+  const isLoading = isLoadingNoteExists || isLoadingCreateNote || isLoadingSetNote;
 
   const noteId = data?.dailyMood?.data?.attributes?.note?.data?.id;
   const noteExists = noteId != null;
@@ -52,9 +54,10 @@ export const TrackMoodPage = () => {
           Priorities Satisfied today
         </Typography>
         <SatisfiedPriorities />
-        {noteExists ?
+        {isLoading && <Loading />}
+        {(!isLoading && noteExists) ?
           <NoteCard noteId={noteId} /> :
-          <NewNote onAddNote={createNote} />
+          <NewNote onAddNote={createNote}  hidden={isLoading} />
         }
         <BackButton />
       </Box>

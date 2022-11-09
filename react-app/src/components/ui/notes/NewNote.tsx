@@ -3,10 +3,13 @@ import { Box, Button, Container, TextField } from '@mui/material';
 
 type NewNoteProps = {
   onAddNote(text: string): void,
+  hidden?: boolean,
 };
 
-export const NewNote = ({ onAddNote }: NewNoteProps) => {
+export const NewNote = ({ onAddNote, hidden = false }: NewNoteProps) => {
   const [note, setNote] = useState('');
+
+  if (hidden) return null;
 
   return (
     <Container maxWidth='sm' sx={{ margin: '20px 0px' }}>
