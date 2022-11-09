@@ -57,7 +57,7 @@ export const TrackMoodPage = () => {
         {isLoading && <Loading />}
         {(!isLoading && noteExists) ?
           <ShowNote noteId={noteId} /> :
-          <NewNote onAddNote={createNote} hidden={isLoading} />
+          <NewNote onAddNote={createNote} buttonLabel={'Save note'} hidden={isLoading} />
         }
         <BackButton />
       </Box>
