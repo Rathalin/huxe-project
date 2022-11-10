@@ -32,7 +32,7 @@ export const themeOptions: ThemeOptions = {
     }
   },
   palette: {
-    mode: 'light',
+    mode: 'dark',
     primary: {
       main: '#7958E3', //'#3a048c',
       light: '#6e38bd',

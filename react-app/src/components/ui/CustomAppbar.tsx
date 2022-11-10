@@ -32,7 +32,7 @@ export const CustomAppbar = () => {
   }
 
   return (
-    <AppBar position='static'>
+    <AppBar position='static' enableColorOnDark>
       <Toolbar>
         <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
           <Link to='/dashboard' style={{ textDecoration: 'none', color: 'inherit' }}>
