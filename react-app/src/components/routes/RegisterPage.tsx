@@ -29,14 +29,19 @@ export const RegisterPage = () => {
     const usernameInput = formData.get('username')?.toString() ?? '';
     const emailInput = formData.get('email')?.toString() ?? '';
     const passwordInput = formData.get('password')?.toString() ?? '';
-    const res = await register(emailInput, usernameInput, passwordInput);
-    if (res.error != null) {
-      setError(res.error.message);
-    } else {
-      setSuccess(true);
-      navigate("/initial-priorities")
+    try {
+      const res = await register(emailInput, usernameInput, passwordInput);
+      if (res.error != null) {
+        setError(res.error.message);
+      } else {
+        setSuccess(true);
+        navigate('/initial-priorities')
+      }
+    } catch (ex) {
+      setError('Could not reach the server.');
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   }
 
   return (
@@ -61,11 +66,11 @@ export const RegisterPage = () => {
             <Grid item xs={12}>
               <TextField
                 sx={{
-                  border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
-                    color: "#fff"
+                  border: 3, borderRadius: 3, '& .MuiOutlinedInput-root': {
+                    color: '#fff'
                   }, bgcolor: '#323463'
                 }}
-                placeholder="Username"
+                placeholder='Username'
                 id='username'
                 name='username'
                 //label='Username'
@@ -79,11 +84,11 @@ export const RegisterPage = () => {
             <Grid item xs={12}>
               <TextField
                 sx={{
-                  border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
-                    color: "#fff"
+                  border: 3, borderRadius: 3, '& .MuiOutlinedInput-root': {
+                    color: '#fff'
                   }, bgcolor: '#323463'
                 }}
-                placeholder="Email Address"
+                placeholder='Email Address'
                 id='email'
                 name='email'
                 //label='Email Address'
@@ -96,11 +101,11 @@ export const RegisterPage = () => {
             <Grid item xs={12}>
               <TextField
                 sx={{
-                  border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
-                    color: "#fff"
+                  border: 3, borderRadius: 3, '& .MuiOutlinedInput-root': {
+                    color: '#fff'
                   }, bgcolor: '#323463'
                 }}
-                placeholder="Password"
+                placeholder='Password'
                 id='password'
                 name='password'
                 //label='Password'
@@ -126,7 +131,7 @@ export const RegisterPage = () => {
           </Button>
           <Grid container justifyContent='flex-end'>
             <Grid item>
-              <Button color='secondary' to="/login" component={Link}>
+              <Button color='secondary' to='/login' component={Link}>
                 Already have an account? Sign in
               </Button>
             </Grid>

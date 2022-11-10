@@ -25,11 +25,16 @@ export const LoginPage = () => {
     const formData = new FormData(event.currentTarget);
     const emailInput = formData.get('email')?.toString() ?? '';
     const passwordInput = formData.get('password')?.toString() ?? '';
-    const res = await login(emailInput, passwordInput);
-    if (res.error != null) {
-      setError(res.error.message);
+    try {
+      const res = await login(emailInput, passwordInput);
+      if (res.error != null) {
+        setError(res.error.message);
+      }
+    } catch (ex) {
+      setError('Could not reach the server.');
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   }
 
   return (
@@ -53,11 +58,11 @@ export const LoginPage = () => {
           noValidate onSubmit={handleLogin} sx={{ mt: 1, minHeight: '80vh' }}>
           <TextField
             sx={{
-              border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
-                color: "#fff"
+              border: 3, borderRadius: 3, '& .MuiOutlinedInput-root': {
+                color: '#fff'
               }, bgcolor: '#323463'
             }}
-            placeholder="Email Address"
+            placeholder='Email Address'
             margin='normal'
             required
             fullWidth
@@ -69,11 +74,11 @@ export const LoginPage = () => {
           />
           <TextField
             sx={{
-              border: 3, borderRadius: 3, "& .MuiOutlinedInput-root": {
-                color: "#fff"
+              border: 3, borderRadius: 3, '& .MuiOutlinedInput-root': {
+                color: '#fff'
               }, bgcolor: '#323463'
             }}
-            placeholder="Password"
+            placeholder='Password'
             margin='normal'
             required
             fullWidth
@@ -97,7 +102,7 @@ export const LoginPage = () => {
           </Button>
           <Grid container>
             <Grid item>
-              <Button color='secondary' to="/register" component={Link}>
+              <Button color='secondary' to='/register' component={Link}>
                 Don't have an account? Sign Up
               </Button>
             </Grid>
