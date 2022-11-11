@@ -18,8 +18,8 @@ function App() {
           <CustomAppbar />
           <Container component='main' maxWidth='xl' >
             <CustomRouter />
-            <Copyright sx={{ mt: 5 }} />
           </Container>
+          <Copyright />
         </Box>
       </QueryClientProvider>
     </ThemeProvider>

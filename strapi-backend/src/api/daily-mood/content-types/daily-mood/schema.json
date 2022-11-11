@@ -42,6 +42,12 @@
         "VeryBad"
       ],
       "required": false
+    },
+    "usersPermissionsUser": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "dailyMood"
     }
   }
 }

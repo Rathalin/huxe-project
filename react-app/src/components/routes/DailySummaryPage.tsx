@@ -21,7 +21,7 @@ export const DailySummaryPage = () => {
     queryFn: () => request(GRAPHQL_ENDPOINT, DAILYMOOD_SUMMARY_QUERY, { dailyMoodId: params.id ?? '' })
   });
 
-  if (params.id === 'null') return (
+  if (params.id === 'no-data') return (
     <Container component='main' maxWidth='md'>
       <Box sx={{
         mt: 5, display: 'flex', flexDirection: 'column',

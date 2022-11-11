@@ -10,7 +10,7 @@ import { useDailyMoodIdStore } from '../../stores/dailyMoodStore';
 import { NoteCard } from '../ui/notes/NoteCard';
 import { CREATE_NOTE_MUTATION } from '../../graphql/mutations/create-note.mutation';
 import { SET_NOTE_OF_DAILY_MOOD_MUTATION } from '../../graphql/mutations/set-note-of-daily-mood.mutation';
-import { SatisfiedPriorities } from '../ui/SatisfiedPriorities';
+import { SatisfiedPriorities } from '../ui/priority/SatisfiedPriorities';
 import { Loading } from '../ui/loading/Loading';
 import { NewNote } from '../ui/notes/NewNote';
 import Grid from '@mui/material/Unstable_Grid2';
