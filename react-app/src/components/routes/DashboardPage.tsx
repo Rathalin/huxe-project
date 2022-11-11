@@ -75,7 +75,7 @@ export const DashboardPage = () => {
           </Grid>
           <Grid xs={6}>
             <Typography component='h3' variant='h5'>
-              Strong Emotion
+              Track Emotion
             </Typography>
             <AddButton Icon={() => <NewReleasesIcon fontSize='large' />} onClick={() => {
               navigate('/emotion');

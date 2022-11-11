@@ -109,7 +109,7 @@ export const MoodGraph = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, justifyContent: "center", alignItems: 'center', ml: 3, my: 1 }}>
+    <Box sx={{ flexGrow: 1, justifyContent: "center", alignItems: 'center', p:3, my: 1 }}>
       <Line data={graphData} options={options} />
     </Box>
   );
