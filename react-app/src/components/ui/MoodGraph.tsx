@@ -15,7 +15,8 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-
+import { useEffect, useState } from 'react';
+import { Enum_Dailymood_Mood } from '../../graphql/generated/graphql';
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -26,11 +27,45 @@ ChartJS.register(
   Legend
 );
 
+
+
 export const MoodGraph = () => {
+
+  const [graphDataSet, setGraphDataset] = useState<number[]>([])
+  const mapDatasets = () => {
+    setGraphDataset([])
+    data?.dailyMoods?.data?.map(moodItem => {
+      switch (moodItem?.attributes?.mood) {
+        case (Enum_Dailymood_Mood.VeryGood):
+          setGraphDataset(prevState => [...prevState, 5])
+          break;
+        case (Enum_Dailymood_Mood.Good):
+          setGraphDataset(prevState => [...prevState, 4])
+          break;
+        case (Enum_Dailymood_Mood.Neutral):
+          setGraphDataset(prevState => [...prevState, 3])
+          break;
+        case (Enum_Dailymood_Mood.Bad):
+          setGraphDataset(prevState => [...prevState, 2])
+          break;
+        case (Enum_Dailymood_Mood.VeryBad):
+          setGraphDataset(prevState => [...prevState, 1])
+          break;
+      }
+    })
+  }
+
   const { data, isLoading } = useQuery({
     queryKey: ['GRAPH_QUERY'],
     queryFn: () => request(GRAPHQL_ENDPOINT, GRAPH_QUERY),
+    onSuccess: () => mapDatasets()
   });
+
+  useEffect(()=> {
+    mapDatasets();
+  }, [data])
+
+  if (isLoading) return <Loading />;
 
   const options = {
     responsive: true,
@@ -52,21 +87,29 @@ export const MoodGraph = () => {
       title: {
         display: false,
       },
+      tooltip: {
+        enabled: false
+      }
     },
   };
 
-  if (isLoading) return <Loading />;
+  const length = data?.dailyMoods?.data?.length ?? 0
+
+  console.log(graphDataSet)
   const testdata = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    labels: Array.from({length: length }, (_, i) => i + 1),
     datasets: [
       {
         label: "Mood",
-        data: [33, 25, 35, 51, 54, 76],
+        data: graphDataSet,
         fill: true,
-        borderColor: "#E8EAF6"
+        borderColor: "#E8EAF6",
+        pointRadius: 6,
+        pointHoverRadius: 8
       }
     ]
   };
+
   return (
     <Box sx={{ flexGrow: 1, justifyContent: "center", alignItems: 'center', ml: 3 }}>
       <Line data={testdata} options={options} />
