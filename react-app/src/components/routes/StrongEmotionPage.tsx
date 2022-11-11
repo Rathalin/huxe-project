@@ -1,5 +1,5 @@
 import { NewNote } from '../ui/notes/NewNote';
-import { Container, Box, Button, Typography, Badge } from '@mui/material';
+import { Container, Box, Typography, Button } from '@mui/material';
 import { SelectEmotionType } from '../ui/SelectEmotionType';
 import { SelectEmotion } from '../ui/SelectEmotion';
 import { ShowNotes } from '../ui/notes/ShowNotes';
@@ -50,7 +50,7 @@ export const StrongEmotionPage = () => {
   }
 
   return (
-    <Container maxWidth='md'>
+    <Container component='main' maxWidth='md'>
       <Box sx={{
         mt: 5, display: 'flex', flexDirection: 'column',
         alignItems: 'center', minHeight: '80vh',

@@ -1,9 +1,5 @@
 import { Container, Typography, Box, Checkbox } from '@mui/material';
 import { MoodIcon } from './MoodIcon';
-import { useQuery } from '@tanstack/react-query';
-import request from 'graphql-request';
-import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
-import { Loading } from '../ui/loading/Loading';
 import { useContext } from 'react';
 import { emotionTypeOptions, SelectedEmotionTypeCtx } from '../routes/StrongEmotionPage';
 import { Enum_Emotion_Emotiontype } from '../../graphql/generated/graphql';
@@ -33,20 +29,6 @@ export const SelectEmotionType = () => {
             checked={selectedEmotionType === emotionType} />
         ))}
       </Box>
-
-      {/* <MoodButton
-        value={'Good'}
-        onClick={emotionSelect}>
-        <img
-          src={`${process.env.PUBLIC_URL}/mood1.png`}
-          alt={'good'} /></MoodButton>
-
-      <MoodButton
-        value={'Good'}
-        onClick={emotionSelect}>
-        <img
-          src={`${process.env.PUBLIC_URL}/mood4.png`}
-          alt={'good'} /></MoodButton> */}
     </Container>
   );
 };

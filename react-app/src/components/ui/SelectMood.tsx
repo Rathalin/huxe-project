@@ -1,4 +1,4 @@
-import { Box, Checkbox, Typography } from "@mui/material";
+import { Box, Checkbox } from "@mui/material";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import request from "graphql-request";
 import { Fragment } from "react";
@@ -43,9 +43,6 @@ export const SelectMood = () => {
 
   return (
     <Fragment>
-      <Typography component='h1' variant='h3'>
-        Track Mood
-      </Typography>
       <Box sx={{
         mt: 3, display: 'flex', flexDirection: 'row',
         alignItems: 'center'

@@ -9,13 +9,32 @@ import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
 import { DAILYMOOD_SUMMARY_QUERY } from '../../graphql/queries/dailymood-summary.query';
+import { MoodIcon } from '../ui/MoodIcon';
+import { MOODS } from '../../utils/utils';
+import { NoteCard } from '../ui/notes/NoteCard';
+import React, { useEffect, useState } from 'react';
+import { ShowEmotions } from '../ui/ShowEmotions';
 
 export const DailySummaryPage = () => {
+  const [emotionIds, setEmotionIds] = useState<string[]>([]);
+
+  const getEmotionIds = () => {
+    setEmotionIds([])
+    data?.dailyMood?.data?.attributes?.strongEmotions?.data.map(emotion => {
+        setEmotionIds(prevState => [...prevState, emotion.id ?? '']);
+    })
+  }
+
   const params = useParams();
   const { data } = useQuery({
     queryKey: ['DAILYMOOD_SUMMARY_QUERY'],
     queryFn: () => request(GRAPHQL_ENDPOINT, DAILYMOOD_SUMMARY_QUERY, { dailyMoodId: params.id ?? '' }),
+    onSuccess: () => getEmotionIds
   });
+
+  useEffect(()=> {
+    getEmotionIds();
+  }, [data])
 
   if (params.id === 'no-data') return (
     <Container component='main' maxWidth='md'>
@@ -31,7 +50,6 @@ export const DailySummaryPage = () => {
     </Container>
   );
 
-  // TODO (@Lisa) Use data from query
   return (
     <Container component='main' maxWidth='md'>
       <CssBaseline />
@@ -47,20 +65,43 @@ export const DailySummaryPage = () => {
             <Typography component='h3' variant='h5'>
               Tracked Mood
             </Typography>
+            <Box sx={{
+              mt: 2, display: 'flex', flexDirection: 'row',
+              alignItems: 'center', justifyContent: 'start'
+            }}>
+              <MoodIcon moodType={data?.dailyMood?.data?.attributes?.mood ?? null} />
+              {data?.dailyMood?.data?.attributes?.mood &&
+                <Typography component='p' sx={{ml:2}}>
+                  {MOODS[data?.dailyMood?.data?.attributes?.mood]}
+                </Typography>
+              }
+            </Box>
           </Grid>
           <Grid xs={6}>
             <Typography component='h3' variant='h5'>
               Tracked Emotions
             </Typography>
+            <ShowEmotions emotionIds={emotionIds} />
           </Grid>
           <Grid xs={12} md={12}>
             <Typography component='h3' variant='h5'>
-              Notes of the day
+              Priorities satisfied this day
             </Typography>
+            {/*// ToDO: Uncomment once priority saving works correct*/}
+            {/*{data?.dailyMood?.data?.attributes?.satisfiedPriorities?.data && data?.dailyMood?.data?.attributes?.satisfiedPriorities?.data.map((priority) => (*/}
+            {/*  */}
+            {/*  // <PriorityCard priority={priority} />*/}
+            {/*))}*/}
+          </Grid>
+          <Grid xs={12} md={12}>
+            <Typography component='h3' variant='h5' >
+              Note of the day
+            </Typography>
+            <NoteCard noteId={data?.dailyMood?.data?.attributes?.note?.data?.id ?? ''}/>
           </Grid>
         </Grid>
         <BackButton />
       </Box>
-    </Container >
+    </Container>
   );
 };

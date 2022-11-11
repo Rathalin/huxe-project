@@ -1,34 +1,27 @@
-import React, { PropsWithChildren } from 'react';
-
-// export const emotionIcons = {
-//   'sadness': <div>sadness</div>,
-//   'fear': <div>fear</div>,
-//   'anger': <div>anger</div>,
-//   'disgust': <div>disgust</div>,
-//   'enjoyment': <div>enjoyment</div>,
-// };
+import { Box, Chip } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
+import request from 'graphql-request';
+import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
+import { EMOTION_QUERY } from '../../graphql/queries/emotion.query';
+import { NoteCard } from './notes/NoteCard';
 
 type EmotionCardProps = {
-  emotion: string,
+  emotionId: string,
 }
 
+export const EmotionCard = ({ emotionId }: EmotionCardProps) => {
 
-// function hasKey<O>(obj: O, key: PropertyKey): key is keyof O {
-//   return key in obj
-// }
+  const { data } = useQuery({
+    queryKey: ['EMOTION_QUERY', emotionId],
+    queryFn: () => request(GRAPHQL_ENDPOINT, EMOTION_QUERY, { emotionId })
+  });
 
-// export const EmotionCard = ({ emotionType, good = false }: PropsWithChildren<EmotionCardProps>) => {
-//   return (
-//     <React.Fragment>
-//       {
-//         hasKey(emotionIcons, emotionType) ? emotionIcons[emotionType] : ""
-//       }
-//     </React.Fragment>
-//   );
-// };
-
-export const EmotionCard = ({ emotion }: EmotionCardProps) => {
   return (
-    <div>{emotion}</div>
+    <Box>
+      {data?.strongEmotion?.data?.attributes?.emotions?.data.map((emotion, i) =>(
+        <Chip key={i} label={emotion?.attributes?.name} variant='outlined' sx={{mx:1}} />
+      ))}
+      <NoteCard noteId={data?.strongEmotion?.data?.attributes?.note?.data?.id ?? ""} />
+    </Box>
   );
 };

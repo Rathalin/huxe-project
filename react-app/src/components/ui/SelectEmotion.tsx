@@ -1,11 +1,10 @@
-import { useState, MouseEvent, useContext } from 'react';
-import { Container, Checkbox, Box, Typography } from '@mui/material';
-import { EmotionCard } from './EmotionCard';
+import { useState, useContext } from 'react';
+import { Container, Checkbox, Box, Typography, Chip } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
 import { EMOTIONS_BY_TYPE_QUERY } from '../../graphql/queries/emotions-by-type.query';
-import { Loading } from '../ui/loading/Loading';
+import { Loading } from './loading/Loading';
 import { SelectedEmotionTypeCtx } from '../routes/StrongEmotionPage';
 
 type SelectEmotionProps = {
@@ -81,8 +80,8 @@ export const SelectEmotion = ({ selectedEmotionIds, setSelectedEmotionIds }: Sel
         {isLoading && <Loading />}
         {isSuccess && emotionOptions.map((emotion) => (
           <Checkbox key={emotion.id}
-            icon={<EmotionCard emotion={emotion.name} />}
-            checkedIcon={<EmotionCard emotion={emotion.name} />}
+            icon={<Chip label={emotion.name} variant='outlined' />}
+            checkedIcon={<Chip label={emotion.name} variant='outlined' />}
             onChange={() => toggleSelectedEmotion(emotion)}
             checked={selectedEmotionIds.includes(emotion.id)} />
         ))}

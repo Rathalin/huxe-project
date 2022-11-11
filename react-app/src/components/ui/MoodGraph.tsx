@@ -94,9 +94,7 @@ export const MoodGraph = () => {
   };
 
   const length = data?.dailyMoods?.data?.length ?? 0
-
-  console.log(graphDataSet)
-  const testdata = {
+  const graphData = {
     labels: Array.from({length: length }, (_, i) => i + 1),
     datasets: [
       {
@@ -111,8 +109,8 @@ export const MoodGraph = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, justifyContent: "center", alignItems: 'center', ml: 3 }}>
-      <Line data={testdata} options={options} />
+    <Box sx={{ flexGrow: 1, justifyContent: "center", alignItems: 'center', p:3, my: 1 }}>
+      <Line data={graphData} options={options} />
     </Box>
   );
 

@@ -10,10 +10,9 @@ import { Enum_Dailymood_Mood, Enum_Emotion_Emotiontype } from '../../graphql/gen
 
 type MoodIconProps = {
   moodType: Enum_Dailymood_Mood | Enum_Emotion_Emotiontype | null,
-  strongEmotion?: boolean, // TODO Display strong emotion icon when true
 };
 
-export const MoodIcon = ({ moodType, strongEmotion = false }: MoodIconProps) => {
+export const MoodIcon = ({ moodType}: MoodIconProps) => {
   let icon: JSX.Element | null;
   switch (moodType) {
     case (Enum_Dailymood_Mood.VeryGood):
@@ -32,7 +31,6 @@ export const MoodIcon = ({ moodType, strongEmotion = false }: MoodIconProps) => 
       icon = <SentimentVeryDissatisfied name='veryBad' type='veryBad' />;
       break;
     default:
-      // icon = <Circle sx={{ color: grey[500] }} />;
       icon = <Circle sx={{ color: '#323463' }} />;
   }
   return icon;

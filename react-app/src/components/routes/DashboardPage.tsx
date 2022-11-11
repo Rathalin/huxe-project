@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
-import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
+import NewReleasesIcon from '@mui/icons-material/NewReleases';
 import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { useDailyMoodIdStore } from '../../stores/dailyMoodStore';
@@ -75,9 +75,9 @@ export const DashboardPage = () => {
           </Grid>
           <Grid xs={6}>
             <Typography component='h3' variant='h5'>
-              Strong Emotion
+              Track Emotion
             </Typography>
-            <AddButton Icon={() => <ThunderstormIcon fontSize='large' />} onClick={() => {
+            <AddButton Icon={() => <NewReleasesIcon fontSize='large' />} onClick={() => {
               navigate('/emotion');
             }} />
           </Grid>

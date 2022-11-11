@@ -1,9 +1,9 @@
 export const MOODS = {
-  veryGood: 'Very Good',
-  good: 'Good',
-  neutral: 'Neutral',
-  bad: 'Bad',
-  veryBad: 'Very Bad',
+  VeryGood: 'Very Good',
+  Good: 'Good',
+  Neutral: 'Neutral',
+  Bad: 'Bad',
+  VeryBad: 'Very Bad',
 };
 
 export const BADEMOTIONS = {
