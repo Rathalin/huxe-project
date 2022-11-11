@@ -13,30 +13,31 @@ import { SET_NOTE_OF_DAILY_MOOD_MUTATION } from '../../graphql/mutations/set-not
 import { SatisfiedPriorities } from '../ui/SatisfiedPriorities';
 import { Loading } from '../ui/loading/Loading';
 import { NewNote } from '../ui/notes/NewNote';
+import Grid from '@mui/material/Unstable_Grid2';
 
 export const TrackMoodPage = () => {
   const { dailyMoodId } = useDailyMoodIdStore();
   const queryClient = useQueryClient();
   const { data, isLoading: isLoadingNoteExists } = useQuery({
     queryKey: ['NOTE_EXISTS_QUERY', dailyMoodId],
-    queryFn: () => request(GRAPHQL_ENDPOINT, NOTE_EXISTS_QUERY, { dailyMoodId: dailyMoodId ?? '' }),
+    queryFn: () => request(GRAPHQL_ENDPOINT, NOTE_EXISTS_QUERY, { dailyMoodId: dailyMoodId ?? '' })
   });
   const { mutate: createNote, isLoading: isLoadingCreateNote } = useMutation({
     mutationKey: ['CREATE_NOTE_MUTATION'],
     mutationFn: (text: string) => request(GRAPHQL_ENDPOINT, CREATE_NOTE_MUTATION, { note: { text } }),
     onSuccess: (data, _variables) => {
       setNoteOfDailyMood(data.createNote?.data?.id ?? '');
-    },
+    }
   });
   const { mutate: setNoteOfDailyMood, isLoading: isLoadingSetNote } = useMutation({
     mutationKey: ['SET_NOTE_OF_DAILY_MOOD_MUTATION'],
     mutationFn: (noteId: string) => request(GRAPHQL_ENDPOINT, SET_NOTE_OF_DAILY_MOOD_MUTATION, {
       dailyMoodId: dailyMoodId ?? '',
-      dailyMoodInput: { note: noteId },
+      dailyMoodInput: { note: noteId }
     }),
     onSuccess: () => {
       queryClient.invalidateQueries(['NOTE_EXISTS_QUERY', dailyMoodId]);
-    },
+    }
   });
   const isLoading = isLoadingNoteExists || isLoadingCreateNote || isLoadingSetNote;
 
@@ -44,21 +45,32 @@ export const TrackMoodPage = () => {
   const noteExists = noteId != null;
 
   return (
-    <Container>
+    <Container component='main' maxWidth='md'>
       <Box sx={{
         mt: 5, display: 'flex', flexDirection: 'column',
         alignItems: 'center', minHeight: '80vh'
       }}>
-        <SelectMood />
-        <Typography component='h3' variant='h5'>
-          Priorities Satisfied today
+        <Typography component='h1' variant='h3'>
+          Track Mood
         </Typography>
-        <SatisfiedPriorities />
-        {isLoading && <Loading />}
-        {(!isLoading && noteExists) ?
-          <NoteCard noteId={noteId} /> :
-          <NewNote onAddNote={createNote} buttonLabel={'Save note'} hidden={isLoading} />
-        }
+        <Grid container spacing={1}>
+          <Grid xs={12} md={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+            <SelectMood />
+          </Grid>
+          <Grid xs={12} md={12}>
+            <Typography component='h3' variant='h5'>
+              Priorities Satisfied today
+            </Typography>
+            <SatisfiedPriorities />
+          </Grid>
+          <Grid xs={12} md={12}>
+            {isLoading && <Loading />}
+            {(!isLoading && noteExists) ?
+              <NoteCard noteId={noteId} /> :
+              <NewNote onAddNote={createNote} buttonLabel={'Save note'} hidden={isLoading} />
+            }
+          </Grid>
+        </Grid>
         <BackButton />
       </Box>
     </Container>

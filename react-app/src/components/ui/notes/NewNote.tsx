@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Button, Container, TextField } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 
 type NewNoteProps = {
   onAddNote(text: string): void,
@@ -13,7 +13,7 @@ export const NewNote = ({ onAddNote, hidden = false, buttonLabel = 'Add Note' }:
   if (hidden) return null;
 
   return (
-    <Container maxWidth='sm' sx={{ margin: '20px 0px' }}>
+    <Box sx={{ my: 2 }}>
       <h4>Add a Note</h4>
       <TextField
         placeholder="Note"
@@ -41,6 +41,6 @@ export const NewNote = ({ onAddNote, hidden = false, buttonLabel = 'Add Note' }:
           }
         }}>{buttonLabel}</Button>
       </Box>
-    </Container>
+    </Box>
   );
 };
