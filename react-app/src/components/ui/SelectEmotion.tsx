@@ -1,11 +1,11 @@
-import { useState, MouseEvent, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { Container, Checkbox, Box, Typography } from '@mui/material';
 import { EmotionCard } from './EmotionCard';
 import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
 import { EMOTIONS_BY_TYPE_QUERY } from '../../graphql/queries/emotions-by-type.query';
-import { Loading } from '../ui/loading/Loading';
+import { Loading } from './loading/Loading';
 import { SelectedEmotionTypeCtx } from '../routes/StrongEmotionPage';
 
 export const SelectEmotion = () => {
