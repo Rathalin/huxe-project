@@ -19,7 +19,7 @@ export const EmotionCard = ({ emotionId }: EmotionCardProps) => {
   return (
     <Box>
       {data?.strongEmotion?.data?.attributes?.emotions?.data.map((emotion, i) =>(
-        <Chip key={i} label={emotion?.attributes?.name} variant='outlined' />
+        <Chip key={i} label={emotion?.attributes?.name} variant='outlined' sx={{mx:1}} />
       ))}
       <NoteCard noteId={data?.strongEmotion?.data?.attributes?.note?.data?.id ?? ""} />
     </Box>
