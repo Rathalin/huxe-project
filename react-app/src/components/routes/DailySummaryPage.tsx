@@ -54,7 +54,7 @@ export const DailySummaryPage = () => {
               mt: 2, display: 'flex', flexDirection: 'row',
               alignItems: 'center', justifyContent: 'start'
             }}>
-              <MoodIcon moodType={data?.dailyMood?.data?.attributes?.mood ?? null} strongEmotion={false} />
+              <MoodIcon moodType={data?.dailyMood?.data?.attributes?.mood ?? null} />
               {data?.dailyMood?.data?.attributes?.mood &&
                 <Typography component='p' sx={{ml:2}}>
                   {MOODS[data?.dailyMood?.data?.attributes?.mood]}
