@@ -8,6 +8,7 @@ export const DAILYMOOD_SUMMARY_QUERY = graphql(`
           mood
           note {
             data {
+              id
               attributes {
                 text
               }

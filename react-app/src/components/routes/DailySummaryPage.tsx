@@ -81,7 +81,7 @@ export const DailySummaryPage = () => {
             <Typography component='h3' variant='h5' >
               Note of the day
             </Typography>
-            <NoteCard noteId={'1'}/>
+            <NoteCard noteId={data?.dailyMood?.data?.attributes?.note?.data?.id ?? ''}/>
           </Grid>
         </Grid>
         <BackButton />
