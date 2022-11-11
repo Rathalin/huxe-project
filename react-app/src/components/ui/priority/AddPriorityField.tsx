@@ -26,10 +26,10 @@ export const AddPriorityField = () => {
 
   return (
     <Box sx={{
-      mt: 3, display: 'flex', flexDirection: 'row',
+      mt: 3, mb: 4, display: 'flex', flexDirection: 'row',
       alignItems: 'center', justifyContent: 'center'
     }}>
-      <Box sx={{ border: 3, borderRadius: 3, padding: 5, mx: 2, display: 'flex', alignItems: 'center', flexDirection: 'column', bgcolor: '#323463' }}>
+      <Box sx={{ border: 3, borderRadius: 3, padding: 5, mx: 3, height: '180px', width: '180px', display: 'flex', justifyConten: 'center', alignItems: 'center', flexDirection: 'column', bgcolor: '#323463' }}>
         <IconButton color='primary' aria-label='upload picture' component='label'>
           <input accept='image/*' type='file' hidden onChange={handleFileUpload} />
           <AddIcon />
@@ -55,7 +55,7 @@ export const AddPriorityField = () => {
           variant='outlined'
           onChange={(e) => setTitle(e.target.value)}
           value={title} />
-        <Typography component='p' sx={{ flexGrow: 1, my: 1 }}>
+        <Typography component='p' sx={{ flexGrow: 1, my: 1 , mt: 3}}>
           How many days do you want to allocate per week?
         </Typography>
         <TextField

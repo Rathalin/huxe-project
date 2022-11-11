@@ -44,11 +44,16 @@ export const SelectMood = () => {
   return (
     <Fragment>
       <Box sx={{
-        mt: 3, display: 'flex', flexDirection: 'row',
+        mt: 3, mb: 5,  display: 'flex', flexDirection: 'row',
         alignItems: 'center'
       }}>
         {moodOptions.map((mood) => (
           <Checkbox
+            sx={{color: '#fff', transform: 'scale(3)', m: 4, "&.MuiButtonBase-root:hover": {
+              color: "#EDD99D"
+            }}}
+            disableRipple
+            color="secondary"
             key={mood}
             icon={<MoodIcon moodType={mood} />}
             checkedIcon={<MoodIcon moodType={mood} />}

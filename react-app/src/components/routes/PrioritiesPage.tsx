@@ -1,4 +1,4 @@
-import { Container, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { PriorityCard } from '../ui/priority/PriorityCard';
 import InterestsIcon from '@mui/icons-material/Interests';
@@ -21,7 +21,14 @@ export const PrioritiesPage = () => {
 
   return (
     <Container component='main' maxWidth='md'>
-      <Grid container spacing={4} sx={{ mt: 1 }}>
+      <Box sx={{
+        mt: 5, display: 'flex', flexDirection: 'column',
+        alignItems: 'center', minHeight: '80vh',
+      }}>
+        <Typography component='h1' variant='h3'>
+          My Priorities
+        </Typography>
+        <Grid container spacing={4} sx={{ mt: 1 }}>
         {data?.priorities?.data?.map((priority) => (
           <Grid key={priority.id} xs={6} md={3}>
             <PriorityCard priorityId={priority.id!} />
@@ -34,6 +41,7 @@ export const PrioritiesPage = () => {
           </Typography>
         </Grid>
       </Grid>
+      </Box>
     </Container>
   );
 };

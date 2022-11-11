@@ -19,10 +19,15 @@ export const SelectEmotionType = () => {
 
       <Box sx={{
         mt: 3, display: 'flex', flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center', justifyContent: 'center'
       }}>
         {emotionTypeOptions.map(emotionType => (
           <Checkbox key={emotionType}
+            sx={{color: '#fff', transform: 'scale(3)', mx: 8, my: 4,  "&.MuiButtonBase-root:hover": {
+              color: "#EDD99D"
+            }}}
+            disableRipple
+            color="secondary"
             icon={<MoodIcon moodType={emotionType} />}
             checkedIcon={<MoodIcon moodType={emotionType} />}
             onChange={() => onEmotionTypeChange(emotionType)}
