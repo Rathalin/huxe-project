@@ -12,14 +12,29 @@ import { DAILYMOOD_SUMMARY_QUERY } from '../../graphql/queries/dailymood-summary
 import { MoodIcon } from '../ui/MoodIcon';
 import { MOODS } from '../../utils/utils';
 import { NoteCard } from '../ui/notes/NoteCard';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { ShowEmotions } from '../ui/ShowEmotions';
 
 export const DailySummaryPage = () => {
+  const [emotionIds, setEmotionIds] = useState<string[]>([]);
+
+  const getEmotionIds = () => {
+    setEmotionIds([])
+    data?.dailyMood?.data?.attributes?.strongEmotions?.data.map(emotion => {
+        setEmotionIds(prevState => [...prevState, emotion.id ?? '']);
+    })
+  }
+
   const params = useParams();
   const { data } = useQuery({
     queryKey: ['DAILYMOOD_SUMMARY_QUERY'],
-    queryFn: () => request(GRAPHQL_ENDPOINT, DAILYMOOD_SUMMARY_QUERY, { dailyMoodId: params.id ?? '' })
+    queryFn: () => request(GRAPHQL_ENDPOINT, DAILYMOOD_SUMMARY_QUERY, { dailyMoodId: params.id ?? '' }),
+    onSuccess: () => getEmotionIds
   });
+
+  useEffect(()=> {
+    getEmotionIds();
+  }, [data])
 
   if (params.id === 'no-data') return (
     <Container component='main' maxWidth='md'>
@@ -66,6 +81,7 @@ export const DailySummaryPage = () => {
             <Typography component='h3' variant='h5'>
               Tracked Emotions
             </Typography>
+            <ShowEmotions emotionIds={emotionIds} />
           </Grid>
           <Grid xs={12} md={12}>
             <Typography component='h3' variant='h5'>

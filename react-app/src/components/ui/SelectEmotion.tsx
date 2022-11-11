@@ -1,6 +1,5 @@
 import { useState, useContext } from 'react';
-import { Container, Checkbox, Box, Typography } from '@mui/material';
-import { EmotionCard } from './EmotionCard';
+import { Container, Checkbox, Box, Typography, Chip } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
@@ -51,8 +50,8 @@ export const SelectEmotion = () => {
         {isLoading && <Loading />}
         {isSuccess && emotionOptions.map((emotion) => (
           <Checkbox key={emotion}
-            icon={<EmotionCard emotion={emotion} />}
-            checkedIcon={<EmotionCard emotion={emotion} />}
+            icon={<Chip label={emotion} variant='outlined'/>}
+            checkedIcon={<Chip label={emotion} variant='outlined' />}
             onChange={() => { toggleStrongFeeling(emotion) }}
             checked={strongFeelings.includes(emotion)} />
         ))}
