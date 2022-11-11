@@ -11,7 +11,7 @@ import request from 'graphql-request';
 import { useDailyMoodIdStore } from '../../stores/dailyMoodStore';
 import { now } from '../../utils/date.util';
 import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
-import { DashboardPriorities } from '../ui/DashboardPriorities';
+import { DashboardPriorities } from '../ui/priority/DashboardPriorities';
 import { AddButton } from '../ui/buttons/AddButton';
 import { MoodCalender } from '../ui/MoodCalender';
 import { MoodGraph } from '../ui/MoodGraph';
@@ -87,7 +87,7 @@ export const DashboardPage = () => {
             </Typography>
             <MoodCalender year={now.getFullYear()} month={now.getMonth() + 1} />
           </Grid>
-          <Grid xs={12} md={6} sx={{display:'flex', justifyContent:'center', alignItems: 'center'}}>
+          <Grid xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <MoodGraph />
           </Grid>
 

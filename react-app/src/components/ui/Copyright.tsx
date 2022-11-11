@@ -3,7 +3,9 @@ import Link from '@mui/material/Link';
 
 export const Copyright = (props: any) => {
   return (
-    <Typography variant='body2' color='text.secondary' align='center' {...props}>
+    <Typography component='footer' color='text.secondary' align='center'
+      sx={{ mt: 3, pt: 2, pb: 2 }} {...props}
+    >
       {'Copyright © '}
       <Link color='inherit' href='https://github.com/Rathalin/huxe-project'>
         Andrea Haider-Pachtrog, Daniel Flockert, Lisa Lamplmair

@@ -18,7 +18,16 @@ export const DAILYMOOD_SUMMARY_QUERY = graphql(`
               id
               attributes {
                 title
-                iconName
+                image {
+                  data {
+                    id
+                    attributes {
+                      name
+                      alternativeText
+                      url
+                    }
+                  }
+                }
               }
             }
           }
