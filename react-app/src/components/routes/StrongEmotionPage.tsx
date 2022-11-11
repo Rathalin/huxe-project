@@ -1,5 +1,5 @@
 import { NewNote } from '../ui/notes/NewNote';
-import { Container, Box, Button, Typography } from '@mui/material';
+import { Container, Box, Typography } from '@mui/material';
 import { SelectEmotionType } from '../ui/SelectEmotionType';
 import { SelectEmotion } from '../ui/SelectEmotion';
 import { ShowNotes } from '../ui/notes/ShowNotes';
@@ -56,8 +56,8 @@ export const StrongEmotionPage = () => {
         </Box>
       </Box>
     </Container>
-      
 
-      
+
+
   );
 };
