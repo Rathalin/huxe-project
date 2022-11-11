@@ -33,7 +33,7 @@ export const StrongEmotionPage = () => {
   }
 
   return (
-    <Container maxWidth='md'>
+    <Container component='main' maxWidth='md'>
       <Box sx={{
         mt: 5, display: 'flex', flexDirection: 'column',
         alignItems: 'center', minHeight: '80vh'

@@ -6,16 +6,10 @@ import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../../graphql/endpoint';
 import { CREATE_PRIORITY_MUTATION } from '../../../graphql/mutations/create-priority.mutation';
 
-
-type PriorityFieldProps = {
-  title: string,
-  weekGoal: string,
-  setTitle: (title: string) => void
-  setWeekGoal: (weekGoal: string) => void
-};
-
-export const AddPriorityField = ({ title, weekGoal, setTitle, setWeekGoal }: PriorityFieldProps) => {
+export const AddPriorityField = () => {
   const [imageName, setImageName] = useState('Add picture');
+  const [title, setTitle] = useState('');
+  const [weekGoal, setWeekGoal] = useState('');
 
   // const { mutate: createPriority } = useMutation({
   //   mutationKey: [''],
