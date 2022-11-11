@@ -37,7 +37,7 @@ class DataService {
                 id
               }
             }
-          }        
+          }
         `), { emotion });
       }
     }

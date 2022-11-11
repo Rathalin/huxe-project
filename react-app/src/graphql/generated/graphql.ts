@@ -49,8 +49,7 @@ export type DailyMood = {
   createdAt?: Maybe<Scalars['DateTime']>;
   mood?: Maybe<Enum_Dailymood_Mood>;
   note?: Maybe<NoteEntityResponse>;
-  priorityNote?: Maybe<PriorityNoteEntityResponse>;
-  satisfiedPriorities?: Maybe<PriorityRelationResponseCollection>;
+  satisfiedPriorities?: Maybe<SatisfiedPriorityRelationResponseCollection>;
   strongEmotions?: Maybe<StrongEmotionRelationResponseCollection>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   usersPermissionsUser?: Maybe<UsersPermissionsUserEntityResponse>;
@@ -58,7 +57,7 @@ export type DailyMood = {
 
 
 export type DailyMoodSatisfiedPrioritiesArgs = {
-  filters?: InputMaybe<PriorityFiltersInput>;
+  filters?: InputMaybe<SatisfiedPriorityFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
@@ -95,8 +94,7 @@ export type DailyMoodFiltersInput = {
   not?: InputMaybe<DailyMoodFiltersInput>;
   note?: InputMaybe<NoteFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<DailyMoodFiltersInput>>>;
-  priorityNote?: InputMaybe<PriorityNoteFiltersInput>;
-  satisfiedPriorities?: InputMaybe<PriorityFiltersInput>;
+  satisfiedPriorities?: InputMaybe<SatisfiedPriorityFiltersInput>;
   strongEmotions?: InputMaybe<StrongEmotionFiltersInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
   usersPermissionsUser?: InputMaybe<UsersPermissionsUserFiltersInput>;
@@ -105,7 +103,6 @@ export type DailyMoodFiltersInput = {
 export type DailyMoodInput = {
   mood?: InputMaybe<Enum_Dailymood_Mood>;
   note?: InputMaybe<Scalars['ID']>;
-  priorityNote?: InputMaybe<Scalars['ID']>;
   satisfiedPriorities?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   strongEmotions?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   usersPermissionsUser?: InputMaybe<Scalars['ID']>;
@@ -224,7 +221,7 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']>;
 };
 
-export type GenericMorph = DailyMood | Emotion | I18NLocale | Note | Priority | PriorityNote | StrongEmotion | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = DailyMood | Emotion | I18NLocale | Note | Priority | SatisfiedPriority | StrongEmotion | UploadFile | UploadFolder | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type I18NLocale = {
   __typename?: 'I18NLocale';
@@ -342,7 +339,7 @@ export type Mutation = {
   createEmotion?: Maybe<EmotionEntityResponse>;
   createNote?: Maybe<NoteEntityResponse>;
   createPriority?: Maybe<PriorityEntityResponse>;
-  createPriorityNote?: Maybe<PriorityNoteEntityResponse>;
+  createSatisfiedPriority?: Maybe<SatisfiedPriorityEntityResponse>;
   createStrongEmotion?: Maybe<StrongEmotionEntityResponse>;
   createUploadFile?: Maybe<UploadFileEntityResponse>;
   createUploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -354,7 +351,7 @@ export type Mutation = {
   deleteEmotion?: Maybe<EmotionEntityResponse>;
   deleteNote?: Maybe<NoteEntityResponse>;
   deletePriority?: Maybe<PriorityEntityResponse>;
-  deletePriorityNote?: Maybe<PriorityNoteEntityResponse>;
+  deleteSatisfiedPriority?: Maybe<SatisfiedPriorityEntityResponse>;
   deleteStrongEmotion?: Maybe<StrongEmotionEntityResponse>;
   deleteUploadFile?: Maybe<UploadFileEntityResponse>;
   deleteUploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -378,7 +375,7 @@ export type Mutation = {
   updateFileInfo: UploadFileEntityResponse;
   updateNote?: Maybe<NoteEntityResponse>;
   updatePriority?: Maybe<PriorityEntityResponse>;
-  updatePriorityNote?: Maybe<PriorityNoteEntityResponse>;
+  updateSatisfiedPriority?: Maybe<SatisfiedPriorityEntityResponse>;
   updateStrongEmotion?: Maybe<StrongEmotionEntityResponse>;
   updateUploadFile?: Maybe<UploadFileEntityResponse>;
   updateUploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -417,8 +414,8 @@ export type MutationCreatePriorityArgs = {
 };
 
 
-export type MutationCreatePriorityNoteArgs = {
-  data: PriorityNoteInput;
+export type MutationCreateSatisfiedPriorityArgs = {
+  data: SatisfiedPriorityInput;
 };
 
 
@@ -467,7 +464,7 @@ export type MutationDeletePriorityArgs = {
 };
 
 
-export type MutationDeletePriorityNoteArgs = {
+export type MutationDeleteSatisfiedPriorityArgs = {
   id: Scalars['ID'];
 };
 
@@ -567,8 +564,8 @@ export type MutationUpdatePriorityArgs = {
 };
 
 
-export type MutationUpdatePriorityNoteArgs = {
-  data: PriorityNoteInput;
+export type MutationUpdateSatisfiedPriorityArgs = {
+  data: SatisfiedPriorityInput;
   id: Scalars['ID'];
 };
 
@@ -715,59 +712,6 @@ export type PriorityInput = {
   weeklyGoal?: InputMaybe<Scalars['Int']>;
 };
 
-export type PriorityNote = {
-  __typename?: 'PriorityNote';
-  createdAt?: Maybe<Scalars['DateTime']>;
-  notes?: Maybe<NoteRelationResponseCollection>;
-  priority?: Maybe<PriorityEntityResponse>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-};
-
-
-export type PriorityNoteNotesArgs = {
-  filters?: InputMaybe<NoteFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-};
-
-export type PriorityNoteEntity = {
-  __typename?: 'PriorityNoteEntity';
-  attributes?: Maybe<PriorityNote>;
-  id?: Maybe<Scalars['ID']>;
-};
-
-export type PriorityNoteEntityResponse = {
-  __typename?: 'PriorityNoteEntityResponse';
-  data?: Maybe<PriorityNoteEntity>;
-};
-
-export type PriorityNoteEntityResponseCollection = {
-  __typename?: 'PriorityNoteEntityResponseCollection';
-  data: Array<PriorityNoteEntity>;
-  meta: ResponseCollectionMeta;
-};
-
-export type PriorityNoteFiltersInput = {
-  and?: InputMaybe<Array<InputMaybe<PriorityNoteFiltersInput>>>;
-  createdAt?: InputMaybe<DateTimeFilterInput>;
-  id?: InputMaybe<IdFilterInput>;
-  not?: InputMaybe<PriorityNoteFiltersInput>;
-  notes?: InputMaybe<NoteFiltersInput>;
-  or?: InputMaybe<Array<InputMaybe<PriorityNoteFiltersInput>>>;
-  priority?: InputMaybe<PriorityFiltersInput>;
-  updatedAt?: InputMaybe<DateTimeFilterInput>;
-};
-
-export type PriorityNoteInput = {
-  notes?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  priority?: InputMaybe<Scalars['ID']>;
-};
-
-export type PriorityRelationResponseCollection = {
-  __typename?: 'PriorityRelationResponseCollection';
-  data: Array<PriorityEntity>;
-};
-
 export type Query = {
   __typename?: 'Query';
   dailyMood?: Maybe<DailyMoodEntityResponse>;
@@ -781,8 +725,8 @@ export type Query = {
   notes?: Maybe<NoteEntityResponseCollection>;
   priorities?: Maybe<PriorityEntityResponseCollection>;
   priority?: Maybe<PriorityEntityResponse>;
-  priorityNote?: Maybe<PriorityNoteEntityResponse>;
-  priorityNotes?: Maybe<PriorityNoteEntityResponseCollection>;
+  satisfiedPriorities?: Maybe<SatisfiedPriorityEntityResponseCollection>;
+  satisfiedPriority?: Maybe<SatisfiedPriorityEntityResponse>;
   strongEmotion?: Maybe<StrongEmotionEntityResponse>;
   strongEmotions?: Maybe<StrongEmotionEntityResponseCollection>;
   uploadFile?: Maybe<UploadFileEntityResponse>;
@@ -856,15 +800,15 @@ export type QueryPriorityArgs = {
 };
 
 
-export type QueryPriorityNoteArgs = {
-  id?: InputMaybe<Scalars['ID']>;
+export type QuerySatisfiedPrioritiesArgs = {
+  filters?: InputMaybe<SatisfiedPriorityFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
-export type QueryPriorityNotesArgs = {
-  filters?: InputMaybe<PriorityNoteFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+export type QuerySatisfiedPriorityArgs = {
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -932,6 +876,62 @@ export type ResponseCollectionMeta = {
   pagination: Pagination;
 };
 
+export type SatisfiedPriority = {
+  __typename?: 'SatisfiedPriority';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  dailyMood?: Maybe<DailyMoodEntityResponse>;
+  notes?: Maybe<NoteRelationResponseCollection>;
+  priority?: Maybe<PriorityEntityResponse>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+
+export type SatisfiedPriorityNotesArgs = {
+  filters?: InputMaybe<NoteFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type SatisfiedPriorityEntity = {
+  __typename?: 'SatisfiedPriorityEntity';
+  attributes?: Maybe<SatisfiedPriority>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type SatisfiedPriorityEntityResponse = {
+  __typename?: 'SatisfiedPriorityEntityResponse';
+  data?: Maybe<SatisfiedPriorityEntity>;
+};
+
+export type SatisfiedPriorityEntityResponseCollection = {
+  __typename?: 'SatisfiedPriorityEntityResponseCollection';
+  data: Array<SatisfiedPriorityEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type SatisfiedPriorityFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<SatisfiedPriorityFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  dailyMood?: InputMaybe<DailyMoodFiltersInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<SatisfiedPriorityFiltersInput>;
+  notes?: InputMaybe<NoteFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<SatisfiedPriorityFiltersInput>>>;
+  priority?: InputMaybe<PriorityFiltersInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type SatisfiedPriorityInput = {
+  dailyMood?: InputMaybe<Scalars['ID']>;
+  notes?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  priority?: InputMaybe<Scalars['ID']>;
+};
+
+export type SatisfiedPriorityRelationResponseCollection = {
+  __typename?: 'SatisfiedPriorityRelationResponseCollection';
+  data: Array<SatisfiedPriorityEntity>;
+};
+
 export type StringFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   between?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -959,6 +959,7 @@ export type StringFilterInput = {
 export type StrongEmotion = {
   __typename?: 'StrongEmotion';
   createdAt?: Maybe<Scalars['DateTime']>;
+  dailyMood?: Maybe<DailyMoodEntityResponse>;
   emotions?: Maybe<EmotionRelationResponseCollection>;
   note?: Maybe<NoteEntityResponse>;
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -991,6 +992,7 @@ export type StrongEmotionEntityResponseCollection = {
 export type StrongEmotionFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<StrongEmotionFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
+  dailyMood?: InputMaybe<DailyMoodFiltersInput>;
   emotions?: InputMaybe<EmotionFiltersInput>;
   id?: InputMaybe<IdFilterInput>;
   not?: InputMaybe<StrongEmotionFiltersInput>;
@@ -1000,6 +1002,7 @@ export type StrongEmotionFiltersInput = {
 };
 
 export type StrongEmotionInput = {
+  dailyMood?: InputMaybe<Scalars['ID']>;
   emotions?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   note?: InputMaybe<Scalars['ID']>;
 };
@@ -1399,6 +1402,13 @@ export type CreatePriorityMutationVariables = Exact<{
 
 export type CreatePriorityMutation = { __typename?: 'Mutation', createNote?: { __typename?: 'NoteEntityResponse', data?: { __typename?: 'NoteEntity', id?: string | null } | null } | null };
 
+export type CreateStrongEmotionMutationVariables = Exact<{
+  strongEmotion: StrongEmotionInput;
+}>;
+
+
+export type CreateStrongEmotionMutation = { __typename?: 'Mutation', createStrongEmotion?: { __typename?: 'StrongEmotionEntityResponse', data?: { __typename?: 'StrongEmotionEntity', id?: string | null } | null } | null };
+
 export type SetMoodMutationVariables = Exact<{
   dailyMoodId: Scalars['ID'];
   dailyMoodInput: DailyMoodInput;
@@ -1425,14 +1435,14 @@ export type DailyMoodSummaryQueryVariables = Exact<{
 }>;
 
 
-export type DailyMoodSummaryQuery = { __typename?: 'Query', dailyMood?: { __typename?: 'DailyMoodEntityResponse', data?: { __typename?: 'DailyMoodEntity', attributes?: { __typename?: 'DailyMood', mood?: Enum_Dailymood_Mood | null, note?: { __typename?: 'NoteEntityResponse', data?: { __typename?: 'NoteEntity', attributes?: { __typename?: 'Note', text: string } | null } | null } | null, satisfiedPriorities?: { __typename?: 'PriorityRelationResponseCollection', data: Array<{ __typename?: 'PriorityEntity', id?: string | null, attributes?: { __typename?: 'Priority', title: string, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, url: string } | null } | null } } | null }> } | null, strongEmotions?: { __typename?: 'StrongEmotionRelationResponseCollection', data: Array<{ __typename?: 'StrongEmotionEntity', id?: string | null, attributes?: { __typename?: 'StrongEmotion', emotions?: { __typename?: 'EmotionRelationResponseCollection', data: Array<{ __typename?: 'EmotionEntity', id?: string | null, attributes?: { __typename?: 'Emotion', name: string } | null }> } | null, note?: { __typename?: 'NoteEntityResponse', data?: { __typename?: 'NoteEntity', id?: string | null, attributes?: { __typename?: 'Note', text: string } | null } | null } | null } | null }> } | null } | null } | null } | null };
+export type DailyMoodSummaryQuery = { __typename?: 'Query', dailyMood?: { __typename?: 'DailyMoodEntityResponse', data?: { __typename?: 'DailyMoodEntity', attributes?: { __typename?: 'DailyMood', mood?: Enum_Dailymood_Mood | null, note?: { __typename?: 'NoteEntityResponse', data?: { __typename?: 'NoteEntity', attributes?: { __typename?: 'Note', text: string } | null } | null } | null, satisfiedPriorities?: { __typename?: 'SatisfiedPriorityRelationResponseCollection', data: Array<{ __typename?: 'SatisfiedPriorityEntity', id?: string | null, attributes?: { __typename?: 'SatisfiedPriority', priority?: { __typename?: 'PriorityEntityResponse', data?: { __typename?: 'PriorityEntity', id?: string | null, attributes?: { __typename?: 'Priority', title: string, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', name: string, alternativeText?: string | null, url: string } | null } | null } } | null } | null } | null } | null }> } | null, strongEmotions?: { __typename?: 'StrongEmotionRelationResponseCollection', data: Array<{ __typename?: 'StrongEmotionEntity', id?: string | null, attributes?: { __typename?: 'StrongEmotion', emotions?: { __typename?: 'EmotionRelationResponseCollection', data: Array<{ __typename?: 'EmotionEntity', id?: string | null, attributes?: { __typename?: 'Emotion', name: string } | null }> } | null, note?: { __typename?: 'NoteEntityResponse', data?: { __typename?: 'NoteEntity', id?: string | null, attributes?: { __typename?: 'Note', text: string } | null } | null } | null } | null }> } | null } | null } | null } | null };
 
 export type EmotionsByTypeQueryVariables = Exact<{
   emotionType: Scalars['String'];
 }>;
 
 
-export type EmotionsByTypeQuery = { __typename?: 'Query', emotions?: { __typename?: 'EmotionEntityResponseCollection', data: Array<{ __typename?: 'EmotionEntity', attributes?: { __typename?: 'Emotion', name: string } | null }> } | null };
+export type EmotionsByTypeQuery = { __typename?: 'Query', emotions?: { __typename?: 'EmotionEntityResponseCollection', data: Array<{ __typename?: 'EmotionEntity', id?: string | null, attributes?: { __typename?: 'Emotion', name: string } | null }> } | null };
 
 export type DailyMoodsGraphQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1477,7 +1487,7 @@ export type SatisfiedPrioritiesQueryVariables = Exact<{
 }>;
 
 
-export type SatisfiedPrioritiesQuery = { __typename?: 'Query', dailyMood?: { __typename?: 'DailyMoodEntityResponse', data?: { __typename?: 'DailyMoodEntity', attributes?: { __typename?: 'DailyMood', satisfiedPriorities?: { __typename?: 'PriorityRelationResponseCollection', data: Array<{ __typename?: 'PriorityEntity', id?: string | null, attributes?: { __typename?: 'Priority', weeklyGoal: number } | null }> } | null } | null } | null } | null };
+export type SatisfiedPrioritiesQuery = { __typename?: 'Query', dailyMood?: { __typename?: 'DailyMoodEntityResponse', data?: { __typename?: 'DailyMoodEntity', attributes?: { __typename?: 'DailyMood', satisfiedPriorities?: { __typename?: 'SatisfiedPriorityRelationResponseCollection', data: Array<{ __typename?: 'SatisfiedPriorityEntity', id?: string | null, attributes?: { __typename?: 'SatisfiedPriority', priority?: { __typename?: 'PriorityEntityResponse', data?: { __typename?: 'PriorityEntity', attributes?: { __typename?: 'Priority', weeklyGoal: number } | null } | null } | null } | null }> } | null } | null } | null } | null };
 
 export type SelectedMoodQueryVariables = Exact<{
   dailyMoodId?: InputMaybe<Scalars['ID']>;
@@ -1516,18 +1526,19 @@ export type CreateEmDailyMoodMutation = { __typename?: 'Mutation', createDailyMo
 
 export const CreateNoteDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateNote"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"note"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"NoteInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createNote"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"note"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<CreateNoteMutation, CreateNoteMutationVariables>;
 export const CreatePriorityDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreatePriority"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"note"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"NoteInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createNote"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"note"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<CreatePriorityMutation, CreatePriorityMutationVariables>;
+export const CreateStrongEmotionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateStrongEmotion"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"strongEmotion"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"StrongEmotionInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createStrongEmotion"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"strongEmotion"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<CreateStrongEmotionMutation, CreateStrongEmotionMutationVariables>;
 export const SetMoodDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"SetMood"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dailyMoodId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dailyMoodInput"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DailyMoodInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateDailyMood"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dailyMoodId"}}},{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dailyMoodInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mood"}}]}}]}}]}}]}}]} as unknown as DocumentNode<SetMoodMutation, SetMoodMutationVariables>;
 export const UpdateDailyMoodDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateDailyMood"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dailyMoodId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dailyMoodInput"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DailyMoodInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateDailyMood"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dailyMoodId"}}},{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dailyMoodInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<UpdateDailyMoodMutation, UpdateDailyMoodMutationVariables>;
 export const DailyMoodsCalenderDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"DailyMoodsCalender"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dailyMoods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"mood"}},{"kind":"Field","name":{"kind":"Name","value":"strongEmotions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<DailyMoodsCalenderQuery, DailyMoodsCalenderQueryVariables>;
-export const DailyMoodSummaryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"DailyMoodSummary"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dailyMoodId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dailyMood"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dailyMoodId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mood"}},{"kind":"Field","name":{"kind":"Name","value":"note"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"satisfiedPriorities"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"strongEmotions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"emotions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"note"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<DailyMoodSummaryQuery, DailyMoodSummaryQueryVariables>;
-export const EmotionsByTypeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"EmotionsByType"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"emotionType"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"emotions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"emotionType"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eqi"},"value":{"kind":"Variable","name":{"kind":"Name","value":"emotionType"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<EmotionsByTypeQuery, EmotionsByTypeQueryVariables>;
+export const DailyMoodSummaryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"DailyMoodSummary"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dailyMoodId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dailyMood"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dailyMoodId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mood"}},{"kind":"Field","name":{"kind":"Name","value":"note"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"satisfiedPriorities"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"priority"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"strongEmotions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"emotions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"note"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<DailyMoodSummaryQuery, DailyMoodSummaryQueryVariables>;
+export const EmotionsByTypeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"EmotionsByType"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"emotionType"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"emotions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"emotionType"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eqi"},"value":{"kind":"Variable","name":{"kind":"Name","value":"emotionType"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]}}]} as unknown as DocumentNode<EmotionsByTypeQuery, EmotionsByTypeQueryVariables>;
 export const DailyMoodsGraphDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"DailyMoodsGraph"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dailyMoods"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"mood"}}]}}]}}]}}]}}]} as unknown as DocumentNode<DailyMoodsGraphQuery, DailyMoodsGraphQueryVariables>;
 export const DailyMoodHasNoteDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"DailyMoodHasNote"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dailyMoodId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dailyMood"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dailyMoodId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"note"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<DailyMoodHasNoteQuery, DailyMoodHasNoteQueryVariables>;
 export const NoteDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Note"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"noteId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"note"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"noteId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]}}]}}]} as unknown as DocumentNode<NoteQuery, NoteQueryVariables>;
 export const PrioritiesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Priorities"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"priorities"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<PrioritiesQuery, PrioritiesQueryVariables>;
 export const PriorityDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Priority"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"priorityId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"priority"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"priorityId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"weeklyGoal"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"alternativeText"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<PriorityQuery, PriorityQueryVariables>;
 export const RecentNoteDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"RecentNote"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"notes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"createdAt:DESC","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"text"}}]}}]}}]}}]}}]} as unknown as DocumentNode<RecentNoteQuery, RecentNoteQueryVariables>;
-export const SatisfiedPrioritiesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SatisfiedPriorities"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dailyMoodId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dailyMood"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dailyMoodId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"satisfiedPriorities"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"active"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"BooleanValue","value":true}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"weeklyGoal"}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<SatisfiedPrioritiesQuery, SatisfiedPrioritiesQueryVariables>;
+export const SatisfiedPrioritiesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SatisfiedPriorities"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dailyMoodId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dailyMood"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dailyMoodId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"satisfiedPriorities"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"priority"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"active"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"BooleanValue","value":true}}]}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"priority"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"weeklyGoal"}}]}}]}}]}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<SatisfiedPrioritiesQuery, SatisfiedPrioritiesQueryVariables>;
 export const SelectedMoodDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SelectedMood"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"dailyMoodId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dailyMood"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"dailyMoodId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mood"}}]}}]}}]}}]}}]} as unknown as DocumentNode<SelectedMoodQuery, SelectedMoodQueryVariables>;
 export const EmotionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Emotions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"emotions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<EmotionsQuery, EmotionsQueryVariables>;
 export const CreateEmotionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateEmotion"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"emotion"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EmotionInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createEmotion"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"emotion"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<CreateEmotionMutation, CreateEmotionMutationVariables>;

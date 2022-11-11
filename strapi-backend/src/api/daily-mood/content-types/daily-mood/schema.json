@@ -12,25 +12,10 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "satisfiedPriorities": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::priority.priority"
-    },
     "note": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::note.note"
-    },
-    "priorityNote": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::priority-note.priority-note"
-    },
-    "strongEmotions": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::strong-emotion.strong-emotion"
     },
     "mood": {
       "type": "enumeration",
@@ -48,6 +33,18 @@
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "dailyMood"
+    },
+    "strongEmotions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::strong-emotion.strong-emotion",
+      "mappedBy": "dailyMood"
+    },
+    "satisfiedPriorities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::satisfied-priority.satisfied-priority",
+      "mappedBy": "dailyMood"
     }
   }
 }

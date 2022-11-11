@@ -32,7 +32,10 @@ export const DashboardPriorities = () => {
         {priorities.map((priority) => (
           <Grid key={priority.id} xs={6} md={4}>
             <PriorityCard priorityId={priority.id!} />
-            <PriorityProgress variant='determinate' value={((priority.attributes?.weeklyGoal ?? 0) / 7) * 100} />
+            <PriorityProgress
+              variant='determinate'
+              value={((priority.attributes?.priority?.data?.attributes?.weeklyGoal ?? 0) / 7) * 100}
+            />
             <AddNoteButton />
           </Grid>
         ))}

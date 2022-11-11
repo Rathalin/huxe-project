@@ -5,11 +5,17 @@ export const SATISFIED_PRIORITIES_QUERY = graphql(`
     dailyMood(id: $dailyMoodId) {
       data {
         attributes {
-          satisfiedPriorities(filters: { active: { eq: true } }) {
+          satisfiedPriorities(filters: { priority: { active: { eq: true } } }) {
             data {
               id
               attributes {
-                weeklyGoal
+                priority {
+                  data {
+                    attributes {
+                      weeklyGoal
+                    }
+                  }
+                }
               }
             }
           }

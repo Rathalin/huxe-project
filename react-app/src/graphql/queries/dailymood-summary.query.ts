@@ -17,14 +17,21 @@ export const DAILYMOOD_SUMMARY_QUERY = graphql(`
             data {
               id
               attributes {
-                title
-                image {
+                priority {
                   data {
                     id
                     attributes {
-                      name
-                      alternativeText
-                      url
+                      title
+                      image {
+                        data {
+                          id
+                          attributes {
+                            name
+                            alternativeText
+                            url
+                          }
+                        }
+                      }
                     }
                   }
                 }

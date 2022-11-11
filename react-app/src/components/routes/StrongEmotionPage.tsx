@@ -1,12 +1,16 @@
 import { NewNote } from '../ui/notes/NewNote';
-import { Container, Box, Button, Typography } from '@mui/material';
+import { Container, Box, Button, Typography, Badge } from '@mui/material';
 import { SelectEmotionType } from '../ui/SelectEmotionType';
 import { SelectEmotion } from '../ui/SelectEmotion';
 import { ShowNotes } from '../ui/notes/ShowNotes';
 import { createContext, FormEvent, useState } from 'react';
-import { Enum_Emotion_Emotiontype } from '../../graphql/generated/graphql';
+import { Enum_Emotion_Emotiontype, StrongEmotionInput } from '../../graphql/generated/graphql';
 import { useNavigate } from 'react-router-dom';
 import { BackButton } from '../ui/buttons/BackButton';
+import { useMutation } from '@tanstack/react-query';
+import request from 'graphql-request';
+import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
+import { CREATE_STRONG_EMOTION_MUTATION } from '../../graphql/mutations/create-strong-emotion.mutation';
 
 export interface EmotionTypeContext {
   selectedEmotionType: Enum_Emotion_Emotiontype | null,
@@ -26,38 +30,80 @@ export const SelectedEmotionTypeCtx = createContext<EmotionTypeContext>({
 export const StrongEmotionPage = () => {
   const navigate = useNavigate();
   const [selectedEmotionType, setSelectedEmotionType] = useState<Enum_Emotion_Emotiontype | null>(null);
+  const [selectedEmotionIds, setSelectedEmotionIds] = useState<string[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const { mutate: createStrongEmotion } = useMutation({
+    mutationKey: [''],
+    mutationFn: (strongEmotion: StrongEmotionInput) => request(GRAPHQL_ENDPOINT, CREATE_STRONG_EMOTION_MUTATION, { strongEmotion }),
+    onSuccess: () => navigate('/dashboard'),
+  });
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    navigate('/dashboard');
+  function onConfirmClick(): void {
+    if (selectedEmotionIds.length === 0) {
+      setError('Please select at least 1 emotion.');
+    } else {
+      setError(null);
+      createStrongEmotion({
+        emotions: selectedEmotionIds,
+      });
+    }
   }
 
   return (
     <Container maxWidth='md'>
       <Box sx={{
         mt: 5, display: 'flex', flexDirection: 'column',
-        alignItems: 'center', minHeight: '80vh'
+        alignItems: 'center', minHeight: '80vh',
       }}>
         <Typography component='h1' variant='h3'>
           Strong Emotion
         </Typography>
 
-        <Box component="form" onSubmit={handleSubmit} sx={{
+        <Box sx={{
           mt: 3, display: 'flex', flexDirection: 'column',
-          alignItems: 'left'
+          alignItems: 'left',
         }}>
-          <SelectedEmotionTypeCtx.Provider value={{ selectedEmotionType, setSelectedEmotionType }}>
+          <SelectedEmotionTypeCtx.Provider
+            value={{
+              selectedEmotionType, setSelectedEmotionType: (emotionType) => {
+                setError(null);
+                setSelectedEmotionType(emotionType);
+              }
+            }}
+          >
             <SelectEmotionType />
-            <SelectEmotion />
+            <SelectEmotion
+              selectedEmotionIds={selectedEmotionIds}
+              setSelectedEmotionIds={((ids) => {
+                setSelectedEmotionIds(ids);
+                setError(null);
+              })}
+            />
           </SelectedEmotionTypeCtx.Provider>
           {/* <NewNote /> */}
-          <ShowNotes noteIds={[]} />
-          <BackButton />
+          {/* <ShowNotes noteIds={[]} /> */}
+          {error != null &&
+            <Typography component='p' color='error'>
+              {error}
+            </Typography>
+          }
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            <BackButton />
+            <Button
+              variant='contained'
+              sx={{ mt: 3, mb: 2, gap: 1, width: '100%' }}
+              onClick={() => onConfirmClick()}
+            >
+              <Typography component='span'>Add </Typography>
+              <Typography component='span'>
+                <span>(</span>
+                <strong>{selectedEmotionIds.length}</strong>
+                <span>)</span>
+              </Typography>
+            </Button>
+          </Box>
         </Box>
       </Box>
     </Container>
-      
-
-      
   );
 };

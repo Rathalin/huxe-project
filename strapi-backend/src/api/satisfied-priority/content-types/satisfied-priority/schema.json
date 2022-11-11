@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "priority_notes",
+  "collectionName": "satisfied_priorities",
   "info": {
-    "singularName": "priority-note",
-    "pluralName": "priority-notes",
-    "displayName": "PriorityNote",
+    "singularName": "satisfied-priority",
+    "pluralName": "satisfied-priorities",
+    "displayName": "SatisfiedPriority",
     "description": ""
   },
   "options": {
@@ -21,6 +21,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::note.note"
+    },
+    "dailyMood": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::daily-mood.daily-mood",
+      "inversedBy": "satisfiedPriorities"
     }
   }
 }

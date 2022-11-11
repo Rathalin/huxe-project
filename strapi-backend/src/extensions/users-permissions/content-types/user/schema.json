@@ -67,7 +67,7 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::daily-mood.daily-mood",
-      "inversedBy": "usersPermissionsUser"
+      "mappedBy": "usersPermissionsUser"
     }
   }
 }

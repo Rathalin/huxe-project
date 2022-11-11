@@ -4,7 +4,8 @@
   "info": {
     "singularName": "strong-emotion",
     "pluralName": "strong-emotions",
-    "displayName": "StrongEmotion"
+    "displayName": "StrongEmotion",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -20,6 +21,12 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::note.note"
+    },
+    "dailyMood": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::daily-mood.daily-mood",
+      "inversedBy": "strongEmotions"
     }
   }
 }

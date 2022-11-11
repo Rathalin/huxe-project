@@ -8,34 +8,64 @@ import { EMOTIONS_BY_TYPE_QUERY } from '../../graphql/queries/emotions-by-type.q
 import { Loading } from '../ui/loading/Loading';
 import { SelectedEmotionTypeCtx } from '../routes/StrongEmotionPage';
 
-export const SelectEmotion = () => {
+type SelectEmotionProps = {
+  selectedEmotionIds: string[],
+  setSelectedEmotionIds: (ids: string[]) => void,
+};
+
+export const SelectEmotion = ({ selectedEmotionIds, setSelectedEmotionIds }: SelectEmotionProps) => {
   const { selectedEmotionType } = useContext(SelectedEmotionTypeCtx);
-  const [strongFeelings, setStrongFeelings] = useState<string[]>([]);
+  const [selectedEmotionNames, setSelectedEmotionNames] = useState<string[]>([]);
   const { data: emotionsData, isLoading, isSuccess } = useQuery({
     queryKey: ['EMOTIONS_BY_TYPE_QUERY', selectedEmotionType],
     queryFn: () => request(GRAPHQL_ENDPOINT, EMOTIONS_BY_TYPE_QUERY, { emotionType: selectedEmotionType ?? '' }),
   });
 
   const emotionOptions = emotionsData?.emotions?.data
-    .map(data => data.attributes?.name)
-    .filter((emotion): emotion is string => emotion != null) ?? [];
+    .map(data => ({
+      id: data.id!,
+      name: data.attributes?.name!,
+    })) ?? [];
 
-  function addStrongFeeling(feeling: string): void {
-    if (strongFeelings.every(existingFeeling => existingFeeling !== feeling)) {
-      setStrongFeelings([...strongFeelings, feeling]);
+  function addSelectedEmotionId(id: string): void {
+    if (selectedEmotionIds.every(existingId => existingId !== id)) {
+      setSelectedEmotionIds([...selectedEmotionIds, id]);
     }
   }
 
-  function removeStrongFeeling(feeling: string): void {
-    setStrongFeelings(strongFeelings.filter(existingFeeling => existingFeeling !== feeling));
+  function removeSelectedEmotionId(id: string): void {
+    setSelectedEmotionIds(selectedEmotionIds.filter(existingId => existingId !== id));
   }
 
-  function toggleStrongFeeling(feeling: string): void {
-    if (strongFeelings.includes(feeling)) {
-      removeStrongFeeling(feeling);
+  function toggleSelectedEmotionId(id: string): void {
+    if (selectedEmotionIds.includes(id)) {
+      removeSelectedEmotionId(id);
     } else {
-      addStrongFeeling(feeling);
+      addSelectedEmotionId(id);
     }
+  }
+
+  function addSelectedEmotionName(name: string): void {
+    if (selectedEmotionNames.every(existingName => existingName !== name)) {
+      setSelectedEmotionNames([...selectedEmotionNames, name]);
+    }
+  }
+
+  function removeSelectedEmotionName(name: string): void {
+    setSelectedEmotionNames(selectedEmotionNames.filter(existingName => existingName !== name));
+  }
+
+  function toggleSelectedEmotionName(name: string): void {
+    if (selectedEmotionNames.includes(name)) {
+      removeSelectedEmotionName(name);
+    } else {
+      addSelectedEmotionName(name);
+    }
+  }
+
+  function toggleSelectedEmotion({ id, name }: { id: string, name: string }): void {
+    toggleSelectedEmotionId(id);
+    toggleSelectedEmotionName(name);
   }
 
   return (
@@ -50,11 +80,11 @@ export const SelectEmotion = () => {
       }}>
         {isLoading && <Loading />}
         {isSuccess && emotionOptions.map((emotion) => (
-          <Checkbox key={emotion}
-            icon={<EmotionCard emotion={emotion} />}
-            checkedIcon={<EmotionCard emotion={emotion} />}
-            onChange={() => { toggleStrongFeeling(emotion) }}
-            checked={strongFeelings.includes(emotion)} />
+          <Checkbox key={emotion.id}
+            icon={<EmotionCard emotion={emotion.name} />}
+            checkedIcon={<EmotionCard emotion={emotion.name} />}
+            onChange={() => toggleSelectedEmotion(emotion)}
+            checked={selectedEmotionIds.includes(emotion.id)} />
         ))}
       </Box>
     </Container>
