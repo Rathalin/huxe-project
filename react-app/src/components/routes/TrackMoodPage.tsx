@@ -48,22 +48,28 @@ export const TrackMoodPage = () => {
         <Typography component='h1' variant='h3'>
           Track Mood
         </Typography>
-        <Grid container spacing={1}>
-          <Grid xs={12} md={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{
+          mt: 3, display: 'flex', flexDirection: 'column',
+          alignItems: 'left',
+        }}>
+          {/* <Grid container spacing={1}> */}
+            {/* <Grid xs={12} md={12} sx={{ display: 'flex', justifyContent: 'center' }}> */}
             <SelectMood />
-          </Grid>
-          <Grid xs={12} md={12}>
-            <Typography component='h3' variant='h5'>
-              Priorities Satisfied today
-            </Typography>
-            <SatisfiedPriorities />
-          </Grid>
-          <Grid xs={12} md={12}>
-            {isLoading && <Loading />}
-            <AddSingleNote noteId={noteId ?? null} setNoteId={(id) => setNoteOfDailyMood(id)} />
-          </Grid>
-        </Grid>
+            {/* </Grid> */}
+            <Grid xs={12} md={12}>
+              <Typography component='h3' variant='h5'>
+                Priorities Satisfied today
+              </Typography>
+              <SatisfiedPriorities />
+            </Grid>
+            {/* <Grid xs={12} md={12}> */}
+              {isLoading && <Loading />}
+              <AddSingleNote noteId={noteId ?? null} setNoteId={(id) => setNoteOfDailyMood(id)} />
+            {/* </Grid> */}
+          {/* </Grid> */}
         <BackButton />
+        </Box>
+        
       </Box>
     </Container>
   );

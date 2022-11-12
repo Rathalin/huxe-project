@@ -34,7 +34,7 @@ export const MoodCalender = ({ year, month }: MoodCalenderProps) => {
     <Box sx={{ flexGrow: 1, justifyContent: "center", alignItems: 'center', mr: 3 }}>
       <Grid container spacing={1} columns={7}>
         {dailyMoodsPerDay.map((mood, i) => (
-          <Grid key={i} md={1}>
+          <Grid key={i} md={1} sx={{ transform: 'scale(1.5)' }}>
             <MoodIconButton onClick={() => navigate(`/daily-summary/${mood?.id ?? 'no-data'}`)}
               moodType={mood?.attributes?.mood ?? null}
               strongEmotion={(mood?.attributes?.strongEmotions?.data?.length ?? 0) > 0}
