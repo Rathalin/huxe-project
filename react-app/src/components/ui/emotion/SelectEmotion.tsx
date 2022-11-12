@@ -1,11 +1,11 @@
 import { useState, useContext } from 'react';
-import { Container, Checkbox, Box, Typography, Chip } from '@mui/material';
+import { Checkbox, Box, Typography, Chip } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
-import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
-import { EMOTIONS_BY_TYPE_QUERY } from '../../graphql/queries/emotions-by-type.query';
-import { Loading } from './loading/Loading';
-import { SelectedEmotionTypeCtx } from '../routes/StrongEmotionPage';
+import { GRAPHQL_ENDPOINT } from '../../../graphql/endpoint';
+import { EMOTIONS_BY_TYPE_QUERY } from '../../../graphql/queries/emotions-by-type.query';
+import { Loading } from '../loading/Loading';
+import { SelectedEmotionTypeCtx } from '../../routes/StrongEmotionPage';
 
 type SelectEmotionProps = {
   selectedEmotionIds: string[],
@@ -68,24 +68,26 @@ export const SelectEmotion = ({ selectedEmotionIds, setSelectedEmotionIds }: Sel
   }
 
   return (
-    <Container maxWidth='xl'>
+    <Box sx={{
+      display: 'flex', flexDirection: 'column',
+      alignItems: 'center'
+    }}>
       <Typography component='h5' variant='h5'>
         Select the emotions you are feeling
       </Typography>
-
       <Box sx={{
-        mt: 3, display: 'flex', flexDirection: 'row',
+        my: 1, display: 'flex', flexDirection: 'row',
         alignItems: 'center'
       }}>
         {isLoading && <Loading />}
         {isSuccess && emotionOptions.map((emotion) => (
           <Checkbox key={emotion.id}
-            icon={<Chip label={emotion.name} variant='outlined' />}
-            checkedIcon={<Chip label={emotion.name} variant='outlined' />}
+            icon={<Chip label={emotion.name} variant='outlined' sx={{fontSize: "1rem"}}/>}
+            checkedIcon={<Chip label={emotion.name}  sx={{fontSize: "1rem"}} />}
             onChange={() => toggleSelectedEmotion(emotion)}
             checked={selectedEmotionIds.includes(emotion.id)} />
         ))}
       </Box>
-    </Container>
+    </Box>
   );
 };

@@ -1,9 +1,9 @@
 import { NewNote } from '../ui/notes/NewNote';
 import { Container, Box, Typography, Button } from '@mui/material';
-import { SelectEmotionType } from '../ui/SelectEmotionType';
-import { SelectEmotion } from '../ui/SelectEmotion';
+import { SelectEmotionType } from '../ui/emotion/SelectEmotionType';
+import { SelectEmotion } from '../ui/emotion/SelectEmotion';
 import { ShowNotes } from '../ui/notes/ShowNotes';
-import { createContext, FormEvent, useState } from 'react';
+import { createContext, useState } from 'react';
 import { Enum_Emotion_Emotiontype, StrongEmotionInput } from '../../graphql/generated/graphql';
 import { useNavigate } from 'react-router-dom';
 import { BackButton } from '../ui/buttons/BackButton';

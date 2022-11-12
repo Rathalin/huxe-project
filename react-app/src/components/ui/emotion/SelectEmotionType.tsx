@@ -1,8 +1,8 @@
 import { Container, Typography, Box, Checkbox } from '@mui/material';
-import { MoodIcon } from './MoodIcon';
+import { MoodIcon } from '../MoodIcon';
 import { useContext } from 'react';
-import { emotionTypeOptions, SelectedEmotionTypeCtx } from '../routes/StrongEmotionPage';
-import { Enum_Emotion_Emotiontype } from '../../graphql/generated/graphql';
+import { emotionTypeOptions, SelectedEmotionTypeCtx } from '../../routes/StrongEmotionPage';
+import { Enum_Emotion_Emotiontype } from '../../../graphql/generated/graphql';
 
 export const SelectEmotionType = () => {
   const { selectedEmotionType, setSelectedEmotionType } = useContext(SelectedEmotionTypeCtx);
@@ -23,7 +23,7 @@ export const SelectEmotionType = () => {
       }}>
         {emotionTypeOptions.map(emotionType => (
           <Checkbox key={emotionType}
-            sx={{color: '#fff', transform: 'scale(3)', mx: 8, my: 4,  "&.MuiButtonBase-root:hover": {
+            sx={{color: '#fff', transform: 'scale(2)', mx: 2, my: 4,  "&.MuiButtonBase-root:hover": {
               color: "#EDD99D"
             }}}
             disableRipple
