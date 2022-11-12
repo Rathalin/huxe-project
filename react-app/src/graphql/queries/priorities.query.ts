@@ -5,6 +5,9 @@ export const PRIORITIES_QUERY = graphql(`
     priorities {
       data {
         id
+        attributes {
+          active
+        }
       }
     }
   }

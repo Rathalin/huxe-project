@@ -7,9 +7,11 @@ import { Loading } from '../loading/Loading';
 
 type PriorityProps = {
   priorityId: string,
+  hideProgress?: boolean
+  borderColor?: string
 }
 
-export const PriorityCard = ({ priorityId }: PriorityProps) => {
+export const PriorityCard = ({ priorityId, hideProgress=false, borderColor='#fff' }: PriorityProps) => {
   const { data, isLoading } = useQuery({
     queryKey: ['PRIORITY_QUERY', priorityId],
     queryFn: () => request(GRAPHQL_ENDPOINT, PRIORITY_QUERY, { priorityId }),
@@ -23,9 +25,10 @@ export const PriorityCard = ({ priorityId }: PriorityProps) => {
     <Card variant='outlined'
       sx={{
         border: 3,
-        borderColor: '#fff',
+        borderColor: borderColor,
         borderRadius: 3,
-        backgroundColor: '#323463'
+        backgroundColor: '#323463',
+        width: '100%'
       }}>
       <CardHeader title={priority?.attributes?.title} sx={{ textAlign: 'center', my: 1 }} disableTypography={true} />
       <CardMedia
@@ -38,9 +41,11 @@ export const PriorityCard = ({ priorityId }: PriorityProps) => {
         }}
       />
       <CardContent sx={{ textAlign: 'right' }}>
+        {!hideProgress &&
         <Typography variant='body2' color='text.secondary'>
           {Math.ceil(((priority?.attributes?.weeklyGoal ?? 1) / 7) * 100)}%
         </Typography>
+        }
       </CardContent>
     </Card>
   );
