@@ -13,7 +13,7 @@ import { MoodIcon } from '../ui/MoodIcon';
 import { MOODS } from '../../utils/utils';
 import { NoteCard } from '../ui/notes/NoteCard';
 import React, { useEffect, useState } from 'react';
-import { ShowEmotions } from '../ui/ShowEmotions';
+import { ShowEmotions } from '../ui/emotion/ShowEmotions';
 
 export const DailySummaryPage = () => {
   const [emotionIds, setEmotionIds] = useState<string[]>([]);
@@ -81,7 +81,10 @@ export const DailySummaryPage = () => {
             <Typography component='h3' variant='h5'>
               Tracked Emotions
             </Typography>
-            <ShowEmotions emotionIds={emotionIds} />
+            {emotionIds.length ? <ShowEmotions emotionIds={emotionIds} /> : <Typography component='p' >
+              No Emotions tracked on this day!
+            </Typography> }
+
           </Grid>
           <Grid xs={12} md={12}>
             <Typography component='h3' variant='h5'>

@@ -49,7 +49,7 @@ export const SelectMood = () => {
       }}>
         {moodOptions.map((mood) => (
           <Checkbox
-            sx={{color: '#fff', transform: 'scale(3)', m: 4, "&.MuiButtonBase-root:hover": {
+            sx={{color: '#fff', transform: 'scale(2)', m: 2, "&.MuiButtonBase-root:hover": {
               color: "#EDD99D"
             }}}
             disableRipple
