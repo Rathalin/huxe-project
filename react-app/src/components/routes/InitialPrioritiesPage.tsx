@@ -23,10 +23,10 @@ export const InitialPrioritiesPage = () => {
           <Typography variant='h6' component='p' sx={{ flexGrow: 1 }}>
             Enter your top 3 priorities at the moment
           </Typography>
-          {[...Array(3)].map((e, i) => (
-            <AddPriorityField key={i}
-            />
-          ))}
+          {/*{[...Array(3)].map((e, i) => (*/}
+          {/*  <AddPriorityField key={i}*/}
+          {/*  />*/}
+          {/*))}*/}
           <Button variant='contained' onClick={()=>navigate('/dashboard')}>Finish</Button>
         </Box>
       )}
