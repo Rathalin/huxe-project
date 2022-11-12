@@ -14,7 +14,6 @@ import { ACTIVE_PRIORITIES_QUERY } from '../../../graphql/queries/active-priorit
 
 export const DashboardPriorities = () => {
   const navigate = useNavigate();
-  const { dailyMoodId } = useDailyMoodIdStore();
   // const { data, isLoading } = useQuery({
   //   queryKey: ['SATISFIED_PRIORITIES_QUERY', dailyMoodId],
   //   queryFn: () => request(GRAPHQL_ENDPOINT, SATISFIED_PRIORITIES_QUERY, { dailyMoodId: dailyMoodId ?? '' }),
@@ -22,7 +21,7 @@ export const DashboardPriorities = () => {
   // });
 
   const { data, isLoading } = useQuery({
-    queryKey: ['ACTIVE_PRIORITIES_QUERY', dailyMoodId],
+    queryKey: ['ACTIVE_PRIORITIES_QUERY'],
     queryFn: () => request(GRAPHQL_ENDPOINT, ACTIVE_PRIORITIES_QUERY)
   });
 
