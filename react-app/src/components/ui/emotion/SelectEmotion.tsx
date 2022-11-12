@@ -5,7 +5,7 @@ import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../../graphql/endpoint';
 import { EMOTIONS_BY_TYPE_QUERY } from '../../../graphql/queries/emotions-by-type.query';
 import { Loading } from '../loading/Loading';
-import { SelectedEmotionTypeCtx } from '../../routes/StrongEmotionPage';
+import { SelectedEmotionTypeCtx } from '../../routes/TrackEmotionPage';
 
 type SelectEmotionProps = {
   selectedEmotionIds: string[],
@@ -82,8 +82,8 @@ export const SelectEmotion = ({ selectedEmotionIds, setSelectedEmotionIds }: Sel
         {isLoading && <Loading />}
         {isSuccess && emotionOptions.map((emotion) => (
           <Checkbox key={emotion.id}
-            icon={<Chip label={emotion.name} variant='outlined' sx={{fontSize: "1rem"}}/>}
-            checkedIcon={<Chip label={emotion.name}  sx={{fontSize: "1rem"}} />}
+            icon={<Chip label={emotion.name} variant='outlined' sx={{ fontSize: "1rem" }} />}
+            checkedIcon={<Chip label={emotion.name} sx={{ fontSize: "1rem" }} />}
             onChange={() => toggleSelectedEmotion(emotion)}
             checked={selectedEmotionIds.includes(emotion.id)} />
         ))}
