@@ -11,6 +11,7 @@ import { useMutation } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
 import { CREATE_STRONG_EMOTION_MUTATION } from '../../graphql/mutations/create-strong-emotion.mutation';
+import { useDailyMoodIdStore } from '../../stores/dailyMoodStore';
 
 export interface EmotionTypeContext {
   selectedEmotionType: Enum_Emotion_Emotiontype | null,
@@ -29,6 +30,7 @@ export const SelectedEmotionTypeCtx = createContext<EmotionTypeContext>({
 
 export const StrongEmotionPage = () => {
   const navigate = useNavigate();
+  const { dailyMoodId } = useDailyMoodIdStore();
   const [selectedEmotionType, setSelectedEmotionType] = useState<Enum_Emotion_Emotiontype | null>(null);
   const [selectedEmotionIds, setSelectedEmotionIds] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -44,6 +46,7 @@ export const StrongEmotionPage = () => {
     } else {
       setError(null);
       createStrongEmotion({
+        dailyMood: dailyMoodId ?? '',
         emotions: selectedEmotionIds,
       });
     }
