@@ -1,7 +1,7 @@
 import { Container, Typography, Box, Checkbox } from '@mui/material';
 import { MoodIcon } from './MoodIcon';
 import { useContext } from 'react';
-import { emotionTypeOptions, SelectedEmotionTypeCtx } from '../routes/StrongEmotionPage';
+import { emotionTypeOptions, SelectedEmotionTypeCtx } from '../routes/TrackEmotionPage';
 import { Enum_Emotion_Emotiontype } from '../../graphql/generated/graphql';
 
 export const SelectEmotionType = () => {
@@ -14,7 +14,7 @@ export const SelectEmotionType = () => {
   return (
     <Container maxWidth='xl'>
       <Typography component='h5' variant='h5'>
-        Is your strong emotion good or bad?
+        Is your emotion good or bad?
       </Typography>
 
       <Box sx={{
@@ -23,9 +23,11 @@ export const SelectEmotionType = () => {
       }}>
         {emotionTypeOptions.map(emotionType => (
           <Checkbox key={emotionType}
-            sx={{color: '#fff', transform: 'scale(3)', mx: 8, my: 4,  "&.MuiButtonBase-root:hover": {
-              color: "#EDD99D"
-            }}}
+            sx={{
+              color: '#fff', transform: 'scale(3)', mx: 8, my: 4, "&.MuiButtonBase-root:hover": {
+                color: "#EDD99D"
+              }
+            }}
             disableRipple
             color="secondary"
             icon={<MoodIcon moodType={emotionType} />}

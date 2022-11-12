@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { DashboardPage } from './DashboardPage';
-import { StrongEmotionPage } from './StrongEmotionPage';
+import { TrackEmotionPage } from './TrackEmotionPage';
 import { RegisterPage } from './RegisterPage';
 import { LoginPage } from './LoginPage';
 import { useAuthStore } from '../../stores/auth.store';
@@ -19,7 +19,7 @@ export const CustomRouter = () => {
       <Route path='login' element={loggedIn ? <Navigate to='/dashboard' /> : <LoginPage />} />
       <Route path='register' element={loggedIn ? <Navigate to='/dashboard' /> : <RegisterPage />} />
       <Route path='dashboard' element={!loggedIn ? <Navigate to='/login' /> : <DashboardPage />} />
-      <Route path='emotion' element={<StrongEmotionPage />} />
+      <Route path='emotion' element={!loggedIn ? <Navigate to='/login' /> : <TrackEmotionPage />} />
       <Route path='login' element={loggedIn ? <Navigate to='/dashboard' /> : <LoginPage />} />
       <Route path='track-mood' element={!loggedIn ? <Navigate to='/login' /> : <TrackMoodPage />} />
       <Route path='initial-priorities' element={!loggedIn ? <Navigate to='/login' /> : <InitialPrioritiesPage />} />
