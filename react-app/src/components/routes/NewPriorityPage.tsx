@@ -35,7 +35,7 @@ export const NewPriorityPage = () => {
           Add Priority
         </Typography>
         <AddPriorityField title={title} weekGoal={weekGoal} setTitle={setTitle} setWeekGoal={setWeekGoal} />
-        <Button onClick={()=>{console.log(title); createPriority({active: true, image: null, title: title, weeklyGoal: parseInt(weekGoal), })}} variant='contained'
+        <Button onClick={()=>{console.log(title); createPriority({active: true, image: "test", title: title, weeklyGoal: parseInt(weekGoal), })}} variant='contained'
                 sx={{ mt: 3, mb: 2, gap: 1, width: '250px' }}>
           <ArrowBack />Finish</Button>
       </Box>
