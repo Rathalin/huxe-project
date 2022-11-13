@@ -22,7 +22,7 @@ export const DashboardPriorities = () => {
 
   const { data, isLoading } = useQuery({
     queryKey: ['ACTIVE_PRIORITIES_QUERY'],
-    queryFn: () => request(GRAPHQL_ENDPOINT, ACTIVE_PRIORITIES_QUERY)
+    queryFn: () => request(GRAPHQL_ENDPOINT, ACTIVE_PRIORITIES_QUERY),
   });
 
   if (isLoading) return <Loading />;

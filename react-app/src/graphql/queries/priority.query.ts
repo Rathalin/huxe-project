@@ -10,9 +10,7 @@ export const PRIORITY_QUERY = graphql(`
           weeklyGoal
           image {
             data {
-              id
               attributes {
-                name
                 alternativeText
                 url
               }

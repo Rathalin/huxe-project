@@ -20,14 +20,22 @@ export const NewPriorityPage = () => {
   const [image, setImage] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const { mutate: uploadImageAndCreatePriority, isLoading: isLoadingUpload } = useMutation({
+  const {
+    mutate: uploadImageAndCreatePriority,
+    isLoading: isLoadingUpload,
+    error: uploadError,
+  } = useMutation({
     mutationKey: ['UPLOAD_IMAGE_MUTATION'],
     mutationFn: () => request(GRAPHQL_ENDPOINT, UPLOAD_IMAGE_MUTATION, {
       file: image,
     }),
     onSuccess: (data) => createPriority(data.upload.data?.id!),
   });
-  const { mutate: createPriority, isLoading: isLoadingCreatePriority } = useMutation({
+  const {
+    mutate: createPriority,
+    isLoading: isLoadingCreatePriority,
+    error: createPriorityError,
+  } = useMutation({
     mutationKey: ['CREATE_PRIORITY_MUTATION'],
     mutationFn: (imageId?: string) => request(GRAPHQL_ENDPOINT, CREATE_PRIORITY_MUTATION, {
       priority: {
@@ -41,6 +49,9 @@ export const NewPriorityPage = () => {
       navigate('/dashboard');
     },
   });
+  if (createPriorityError != null) console.log(JSON.stringify(
+    createPriorityError
+  ));
 
   function onFinishClick() {
     setError(null);
@@ -76,6 +87,8 @@ export const NewPriorityPage = () => {
         />
         {isLoading && <Loading />}
         {error != null && <Alert severity='error'>{error}</Alert>}
+        {uploadError != null && <Alert severity='error'>An error occurred during upload.</Alert>}
+        {createPriorityError != null && <Alert severity='error'>Title already exists.</Alert>}
         <Box sx={{ display: 'flex', columnGap: 2, flexWrap: 'wrap' }}>
           <BackButton />
           <Button
