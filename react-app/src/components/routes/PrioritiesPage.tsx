@@ -4,7 +4,7 @@ import { PriorityCard } from '../ui/priority/PriorityCard';
 import InterestsIcon from '@mui/icons-material/Interests';
 import { AddButton } from '../ui/buttons/AddButton';
 import { useNavigate } from 'react-router-dom';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
 import { PRIORITIES_QUERY } from '../../graphql/queries/priorities.query';
@@ -12,33 +12,26 @@ import { Loading } from '../ui/loading/Loading';
 import { BackButton } from '../ui/buttons/BackButton';
 import { useState } from 'react';
 import { SET_PRIORITY_ACTIVE } from '../../graphql/mutations/set-priority-active.mutation';
+import { SET_PRIORITY_ACTIVITY_MUTATION } from '../../graphql/mutations/set-priority-activity.mutation';
 
 export const PrioritiesPage = () => {
-  const [activePriorities, setActivePriorities] = useState<string[]>([]);
-
-  const findActivePriorities = () => {
-    setActivePriorities([]);
-    data?.priorities?.data?.map((priority) => {
-        if (priority.attributes?.active) {
-          setActivePriorities(prevState => [...prevState, priority.id!]);
-        }
-      }
-    );
-  };
-
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { data, isLoading } = useQuery({
     queryKey: ['PRIORITIES_QUERY'],
     queryFn: () => request(GRAPHQL_ENDPOINT, PRIORITIES_QUERY),
-    onSuccess: () => findActivePriorities()
+  });
+  const { mutate: setPriorityActive } = useMutation({
+    mutationFn: ({ priorityId, active }: { priorityId: string, active: boolean }) => request(
+      GRAPHQL_ENDPOINT, SET_PRIORITY_ACTIVITY_MUTATION, {
+      priorityId,
+      active
+    }),
+    onSuccess: () => queryClient.invalidateQueries(['PRIORITIES_QUERY']),
   });
 
 
   if (isLoading) return <Loading />;
-
-  const handleSetActive = () =>{
-
-  }
 
   return (
     <Container component='main' maxWidth='md'>
@@ -61,8 +54,11 @@ export const PrioritiesPage = () => {
                 key={priority.id}
                 icon={<PriorityCard priorityId={priority.id!} hideProgress={true} />}
                 checkedIcon={<PriorityCard priorityId={priority.id!} hideProgress={true} borderColor='#FFC107' />}
-                checked={activePriorities.includes(priority.id!)}
-                onChange={handleSetActive}
+                checked={priority.attributes?.active}
+                onChange={() => setPriorityActive({
+                  priorityId: priority.id!,
+                  active: priority.attributes?.active ? false : true,
+                })}
               />
             </Grid>
           ))}
