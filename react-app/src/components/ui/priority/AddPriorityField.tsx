@@ -57,7 +57,7 @@ export const AddPriorityField = ({
           }}
           id='outlined-basic'
           placeholder='Title'
-          //label='Title'
+          inputProps={{ maxLength: 30 }}
           color='secondary'
           variant='outlined'
           onChange={(e) => setTitle(e.target.value)}

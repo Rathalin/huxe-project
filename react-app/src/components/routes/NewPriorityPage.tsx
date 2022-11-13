@@ -11,6 +11,7 @@ import { ArrowBack } from '@mui/icons-material';
 import { UPLOAD_FILE_MUTATION } from '../../graphql/mutations/upload-file.mutation';
 import { UPLOAD_IMAGE_MUTATION } from '../../graphql/mutations/upload-image.mutation';
 import { Loading } from '../ui/loading/Loading';
+import { BackButton } from '../ui/buttons/BackButton';
 
 export const NewPriorityPage = () => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ export const NewPriorityPage = () => {
   function onFinishClick() {
     setError(null);
     if (title.trim().length === 0 || weeklyGoal <= 0) {
-      setError('Title and weekyl goal are required!');
+      setError('Title and weekly goal are required.');
       return;
     }
     if (image == null) {
@@ -75,15 +76,17 @@ export const NewPriorityPage = () => {
         />
         {isLoading && <Loading />}
         {error != null && <Alert severity='error'>{error}</Alert>}
-        <Button
-          onClick={() => onFinishClick()}
-          disabled={isLoading}
-          variant='contained'
-          sx={{ mt: 3, mb: 2, gap: 1, width: '250px' }}
-        >
-          <ArrowBack />
-          <span>Finish</span>
-        </Button>
+        <Box sx={{ display: 'flex', columnGap: 2, flexWrap: 'wrap' }}>
+          <BackButton />
+          <Button
+            onClick={() => onFinishClick()}
+            disabled={isLoading}
+            variant='contained'
+            sx={{ mt: 3, mb: 2, gap: 1, width: '250px' }}
+          >
+            Finish
+          </Button>
+        </Box>
       </Box>
     </Container>
   );
