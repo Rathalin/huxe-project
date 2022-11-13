@@ -1,10 +1,8 @@
-import { NewNote } from '../ui/notes/NewNote';
 import { Container, Box, Typography, Button } from '@mui/material';
 import { SelectEmotionType } from '../ui/emotion/SelectEmotionType';
 import { SelectEmotion } from '../ui/emotion/SelectEmotion';
-import { ShowNotes } from '../ui/notes/ShowNotes';
 import { createContext, useState } from 'react';
-import { Enum_Emotion_Emotiontype, NoteInput, StrongEmotionInput } from '../../graphql/generated/graphql';
+import { Enum_Emotion_Emotiontype, StrongEmotionInput } from '../../graphql/generated/graphql';
 import { useNavigate } from 'react-router-dom';
 import { BackButton } from '../ui/buttons/BackButton';
 import { useMutation } from '@tanstack/react-query';
@@ -12,7 +10,6 @@ import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
 import { CREATE_STRONG_EMOTION_MUTATION } from '../../graphql/mutations/create-strong-emotion.mutation';
 import { useDailyMoodIdStore } from '../../stores/dailyMoodStore';
-import { CREATE_NOTE_MUTATION } from '../../graphql/mutations/create-note.mutation';
 import { AddSingleNote } from '../ui/notes/AddSingleNote';
 
 export interface EmotionTypeContext {
@@ -48,11 +45,6 @@ export const TrackEmotionPage = () => {
       setError('Please select at least 1 emotion.');
     } else {
       setError(null);
-      console.log({
-        dailyMood: dailyMoodId ?? '',
-        emotions: selectedEmotionIds,
-        note: noteId,
-      });
       createStrongEmotion({
         dailyMood: dailyMoodId ?? '',
         emotions: selectedEmotionIds,
