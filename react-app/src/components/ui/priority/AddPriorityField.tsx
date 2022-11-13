@@ -4,22 +4,16 @@ import { ChangeEvent, useState } from 'react';
 
 type AddPriorityFieldProps = {
   title: string,
-  weekGoal: string,
   setTitle(title: string): void,
-  setWeekGoal(title: string): void,
+  weeklyGoal: number,
+  setWeeklyGoal(goal: number): void,
+  image: File | null,
+  setImage(image: File | null): void,
 };
 
-export const AddPriorityField = ({ title, weekGoal, setTitle, setWeekGoal }: AddPriorityFieldProps) => {
-  const [imageName, setImageName] = useState('Add picture');
-
-  const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    if (!e.target || !e.target.files || !e.target.files[0]) {
-      setImageName('Add picture');
-    } else {
-      setImageName(e.target.files[0].name);
-    }
-  };
-
+export const AddPriorityField = ({
+  title, setTitle, weeklyGoal, setWeeklyGoal, image, setImage
+}: AddPriorityFieldProps) => {
   return (
     <Box sx={{
       mt: 3, mb: 4, display: 'flex', flexDirection: 'row',
@@ -39,11 +33,16 @@ export const AddPriorityField = ({ title, weekGoal, setTitle, setWeekGoal }: Add
         bgcolor: '#323463'
       }}>
         <IconButton color='primary' aria-label='upload picture' component='label'>
-          <input accept='image/*' type='file' hidden onChange={handleFileUpload} />
+          <input
+            accept='image/*'
+            type='file'
+            onChange={(e) => setImage(e.target.files != null ? e.target.files[0] : null)}
+            hidden
+          />
           <AddIcon />
         </IconButton>
         <Typography component='p' sx={{ flexGrow: 1 }}>
-          {imageName}
+          {image != null ? image.name : 'Select image'}
         </Typography>
       </Box>
       <Box sx={{
@@ -81,8 +80,8 @@ export const AddPriorityField = ({ title, weekGoal, setTitle, setWeekGoal }: Add
           InputLabelProps={{
             shrink: true
           }}
-          value={weekGoal}
-          onChange={(e) => setWeekGoal(e.target.value)}
+          value={weeklyGoal}
+          onChange={(e) => setWeeklyGoal(parseInt(e.target.value))}
         />
       </Box>
     </Box>
