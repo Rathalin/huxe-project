@@ -14,6 +14,7 @@ export const DashboardPriorities = () => {
   const { data: activePrioritesData, isLoading } = useQuery({
     queryKey: ['ACTIVE_PRIORITIES_QUERY'],
     queryFn: () => request(GRAPHQL_ENDPOINT, ACTIVE_PRIORITIES_QUERY),
+
   });
 
   if (isLoading) return <Loading />;
@@ -21,7 +22,7 @@ export const DashboardPriorities = () => {
   return (
     <Box sx={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Grid container spacing={4}>
-        {activePrioritesData?.priorities?.data && activePrioritesData?.priorities?.data.map((priority) => (
+        {activePrioritesData?.priorities?.data?.map((priority) => (
           <Grid key={priority.id} xs={6} md={4}>
             <PriorityItem priorityId={priority.id!} showProgress showProgressBar showAddNote />
           </Grid>
