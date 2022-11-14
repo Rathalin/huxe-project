@@ -64,7 +64,7 @@ class DataService {
     if (foundId == null) {
       console.log('Created DailyMood');
       const dailyMoodIdData = await request(GRAPHQL_ENDPOINT, graphql(`
-        mutation CreateEmDailyMood($dailyMoodInput: DailyMoodInput!) {
+        mutation CreateDailyMood($dailyMoodInput: DailyMoodInput!) {
           createDailyMood(data: $dailyMoodInput) {
             data {
               id

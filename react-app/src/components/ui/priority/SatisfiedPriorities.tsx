@@ -5,12 +5,17 @@ import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../../graphql/endpoint';
 import { ACTIVE_PRIORITIES_QUERY } from '../../../graphql/queries/active-priorities.query';
+import { Loading } from '../loading/Loading';
+import { MEDIA_ENDPOINT } from '../../../utils/media-endpoint';
+import { PriorityItem } from './PriorityItem';
 
 export const SatisfiedPriorities = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['ACTIVE_PRIORITIES_QUERY'],
     queryFn: () => request(GRAPHQL_ENDPOINT, ACTIVE_PRIORITIES_QUERY)
   });
+
+  if (isLoading) return <Loading />;
 
   return (
     <Box sx={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -24,10 +29,10 @@ export const SatisfiedPriorities = () => {
               disableRipple
               color='secondary'
               key={priority.id}
-              icon={<PriorityCard priorityId={priority.id!} hideProgress={true} />}
-              checkedIcon={<PriorityCard priorityId={priority.id!} hideProgress={true} borderColor='#FFC107' />}
-              // checked={activePriorities.includes(priority.id!)}
-              // onChange={handleSetActive}
+              icon={<PriorityItem priorityId={priority.id!} />}
+              checkedIcon={<PriorityItem priorityId={priority.id!} checked />}
+            // checked={activePriorities.includes(priority.id!)}
+            // onChange={handleSetActive}
             />
           </Grid>
         ))}

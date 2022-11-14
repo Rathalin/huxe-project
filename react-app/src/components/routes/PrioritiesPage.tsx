@@ -1,6 +1,5 @@
 import { Box, Checkbox, Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
-import { PriorityCard } from '../ui/priority/PriorityCard';
 import InterestsIcon from '@mui/icons-material/Interests';
 import { AddButton } from '../ui/buttons/AddButton';
 import { useNavigate } from 'react-router-dom';
@@ -10,9 +9,8 @@ import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
 import { PRIORITIES_QUERY } from '../../graphql/queries/priorities.query';
 import { Loading } from '../ui/loading/Loading';
 import { BackButton } from '../ui/buttons/BackButton';
-import { useState } from 'react';
-import { SET_PRIORITY_ACTIVE } from '../../graphql/mutations/set-priority-active.mutation';
 import { SET_PRIORITY_ACTIVITY_MUTATION } from '../../graphql/mutations/set-priority-activity.mutation';
+import { PriorityItem } from '../ui/priority/PriorityItem';
 
 export const PrioritiesPage = () => {
   const navigate = useNavigate();
@@ -52,8 +50,8 @@ export const PrioritiesPage = () => {
                 disableRipple
                 color='secondary'
                 key={priority.id}
-                icon={<PriorityCard priorityId={priority.id!} hideProgress={true} />}
-                checkedIcon={<PriorityCard priorityId={priority.id!} hideProgress={true} borderColor='#FFC107' />}
+                icon={<PriorityItem priorityId={priority.id!} />}
+                checkedIcon={<PriorityItem priorityId={priority.id!} checked />}
                 checked={priority.attributes?.active}
                 onChange={() => setPriorityActive({
                   priorityId: priority.id!,
