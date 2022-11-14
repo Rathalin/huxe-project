@@ -51,8 +51,6 @@ export const DailySummaryPage = () => {
     </Container>
   );
 
-  console.log(data)
-
   return (
     <Container component='main' maxWidth='md'>
       <CssBaseline />
