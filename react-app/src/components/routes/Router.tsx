@@ -9,7 +9,6 @@ import { InitialPrioritiesPage } from './InitialPrioritiesPage';
 import { NewPriorityPage } from './NewPriorityPage';
 import { PrioritiesPage } from './PrioritiesPage';
 import { DailySummaryPage } from './DailySummaryPage';
-import { UploadTestPage } from './UploadTestPage';
 
 export const CustomRouter = () => {
   const loggedIn = useAuthStore().user != null;
@@ -28,8 +27,6 @@ export const CustomRouter = () => {
       <Route path='priorities' element={!loggedIn ? <Navigate to='/login' /> : <PrioritiesPage />} />
       <Route path='register' element={loggedIn ? <Navigate to='/dashboard' /> : <RegisterPage />} />
       <Route path='/daily-summary/:id' element={!loggedIn ? <Navigate to='/login' /> : <DailySummaryPage />} />
-
-      <Route path='/test-upload' element={<UploadTestPage />} />
     </Routes>
   );
 };

@@ -3,7 +3,6 @@ import * as types from './graphql';
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 
 const documents = {
-    "\n      mutation Upload($file: Upload!) {\n        upload(file: $file) {\n          data {\n            id\n          }\n        }\n      }\n    ": types.UploadDocument,
     "\n  mutation CreateNote($note: NoteInput!) {\n    createNote(data: $note) {\n      data {\n        id\n      }\n    }\n  }\n": types.CreateNoteDocument,
     "\n  mutation CreatePriority($priority: PriorityInput!) {\n    createPriority(data: $priority) {\n      data {\n        id\n      }\n    }\n  }\n": types.CreatePriorityDocument,
     "\n  mutation CreateStrongEmotion($strongEmotion: StrongEmotionInput!) {\n    createStrongEmotion(data: $strongEmotion) {\n      data {\n        id\n      }\n    }\n  }\n": types.CreateStrongEmotionDocument,
@@ -33,7 +32,6 @@ const documents = {
     "\n        mutation CreateDailyMood($dailyMoodInput: DailyMoodInput!) {\n          createDailyMood(data: $dailyMoodInput) {\n            data {\n              id\n            }\n          }\n        }\n      ": types.CreateDailyMoodDocument,
 };
 
-export function graphql(source: "\n      mutation Upload($file: Upload!) {\n        upload(file: $file) {\n          data {\n            id\n          }\n        }\n      }\n    "): (typeof documents)["\n      mutation Upload($file: Upload!) {\n        upload(file: $file) {\n          data {\n            id\n          }\n        }\n      }\n    "];
 export function graphql(source: "\n  mutation CreateNote($note: NoteInput!) {\n    createNote(data: $note) {\n      data {\n        id\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation CreateNote($note: NoteInput!) {\n    createNote(data: $note) {\n      data {\n        id\n      }\n    }\n  }\n"];
 export function graphql(source: "\n  mutation CreatePriority($priority: PriorityInput!) {\n    createPriority(data: $priority) {\n      data {\n        id\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation CreatePriority($priority: PriorityInput!) {\n    createPriority(data: $priority) {\n      data {\n        id\n      }\n    }\n  }\n"];
 export function graphql(source: "\n  mutation CreateStrongEmotion($strongEmotion: StrongEmotionInput!) {\n    createStrongEmotion(data: $strongEmotion) {\n      data {\n        id\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation CreateStrongEmotion($strongEmotion: StrongEmotionInput!) {\n    createStrongEmotion(data: $strongEmotion) {\n      data {\n        id\n      }\n    }\n  }\n"];

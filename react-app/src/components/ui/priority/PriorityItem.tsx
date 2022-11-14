@@ -64,7 +64,7 @@ export const PriorityItem = ({
         borderColor={checked ? '#FFC107' : undefined}
       />
       {progressEnabled && <PriorityProgress progressPercent={progressPercent} />}
-      {showAddNote && <AddNoteButton />}
+      {/* {showAddNote && <AddNoteButton />} */}
     </Fragment>
   );
 };
