@@ -22,7 +22,6 @@ class DataService {
       }
     `));
     if (emotionsData.emotions?.data.length === 0) {
-      console.log('No emotions found in database. Seeding database.');
       const emotionsInput = [
         ...['Confident', 'Comfortable', 'Exited', 'Happy', 'Relaxed', 'Reliefed', 'Thankful']
           .map(name => ({ name, emotionType: Enum_Emotion_Emotiontype.Good })),
@@ -62,7 +61,6 @@ class DataService {
     });
     const foundId = foundDailyMoodsData.dailyMoods?.data[0]?.id;
     if (foundId == null) {
-      console.log('Created DailyMood');
       const dailyMoodIdData = await request(GRAPHQL_ENDPOINT, graphql(`
         mutation CreateDailyMood($dailyMoodInput: DailyMoodInput!) {
           createDailyMood(data: $dailyMoodInput) {

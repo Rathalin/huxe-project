@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { Checkbox, Box, Typography, Chip } from '@mui/material';
+import { Checkbox, Box, Chip } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../../graphql/endpoint';
@@ -68,13 +68,6 @@ export const SelectEmotion = ({ selectedEmotionIds, setSelectedEmotionIds }: Sel
   }
 
   return (
-    <Box sx={{
-      display: 'flex', flexDirection: 'column',
-      alignItems: 'center'
-    }}>
-      <Typography component='h5' variant='h5'>
-        Select the emotions you are feeling
-      </Typography>
       <Box sx={{
         my: 1, display: 'flex', flexDirection: 'row',
         alignItems: 'center'
@@ -88,6 +81,5 @@ export const SelectEmotion = ({ selectedEmotionIds, setSelectedEmotionIds }: Sel
             checked={selectedEmotionIds.includes(emotion.id)} />
         ))}
       </Box>
-    </Box>
   );
 };

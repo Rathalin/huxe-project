@@ -14,16 +14,17 @@ import { MOODS } from '../../utils/utils';
 import { NoteCard } from '../ui/notes/NoteCard';
 import React, { useEffect, useState } from 'react';
 import { ShowEmotions } from '../ui/emotion/ShowEmotions';
+import { PriorityItem } from '../ui/priority/PriorityItem';
 
 export const DailySummaryPage = () => {
   const [emotionIds, setEmotionIds] = useState<string[]>([]);
 
   const getEmotionIds = () => {
-    setEmotionIds([])
+    setEmotionIds([]);
     data?.dailyMood?.data?.attributes?.strongEmotions?.data.map(emotion => {
-        setEmotionIds(prevState => [...prevState, emotion.id ?? '']);
-    })
-  }
+      setEmotionIds(prevState => [...prevState, emotion.id ?? '']);
+    });
+  };
 
   const params = useParams();
   const { data } = useQuery({
@@ -32,9 +33,9 @@ export const DailySummaryPage = () => {
     onSuccess: () => getEmotionIds
   });
 
-  useEffect(()=> {
+  useEffect(() => {
     getEmotionIds();
-  }, [data])
+  }, [data]);
 
   if (params.id === 'no-data') return (
     <Container component='main' maxWidth='md'>
@@ -71,7 +72,7 @@ export const DailySummaryPage = () => {
             }}>
               <MoodIcon moodType={data?.dailyMood?.data?.attributes?.mood ?? null} />
               {data?.dailyMood?.data?.attributes?.mood &&
-                <Typography component='p' sx={{ml:2}}>
+                <Typography component='p' sx={{ ml: 2 }}>
                   {MOODS[data?.dailyMood?.data?.attributes?.mood]}
                 </Typography>
               }
@@ -81,26 +82,30 @@ export const DailySummaryPage = () => {
             <Typography component='h3' variant='h5'>
               Tracked Emotions
             </Typography>
-            {emotionIds.length ? <ShowEmotions emotionIds={emotionIds} /> : <Typography component='p' >
+            {emotionIds.length ? <ShowEmotions emotionIds={emotionIds} /> : <Typography component='p'>
               No Emotions tracked on this day!
-            </Typography> }
+            </Typography>}
 
           </Grid>
           <Grid xs={12} md={12}>
             <Typography component='h3' variant='h5'>
               Priorities satisfied this day
             </Typography>
-            {/*// ToDO: Uncomment once priority saving works correct*/}
-            {/*{data?.dailyMood?.data?.attributes?.satisfiedPriorities?.data && data?.dailyMood?.data?.attributes?.satisfiedPriorities?.data.map((priority) => (*/}
-            {/*  */}
-            {/*  // <PriorityCard priority={priority} />*/}
-            {/*))}*/}
+            <Grid container spacing={4}>
+              {data?.dailyMood?.data?.attributes?.satisfiedPriorities?.data && data?.dailyMood?.data?.attributes?.satisfiedPriorities?.data.map((priority) => (
+                <Grid xs={4}>
+                  <PriorityItem priorityId={priority.id!} />
+                </Grid>
+              ))}
+            </Grid>
           </Grid>
           <Grid xs={12} md={12}>
-            <Typography component='h3' variant='h5' >
+            <Typography component='h3' variant='h5'>
               Note of the day
             </Typography>
-            <NoteCard noteId={data?.dailyMood?.data?.attributes?.note?.data?.id ?? ''}/>
+            {data?.dailyMood?.data?.attributes?.note?.data?.id &&
+              <NoteCard noteId={data?.dailyMood?.data?.attributes?.note?.data?.id!} />
+            }
           </Grid>
         </Grid>
         <BackButton />

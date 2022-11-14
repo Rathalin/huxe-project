@@ -18,14 +18,18 @@ export const DashboardPriorities = () => {
 
   if (isLoading) return <Loading />;
 
+  console.log(activePrioritesData)
+
   return (
     <Box sx={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Grid container spacing={4}>
-        {activePrioritesData?.priorities?.data && activePrioritesData?.priorities?.data.map((priority) => (
+        {activePrioritesData?.priorities?.data.length ? activePrioritesData?.priorities?.data.map((priority) => (
           <Grid key={priority.id} xs={6} md={4}>
-            <PriorityItem priorityId={priority.id!} showProgress showProgressBar showAddNote />
+            <PriorityItem priorityId={priority.id!} showProgress showProgressBar />
           </Grid>
-        ))}
+        )) : <Typography component='p' sx={{ flexGrow: 1, mx: 1 }}>
+          You have no active priorities at the moment, create new ones or activate others.
+        </Typography>}
         <Grid display='flex' justifyContent='center' alignItems='center' xs={12}>
           <IconButton color='secondary' aria-label='add' onClick={() => navigate('/priorities')}>
             <SwitchAccessShortcutAddIcon />

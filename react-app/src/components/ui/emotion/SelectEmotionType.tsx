@@ -1,4 +1,4 @@
-import { Container, Typography, Box, Checkbox } from '@mui/material';
+import { Container, Box, Checkbox } from '@mui/material';
 import { MoodIcon } from '../MoodIcon';
 import { useContext } from 'react';
 import { emotionTypeOptions, SelectedEmotionTypeCtx } from '../../routes/TrackEmotionPage';
@@ -13,27 +13,23 @@ export const SelectEmotionType = () => {
 
   return (
     <Container maxWidth='xl'>
-      <Typography component='h5' variant='h5'>
-        Is your emotion good or bad?
-      </Typography>
-
       <Box sx={{
         mt: 3, display: 'flex', flexDirection: 'row',
         alignItems: 'center', justifyContent: 'center'
       }}>
         {emotionTypeOptions.map(emotionType => (
           <Checkbox key={emotionType}
-            sx={{
-              color: '#fff', transform: 'scale(2)', mx: 2, my: 4, "&.MuiButtonBase-root:hover": {
-                color: "#EDD99D"
-              }
-            }}
-            disableRipple
-            color="secondary"
-            icon={<MoodIcon moodType={emotionType} />}
-            checkedIcon={<MoodIcon moodType={emotionType} />}
-            onChange={() => onEmotionTypeChange(emotionType)}
-            checked={selectedEmotionType === emotionType} />
+                    sx={{
+                      color: '#fff', transform: 'scale(2)', mx: 2, my: 4, '&.MuiButtonBase-root:hover': {
+                        color: '#EDD99D'
+                      }
+                    }}
+                    disableRipple
+                    color='secondary'
+                    icon={<MoodIcon moodType={emotionType} />}
+                    checkedIcon={<MoodIcon moodType={emotionType} />}
+                    onChange={() => onEmotionTypeChange(emotionType)}
+                    checked={selectedEmotionType === emotionType} />
         ))}
       </Box>
     </Container>

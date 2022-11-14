@@ -14,12 +14,11 @@ type PriorityItemProps = {
   priorityId: string,
   showProgress?: boolean,
   showProgressBar?: boolean,
-  showAddNote?: boolean,
   checked?: boolean,
 };
 
 export const PriorityItem = ({
-  priorityId, showProgress = false, showProgressBar = false, showAddNote = false, checked = false,
+  priorityId, showProgress = false, showProgressBar = false, checked = false,
 }: PriorityItemProps) => {
   const { data: priorityData, isLoading: isLoadingPriority } = useQuery({
     queryKey: ['PRIORITY_QUERY', priorityId],
@@ -56,11 +55,10 @@ export const PriorityItem = ({
             alt: priority?.attributes?.image?.data?.attributes?.alternativeText ?? ''
           },
         }}
-        progressPercent={progressEnabled ? progressPercent : undefined}
+        progressPercent={progressEnabled ? Math.floor(progressPercent) : undefined}
         checked={checked === true}
       />
       {progressEnabled && <PriorityProgress progressPercent={progressPercent} />}
-      {/* {showAddNote && <AddNoteButton />} */}
     </Fragment>
   );
 };
