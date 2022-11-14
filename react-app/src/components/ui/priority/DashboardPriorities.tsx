@@ -14,11 +14,10 @@ export const DashboardPriorities = () => {
   const { data: activePrioritesData, isLoading } = useQuery({
     queryKey: ['ACTIVE_PRIORITIES_QUERY'],
     queryFn: () => request(GRAPHQL_ENDPOINT, ACTIVE_PRIORITIES_QUERY),
+
   });
 
   if (isLoading) return <Loading />;
-
-  console.log(activePrioritesData)
 
   return (
     <Box sx={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}>

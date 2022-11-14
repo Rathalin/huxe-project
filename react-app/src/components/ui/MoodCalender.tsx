@@ -8,6 +8,7 @@ import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
 import { CALENDER_QUERY } from '../../graphql/queries/calender.query';
 import { Loading } from './loading/Loading';
 import { useNavigate } from 'react-router-dom';
+import { useDailyMoodIdStore } from '../../stores/dailyMoodStore';
 
 type MoodCalenderProps = {
   month: number
@@ -15,6 +16,7 @@ type MoodCalenderProps = {
 };
 
 export const MoodCalender = ({ year, month }: MoodCalenderProps) => {
+  const { dailyMoodId } = useDailyMoodIdStore();
   const { data, isLoading } = useQuery({
     queryKey: ['CALENDER_QUERY'],
     queryFn: () => request(GRAPHQL_ENDPOINT, CALENDER_QUERY),
@@ -29,15 +31,18 @@ export const MoodCalender = ({ year, month }: MoodCalenderProps) => {
       new Date(mood.attributes?.createdAt).getDate() === day + 1
     ) ?? null
   );
+  console.log(dailyMoodsPerDay.map(m => m?.id));
 
   return (
     <Box sx={{ flexGrow: 1, justifyContent: "center", alignItems: 'center', mr: 3 }}>
       <Grid container spacing={1} columns={7}>
         {dailyMoodsPerDay.map((mood, i) => (
           <Grid key={i} md={1} sx={{ transform: 'scale(1.5)' }}>
-            <MoodIconButton onClick={() => navigate(`/daily-summary/${mood?.id ?? 'no-data'}`)}
+            <MoodIconButton
+              onClick={() => navigate(`/daily-summary/${mood?.id ?? 'no-data'}`)}
               moodType={mood?.attributes?.mood ?? null}
               strongEmotion={(mood?.attributes?.strongEmotions?.data?.length ?? 0) > 0}
+              highlight={mood?.id === dailyMoodId}
             />
           </Grid>
         ))}

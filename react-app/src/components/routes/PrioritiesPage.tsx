@@ -11,11 +11,12 @@ import { Loading } from '../ui/loading/Loading';
 import { BackButton } from '../ui/buttons/BackButton';
 import { SET_PRIORITY_ACTIVITY_MUTATION } from '../../graphql/mutations/set-priority-activity.mutation';
 import { PriorityItem } from '../ui/priority/PriorityItem';
+import { LoadingError } from '../ui/loading/LoadingError';
 
 export const PrioritiesPage = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ['PRIORITIES_QUERY'],
     queryFn: () => request(GRAPHQL_ENDPOINT, PRIORITIES_QUERY),
   });
@@ -30,6 +31,7 @@ export const PrioritiesPage = () => {
 
 
   if (isLoading) return <Loading />;
+  if (isError) return <LoadingError error={JSON.stringify(error)} />;
 
   return (
     <Container component='main' maxWidth='md'>
@@ -53,10 +55,12 @@ export const PrioritiesPage = () => {
                 icon={<PriorityItem priorityId={priority.id!} />}
                 checkedIcon={<PriorityItem priorityId={priority.id!} checked />}
                 checked={priority.attributes?.active}
-                onChange={() => setPriorityActive({
-                  priorityId: priority.id!,
-                  active: priority.attributes?.active ? false : true,
-                })}
+                onChange={() => {
+                  setPriorityActive({
+                    priorityId: priority.id!,
+                    active: priority.attributes?.active ? false : true,
+                  });
+                }}
               />
             </Grid>
           ))}
