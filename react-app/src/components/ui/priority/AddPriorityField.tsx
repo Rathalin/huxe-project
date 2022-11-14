@@ -22,7 +22,7 @@ export const AddPriorityField = ({
         border: 3,
         borderRadius: 3,
         padding: 5,
-        mx: 3,
+        mr: 3,
         height: '180px',
         width: '180px',
         display: 'flex',
@@ -40,7 +40,7 @@ export const AddPriorityField = ({
           />
           <AddIcon />
         </IconButton>
-        <Typography component='p' sx={{ flexGrow: 1 }}>
+        <Typography component='p' sx={{ flexGrow: 1, textAlign: 'center' }}>
           {image != null ? image.name : 'Select image'}
         </Typography>
       </Box>

@@ -5,7 +5,7 @@ interface LoadingSuccessProps {
   success?: string,
 }
 
-export function LoadingSuccess({ success: success }: LoadingSuccessProps) {
+export function LoadingSuccess({ success }: LoadingSuccessProps) {
   if (success == null) return null;
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', }}>

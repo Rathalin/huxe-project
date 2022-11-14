@@ -1,18 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import request from "graphql-request";
-import { Fragment } from "react";
 import { GRAPHQL_ENDPOINT } from "../../../graphql/endpoint";
 import { CREATE_SATISFIED_PRIORITY_MUTATION } from "../../../graphql/mutations/create-satisfied-priority.mutation";
 import { REMOVE_SATISFIED_PRIORITY_MUTATION } from "../../../graphql/mutations/remove-satisfied-priority.mutation";
 import { PRIORITY_QUERY } from "../../../graphql/queries/priority.query";
-import { SATISFIED_PRIORITIES_BETWEEN_QUERY } from "../../../graphql/queries/satisfied-priorites-between.query";
 import { SATISFIED_PRIORITY_OF_PRIORITY_QUERY } from "../../../graphql/queries/satisfied-priorities-of-priority.query";
 import { useDailyMoodIdStore } from "../../../stores/dailyMoodStore";
-import { beginningOfThisWeek, endOfToday } from "../../../utils/date.util";
 import { MEDIA_ENDPOINT } from "../../../utils/media-endpoint";
 import { Loading } from "../loading/Loading";
 import { PriorityCard } from "./PriorityCard";
-import { PriorityProgress } from "./PriorityProgress";
 
 type SatisfiedPriorityCheckboxProps = {
   priorityId: string,

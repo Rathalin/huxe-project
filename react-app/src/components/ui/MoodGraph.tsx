@@ -63,7 +63,7 @@ export const MoodGraph = () => {
 
   useEffect(()=> {
     mapDatasets();
-  }, [data])
+  }, [data] )
 
   if (isLoading) return <Loading />;
 

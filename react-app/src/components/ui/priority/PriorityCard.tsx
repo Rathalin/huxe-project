@@ -1,10 +1,4 @@
 import { Card, CardContent, CardHeader, CardMedia, Typography } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
-import request from 'graphql-request';
-import { GRAPHQL_ENDPOINT } from '../../../graphql/endpoint';
-import { PRIORITY_QUERY } from '../../../graphql/queries/priority.query';
-import { MEDIA_ENDPOINT } from '../../../utils/media-endpoint';
-import { Loading } from '../loading/Loading';
 
 type PriorityProps = {
   priority: {

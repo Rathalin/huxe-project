@@ -51,6 +51,8 @@ export const DailySummaryPage = () => {
     </Container>
   );
 
+  console.log(data)
+
   return (
     <Container component='main' maxWidth='md'>
       <CssBaseline />
@@ -93,8 +95,8 @@ export const DailySummaryPage = () => {
             </Typography>
             <Grid container spacing={4}>
               {data?.dailyMood?.data?.attributes?.satisfiedPriorities?.data && data?.dailyMood?.data?.attributes?.satisfiedPriorities?.data.map((priority) => (
-                <Grid xs={4}>
-                  <PriorityItem priorityId={priority.id!} />
+                <Grid key={priority.id!} xs={4}>
+                  <PriorityItem priorityId={priority.attributes?.priority?.data?.id!!} />
                 </Grid>
               ))}
             </Grid>

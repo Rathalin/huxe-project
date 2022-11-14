@@ -1,6 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
 import request from "graphql-request";
-import { Fragment } from "react";
 import { GRAPHQL_ENDPOINT } from "../../../graphql/endpoint";
 import { CREATE_NOTE_MUTATION } from "../../../graphql/mutations/create-note.mutation";
 import { Loading } from "../loading/Loading";

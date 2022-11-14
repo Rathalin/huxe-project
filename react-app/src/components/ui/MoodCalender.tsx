@@ -31,7 +31,6 @@ export const MoodCalender = ({ year, month }: MoodCalenderProps) => {
       new Date(mood.attributes?.createdAt).getDate() === day + 1
     ) ?? null
   );
-  console.log(dailyMoodsPerDay.map(m => m?.id));
 
   return (
     <Box sx={{ flexGrow: 1, justifyContent: "center", alignItems: 'center', mr: 3 }}>

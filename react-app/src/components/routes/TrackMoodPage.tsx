@@ -34,7 +34,6 @@ export const TrackMoodPage = () => {
   const isLoading = isLoadingNoteExists || isLoadingSetNote;
 
   const noteId = data?.dailyMood?.data?.attributes?.note?.data?.id;
-  const noteExists = noteId != null;
 
   return (
     <Container component='main' maxWidth='md'>

@@ -37,12 +37,12 @@ export const PrioritiesPage = () => {
     <Container component='main' maxWidth='md'>
       <Box sx={{
         mt: 5, display: 'flex', flexDirection: 'column',
-        alignItems: 'center', minHeight: '80vh'
+        alignItems: 'center', minHeight: '80vh', width: '100%'
       }}>
         <Typography component='h1' variant='h3'>
           My Priorities
         </Typography>
-        <Grid container spacing={4} sx={{ mt: 1 }}>
+        <Grid container spacing={4} sx={{ mt: 1, width: '100%' }}>
           {data?.priorities?.data?.map((priority) => (
             <Grid key={priority.id} xs={6} md={3}>
               <Checkbox
@@ -58,7 +58,7 @@ export const PrioritiesPage = () => {
                 onChange={() => {
                   setPriorityActive({
                     priorityId: priority.id!,
-                    active: priority.attributes?.active ? false : true,
+                    active: !priority.attributes?.active,
                   });
                 }}
               />

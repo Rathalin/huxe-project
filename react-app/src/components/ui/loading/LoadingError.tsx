@@ -5,7 +5,7 @@ interface LoadingErrorProps {
   error?: string,
 }
 
-export function LoadingError({ error: error }: LoadingErrorProps) {
+export function LoadingError({ error }: LoadingErrorProps) {
   if (error == null) return null;
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', }}>
