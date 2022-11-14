@@ -15,11 +15,11 @@ type PriorityProps = {
     }
   }
   progressPercent?: number,
-  borderColor?: string
+  checked?: boolean,
 }
 
-export const PriorityCard = ({ priority, progressPercent, borderColor = '#fff' }: PriorityProps) => {
-
+export const PriorityCard = ({ priority, progressPercent, checked = false }: PriorityProps) => {
+  const borderColor = checked ? '#FFC107' : '#FFF';
 
   return (
     <Card variant='outlined'

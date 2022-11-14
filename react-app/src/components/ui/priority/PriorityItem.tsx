@@ -4,10 +4,8 @@ import { Fragment } from "react";
 import { GRAPHQL_ENDPOINT } from "../../../graphql/endpoint";
 import { PRIORITY_QUERY } from "../../../graphql/queries/priority.query";
 import { SATISFIED_PRIORITIES_BETWEEN_QUERY } from "../../../graphql/queries/satisfied-priorites-between.query";
-import { useDailyMoodIdStore } from "../../../stores/dailyMoodStore";
-import { today, tomorrow } from "../../../utils/date.util";
+import { beginningOfThisWeek, endOfToday } from "../../../utils/date.util";
 import { MEDIA_ENDPOINT } from "../../../utils/media-endpoint";
-import { AddNoteButton } from "../buttons/AddNoteButton";
 import { Loading } from "../loading/Loading";
 import { PriorityCard } from "./PriorityCard";
 import { PriorityProgress } from "./PriorityProgress";
@@ -23,7 +21,6 @@ type PriorityItemProps = {
 export const PriorityItem = ({
   priorityId, showProgress = false, showProgressBar = false, showAddNote = false, checked = false,
 }: PriorityItemProps) => {
-  const { dailyMoodId } = useDailyMoodIdStore();
   const { data: priorityData, isLoading: isLoadingPriority } = useQuery({
     queryKey: ['PRIORITY_QUERY', priorityId],
     queryFn: () => request(GRAPHQL_ENDPOINT, PRIORITY_QUERY, { priorityId }),
@@ -32,10 +29,9 @@ export const PriorityItem = ({
   const { data: progressData, isLoading: isLoadingProgress } = useQuery({
     queryKey: ['SATISFIED_PRIORITIES_BETWEEN_QUERY', priorityId],
     queryFn: () => request(GRAPHQL_ENDPOINT, SATISFIED_PRIORITIES_BETWEEN_QUERY, {
-      dailyMoodId: dailyMoodId ?? '',
       priorityId,
-      beginDate: today,
-      endDate: tomorrow,
+      beginDate: beginningOfThisWeek,
+      endDate: endOfToday,
     }),
     enabled: progressEnabled,
   });
@@ -61,7 +57,7 @@ export const PriorityItem = ({
           },
         }}
         progressPercent={progressEnabled ? progressPercent : undefined}
-        borderColor={checked ? '#FFC107' : undefined}
+        checked={checked === true}
       />
       {progressEnabled && <PriorityProgress progressPercent={progressPercent} />}
       {/* {showAddNote && <AddNoteButton />} */}
