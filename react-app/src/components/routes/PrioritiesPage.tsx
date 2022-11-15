@@ -15,7 +15,6 @@ import { useState } from 'react';
 
 export const PrioritiesPage = () => {
   const navigate = useNavigate();
-  const [showMaxInfo, setShowMaxInfo] = useState(false);
   const queryClient = useQueryClient();
   const { data, isLoading } = useQuery({
     queryKey: ['PRIORITIES_QUERY'],
@@ -38,9 +37,6 @@ export const PrioritiesPage = () => {
     const activePriorityIds = data?.priorities?.data?.filter(p => p.attributes?.active === true).map(p => p.id!) ?? [];
     if (active && activePriorityIds.length >= maxActivePriorities) {
       setPriorityActivity({ priorityId: activePriorityIds[0], active: false });
-      setShowMaxInfo(true);
-    } else {
-      setShowMaxInfo(false);
     }
     setPriorityActivity({ priorityId, active });
   }
@@ -58,6 +54,12 @@ export const PrioritiesPage = () => {
         <Typography component='h1' variant='h3'>
           My Priorities
         </Typography>
+        <Alert
+          sx={{ marginInline: 'auto' }}
+          severity='info'
+        >
+          Only {maxActivePriorities} priorities can be active at a time
+        </Alert>
         <Grid container spacing={4} sx={{ mt: 1, width: '100%' }}>
           {prioritiesSortedById.map((priority) => (
             <Grid key={priority.id} xs={6} md={3}>
@@ -75,12 +77,6 @@ export const PrioritiesPage = () => {
               />
             </Grid>
           ))}
-          {showMaxInfo && <Alert
-            sx={{ marginInline: 'auto' }}
-            severity='info'
-          >
-            Only {maxActivePriorities} priorities can be active at a time
-          </Alert>}
           <Grid display='flex' justifyContent='center' alignItems='center' xs={12}>
             <AddButton Icon={() => <InterestsIcon fontSize='large' />} onClick={() => {
               navigate('/new-priority');

@@ -38,7 +38,7 @@ export const NewPriority = () => {
         title,
         image: imageId,
         weeklyGoal,
-        active: true
+        active: false,
       }
     }),
     onSuccess: (data) => {
