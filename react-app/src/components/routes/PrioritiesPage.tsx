@@ -1,4 +1,4 @@
-import { Box, Checkbox, Container, Typography } from '@mui/material';
+import { Alert, Box, Checkbox, Container, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import InterestsIcon from '@mui/icons-material/Interests';
 import { AddButton } from '../ui/buttons/AddButton';
@@ -11,16 +11,17 @@ import { Loading } from '../ui/loading/Loading';
 import { BackButton } from '../ui/buttons/BackButton';
 import { SET_PRIORITY_ACTIVITY_MUTATION } from '../../graphql/mutations/set-priority-activity.mutation';
 import { PriorityItem } from '../ui/priority/PriorityItem';
-import { LoadingError } from '../ui/loading/LoadingError';
+import { useState } from 'react';
 
 export const PrioritiesPage = () => {
   const navigate = useNavigate();
+  const [showMaxInfo, setShowMaxInfo] = useState(false);
   const queryClient = useQueryClient();
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['PRIORITIES_QUERY'],
     queryFn: () => request(GRAPHQL_ENDPOINT, PRIORITIES_QUERY),
   });
-  const { mutate: setPriorityActive } = useMutation({
+  const { mutate: setPriorityActivity } = useMutation({
     mutationFn: ({ priorityId, active }: { priorityId: string, active: boolean }) => request(
       GRAPHQL_ENDPOINT, SET_PRIORITY_ACTIVITY_MUTATION, {
       priorityId,
@@ -29,9 +30,24 @@ export const PrioritiesPage = () => {
     onSuccess: () => queryClient.invalidateQueries(['PRIORITIES_QUERY']),
   });
 
-
   if (isLoading) return <Loading />;
-  if (isError) return <LoadingError error={JSON.stringify(error)} />;
+
+  const maxActivePriorities = 3;
+
+  function activatePriority(priorityId: string, active: boolean): void {
+    const activePriorityIds = data?.priorities?.data?.filter(p => p.attributes?.active === true).map(p => p.id!) ?? [];
+    if (active && activePriorityIds.length >= maxActivePriorities) {
+      setPriorityActivity({ priorityId: activePriorityIds[0], active: false });
+      setShowMaxInfo(true);
+    } else {
+      setShowMaxInfo(false);
+    }
+    setPriorityActivity({ priorityId, active });
+  }
+
+  const prioritiesSortedById = (data?.priorities?.data.map(p => p) ?? []).sort(
+    (first, second) => parseInt(first.id!) - parseInt(second.id!)
+  );
 
   return (
     <Container component='main' maxWidth='md'>
@@ -43,7 +59,7 @@ export const PrioritiesPage = () => {
           My Priorities
         </Typography>
         <Grid container spacing={4} sx={{ mt: 1, width: '100%' }}>
-          {data?.priorities?.data?.map((priority) => (
+          {prioritiesSortedById.map((priority) => (
             <Grid key={priority.id} xs={6} md={3}>
               <Checkbox
                 sx={{
@@ -55,15 +71,16 @@ export const PrioritiesPage = () => {
                 icon={<PriorityItem priorityId={priority.id!} />}
                 checkedIcon={<PriorityItem priorityId={priority.id!} checked />}
                 checked={priority.attributes?.active}
-                onChange={() => {
-                  setPriorityActive({
-                    priorityId: priority.id!,
-                    active: !priority.attributes?.active,
-                  });
-                }}
+                onChange={() => activatePriority(priority.id!, !priority.attributes?.active)}
               />
             </Grid>
           ))}
+          {showMaxInfo && <Alert
+            sx={{ marginInline: 'auto' }}
+            severity='info'
+          >
+            Only {maxActivePriorities} priorities can be active at a time
+          </Alert>}
           <Grid display='flex' justifyContent='center' alignItems='center' xs={12}>
             <AddButton Icon={() => <InterestsIcon fontSize='large' />} onClick={() => {
               navigate('/new-priority');

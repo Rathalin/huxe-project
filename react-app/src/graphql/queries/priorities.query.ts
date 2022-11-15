@@ -2,7 +2,7 @@ import { graphql } from '../generated/';
 
 export const PRIORITIES_QUERY = graphql(`
   query Priorities {
-    priorities {
+    priorities(sort: "updatedAt") {
       data {
         id
         attributes {
