@@ -102,7 +102,7 @@ export const LoginPage = () => {
           </Button>
           <Grid container>
             <Grid item>
-              <Button color='secondary' to='/register' component={Link}>
+              <Button color='secondary' to='/register' id="signup" component={Link}>
                 Don't have an account? Sign Up
               </Button>
             </Grid>
