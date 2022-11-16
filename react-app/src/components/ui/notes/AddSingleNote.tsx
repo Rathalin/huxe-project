@@ -9,7 +9,7 @@ import { NoteCard } from "./NoteCard";
 type AddSingleNoteProps = {
   noteId: string | null,
   setNoteId: (id: string) => void,
-}
+};
 
 export const AddSingleNote = ({ noteId, setNoteId }: AddSingleNoteProps) => {
   const { mutate: createNote, isLoading: isLoadingCreateNote } = useMutation({

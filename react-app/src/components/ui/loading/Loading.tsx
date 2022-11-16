@@ -5,11 +5,11 @@ interface LoadingProps {
   loading?: boolean,
 }
 
-export function Loading({ loading }: LoadingProps) {
+export const Loading = ({ loading }: LoadingProps) => {
   if (loading === false) return null;
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', }}>
       <CircularProgress />
     </Box>
   );
-}
+};

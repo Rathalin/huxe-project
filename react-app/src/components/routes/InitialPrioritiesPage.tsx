@@ -26,7 +26,13 @@ export const InitialPrioritiesPage = () => {
           {[...Array(3)].map((e, i) => (
             <NewPriority key={i} />
           ))}
-          <Button variant='contained' sx={{ mt: 3, mb: 2, gap: 1, width: '250px' }} onClick={()=>navigate('/dashboard')}>Finish</Button>
+          <Button
+            variant='contained'
+            sx={{ mt: 3, mb: 2, gap: 1, width: '250px' }}
+            onClick={() => navigate('/dashboard')}
+          >
+            Finish
+          </Button>
         </Box>
       )}
     </Container>

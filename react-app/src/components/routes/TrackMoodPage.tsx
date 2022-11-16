@@ -6,7 +6,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
 import { NOTE_EXISTS_QUERY } from '../../graphql/queries/note-exists.query';
-import { useDailyMoodIdStore } from '../../stores/dailyMoodStore';
+import { useDailyMoodIdStore } from '../../stores/daily-mood.store';
 import { SET_NOTE_OF_DAILY_MOOD_MUTATION } from '../../graphql/mutations/set-note-of-daily-mood.mutation';
 import { SatisfiedPriorities } from '../ui/priority/SatisfiedPriorities';
 import { Loading } from '../ui/loading/Loading';

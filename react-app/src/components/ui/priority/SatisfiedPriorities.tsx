@@ -5,7 +5,7 @@ import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../../graphql/endpoint';
 import { ACTIVE_PRIORITIES_QUERY } from '../../../graphql/queries/active-priorities.query';
 import { Loading } from '../loading/Loading';
-import { SatisfiedPriorityCheckbox as SatisfiedPriorityCheckbox } from './SatisfiedPriorityItem';
+import { SatisfiedPriorityCheckbox } from './SatisfiedPriorityItem';
 
 export const SatisfiedPriorities = () => {
   const { data: activePrioritiesData, isLoading: isLoadingActivePriorities } = useQuery({

@@ -5,11 +5,11 @@ interface LoadingErrorProps {
   error?: string,
 }
 
-export function LoadingError({ error }: LoadingErrorProps) {
+export const LoadingError = ({ error }: LoadingErrorProps) => {
   if (error == null) return null;
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', }}>
       <Alert severity="error">{error}</Alert>
     </Box>
   );
-}
+};

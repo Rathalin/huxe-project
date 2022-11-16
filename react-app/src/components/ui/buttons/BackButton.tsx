@@ -18,4 +18,4 @@ export const BackButton = ({ children, ...props }: BackButtonProps) => {
       {children == null ? <span>Back</span> : children}
     </Button>
   );
-}
+};

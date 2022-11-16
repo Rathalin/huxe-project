@@ -9,7 +9,7 @@ import { useMutation } from '@tanstack/react-query';
 import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
 import { CREATE_STRONG_EMOTION_MUTATION } from '../../graphql/mutations/create-strong-emotion.mutation';
-import { useDailyMoodIdStore } from '../../stores/dailyMoodStore';
+import { useDailyMoodIdStore } from '../../stores/daily-mood.store';
 import { AddSingleNote } from '../ui/notes/AddSingleNote';
 import Grid from '@mui/material/Unstable_Grid2';
 
@@ -74,7 +74,7 @@ export const TrackEmotionPage = () => {
               }
             }}
           >
-            <Grid xs={12} md={12} sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <Grid xs={12} md={12} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Typography component='h5' variant='h5'>
                 Is your emotion good or bad?
               </Typography>
@@ -93,32 +93,31 @@ export const TrackEmotionPage = () => {
               />
             </Grid>
           </SelectedEmotionTypeCtx.Provider>
-        {error != null &&
-          <Typography component='p' color='error'>
-            {error}
-          </Typography>
-        }
-        <Grid xs={12} md={12}>
-          <AddSingleNote noteId={noteId} setNoteId={setNoteId} />
-        </Grid>
-        <Grid xs={12} md={12} sx={{ display: 'flex', justifyContent: 'center' }}>
-          <BackButton />
-          <Button
-            variant='contained'
-            sx={{ mt: 3, mb: 2, mx: 2, gap: 1, width: '250px' }}
-            onClick={() => onConfirmClick()}
-          >
-            <Typography component='span'>Add </Typography>
-            <Typography component='span'>
-              <span>(</span>
-              <strong>{selectedEmotionIds.length}</strong>
-              <span>)</span>
+          {error != null &&
+            <Typography component='p' color='error'>
+              {error}
             </Typography>
-          </Button>
+          }
+          <Grid xs={12} md={12}>
+            <AddSingleNote noteId={noteId} setNoteId={setNoteId} />
+          </Grid>
+          <Grid xs={12} md={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+            <BackButton />
+            <Button
+              variant='contained'
+              sx={{ mt: 3, mb: 2, mx: 2, gap: 1, width: '250px' }}
+              onClick={() => onConfirmClick()}
+            >
+              <Typography component='span'>Add </Typography>
+              <Typography component='span'>
+                <span>(</span>
+                <strong>{selectedEmotionIds.length}</strong>
+                <span>)</span>
+              </Typography>
+            </Button>
+          </Grid>
         </Grid>
-      </Grid>
-    </Box>
-</Container>
-)
-  ;
+      </Box>
+    </Container>
+  );
 };

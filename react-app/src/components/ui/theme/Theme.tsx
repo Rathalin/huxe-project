@@ -7,12 +7,12 @@ export const themeOptions: ThemeOptions = {
         contained: {
           borderRadius: '50px',
           height: '60px',
-          "&:hover": {
+          '&:hover': {
             backgroundColor: '#873CC9'
           }
         },
         text: {
-          "&:hover": {
+          '&:hover': {
             backgroundColor: '#323463'
           }
         },
@@ -22,7 +22,7 @@ export const themeOptions: ThemeOptions = {
           color: '#E8EAF6',
           borderColor: '#FFC107',
           backgroundColor: '#323463',
-          "&:hover": {
+          '&:hover': {
             backgroundColor: '#FFC107',
             borderColor: '#422cb0',
             color: '#422cb0',
@@ -82,4 +82,4 @@ export const themeOptions: ThemeOptions = {
 
 export const Theme = () => {
   return createTheme(themeOptions);
-}
+};

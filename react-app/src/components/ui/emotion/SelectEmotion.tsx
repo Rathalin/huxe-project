@@ -68,18 +68,18 @@ export const SelectEmotion = ({ selectedEmotionIds, setSelectedEmotionIds }: Sel
   }
 
   return (
-      <Box sx={{
-        my: 1, display: 'flex', flexDirection: 'row',
-        alignItems: 'center'
-      }}>
-        {isLoading && <Loading />}
-        {isSuccess && emotionOptions.map((emotion) => (
-          <Checkbox key={emotion.id}
-            icon={<Chip label={emotion.name} variant='outlined' sx={{ fontSize: "1rem" }} />}
-            checkedIcon={<Chip label={emotion.name} sx={{ fontSize: "1rem" }} />}
-            onChange={() => toggleSelectedEmotion(emotion)}
-            checked={selectedEmotionIds.includes(emotion.id)} />
-        ))}
-      </Box>
+    <Box sx={{
+      my: 1, display: 'flex', flexDirection: 'row',
+      alignItems: 'center'
+    }}>
+      {isLoading && <Loading />}
+      {isSuccess && emotionOptions.map((emotion) => (
+        <Checkbox key={emotion.id}
+          icon={<Chip label={emotion.name} variant='outlined' sx={{ fontSize: "1rem" }} />}
+          checkedIcon={<Chip label={emotion.name} sx={{ fontSize: "1rem" }} />}
+          onChange={() => toggleSelectedEmotion(emotion)}
+          checked={selectedEmotionIds.includes(emotion.id)} />
+      ))}
+    </Box>
   );
 };

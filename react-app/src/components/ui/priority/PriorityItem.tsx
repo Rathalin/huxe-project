@@ -1,14 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
-import request from "graphql-request";
-import { Fragment } from "react";
-import { GRAPHQL_ENDPOINT } from "../../../graphql/endpoint";
-import { PRIORITY_QUERY } from "../../../graphql/queries/priority.query";
-import { SATISFIED_PRIORITIES_BETWEEN_QUERY } from "../../../graphql/queries/satisfied-priorites-between.query";
-import { beginningOfThisWeek, endOfToday } from "../../../utils/date.util";
-import { MEDIA_ENDPOINT } from "../../../utils/media-endpoint";
-import { Loading } from "../loading/Loading";
-import { PriorityCard } from "./PriorityCard";
-import { PriorityProgress } from "./PriorityProgress";
+import { useQuery } from '@tanstack/react-query';
+import request from 'graphql-request';
+import { Fragment } from 'react';
+import { GRAPHQL_ENDPOINT } from '../../../graphql/endpoint';
+import { PRIORITY_QUERY } from '../../../graphql/queries/priority.query';
+import { SATISFIED_PRIORITIES_BETWEEN_QUERY } from '../../../graphql/queries/satisfied-priorites-between.query';
+import { beginningOfThisWeek, endOfToday } from '../../../utils/date.util';
+import { MEDIA_ENDPOINT } from '../../../utils/media-endpoint';
+import { Loading } from '../loading/Loading';
+import { PriorityCard } from './PriorityCard';
+import { PriorityProgress } from './PriorityProgress';
+import defaultImage from '../../../assets/images/goal.png';
 
 type PriorityItemProps = {
   priorityId: string,
@@ -51,7 +52,7 @@ export const PriorityItem = ({
         priority={{
           title: priority?.attributes?.title ?? '',
           image: {
-            url: imageUrl != null ? MEDIA_ENDPOINT + imageUrl : 'mood1.png',
+            url: imageUrl != null ? MEDIA_ENDPOINT + imageUrl : defaultImage,
             alt: priority?.attributes?.image?.data?.attributes?.alternativeText ?? ''
           },
         }}

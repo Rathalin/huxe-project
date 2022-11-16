@@ -7,7 +7,7 @@ import NotesIcon from '@mui/icons-material/Notes';
 
 type ShowNoteProps = {
   noteId: string,
-}
+};
 
 export const NoteCard = ({ noteId }: ShowNoteProps) => {
   const { data } = useQuery({
@@ -23,16 +23,16 @@ export const NoteCard = ({ noteId }: ShowNoteProps) => {
 
   return (
     <Card variant='outlined'
-          sx={{
-            border: 3,
-            borderColor: '#fff',
-            borderRadius: 3,
-            backgroundColor: '#323463',
-            my: 2
-          }}>
+      sx={{
+        border: 3,
+        borderColor: '#fff',
+        borderRadius: 3,
+        backgroundColor: '#323463',
+        my: 2
+      }}>
       <CardContent sx={{ textAlign: 'left' }}>
         <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-          <NotesIcon sx={{mr: 2}}/>
+          <NotesIcon sx={{ mr: 2 }} />
           <Typography component='p' color='text.primary'>
             {note.text}
           </Typography>

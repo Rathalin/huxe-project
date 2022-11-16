@@ -13,20 +13,35 @@ import { DailySummaryPage } from './DailySummaryPage';
 export const CustomRouter = () => {
   const loggedIn = useAuthStore().user != null;
 
+  if (loggedIn) return (
+    <Routes>
+      <Route path='/' element={<Navigate to='/dashboard' />} />
+      <Route path='login' element={<Navigate to='/dashboard' />} />
+      <Route path='register' element={<Navigate to='/dashboard' />} />
+
+      <Route path='dashboard' element={<DashboardPage />} />
+      <Route path='emotion' element={<TrackEmotionPage />} />
+      <Route path='track-mood' element={<TrackMoodPage />} />
+      <Route path='initial-priorities' element={<InitialPrioritiesPage />} />
+      <Route path='new-priority' element={<NewPriorityPage />} />
+      <Route path='priorities' element={<PrioritiesPage />} />
+      <Route path='daily-summary/:id' element={<DailySummaryPage />} />
+    </Routes>
+  );
+
   return (
     <Routes>
-      <Route path='/' element={loggedIn ? <Navigate to='/dashboard' /> : <LoginPage />} />
-      <Route path='login' element={loggedIn ? <Navigate to='/dashboard' /> : <LoginPage />} />
-      <Route path='register' element={loggedIn ? <Navigate to='/dashboard' /> : <RegisterPage />} />
-      <Route path='dashboard' element={!loggedIn ? <Navigate to='/login' /> : <DashboardPage />} />
-      <Route path='emotion' element={!loggedIn ? <Navigate to='/login' /> : <TrackEmotionPage />} />
-      <Route path='login' element={loggedIn ? <Navigate to='/dashboard' /> : <LoginPage />} />
-      <Route path='track-mood' element={!loggedIn ? <Navigate to='/login' /> : <TrackMoodPage />} />
-      <Route path='initial-priorities' element={!loggedIn ? <Navigate to='/login' /> : <InitialPrioritiesPage />} />
-      <Route path='new-priority' element={!loggedIn ? <Navigate to='/login' /> : <NewPriorityPage />} />
-      <Route path='priorities' element={!loggedIn ? <Navigate to='/login' /> : <PrioritiesPage />} />
-      <Route path='register' element={loggedIn ? <Navigate to='/dashboard' /> : <RegisterPage />} />
-      <Route path='daily-summary/:id' element={!loggedIn ? <Navigate to='/login' /> : <DailySummaryPage />} />
+      <Route path='/' element={<LoginPage />} />
+      <Route path='login' element={<LoginPage />} />
+      <Route path='register' element={<RegisterPage />} />
+
+      <Route path='dashboard' element={<Navigate to='/login' />} />
+      <Route path='emotion' element={<Navigate to='/login' />} />
+      <Route path='track-mood' element={<Navigate to='/login' />} />
+      <Route path='initial-priorities' element={<Navigate to='/login' />} />
+      <Route path='new-priority' element={<Navigate to='/login' />} />
+      <Route path='priorities' element={<Navigate to='/login' />} />
+      <Route path='daily-summary/:id' element={<Navigate to='/login' />} />
     </Routes>
   );
 };

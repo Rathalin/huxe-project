@@ -1,5 +1,5 @@
 import { IconButton } from '@mui/material';
-import React, { ButtonHTMLAttributes, PropsWithChildren } from 'react';
+import { ButtonHTMLAttributes, PropsWithChildren } from 'react';
 import { MoodIcon } from '../MoodIcon';
 import { Enum_Dailymood_Mood, Enum_Emotion_Emotiontype } from '../../../graphql/generated/graphql';
 import NewReleasesIcon from '@mui/icons-material/NewReleases';
