@@ -11,7 +11,6 @@ import { Loading } from '../ui/loading/Loading';
 import { BackButton } from '../ui/buttons/BackButton';
 import { SET_PRIORITY_ACTIVITY_MUTATION } from '../../graphql/mutations/set-priority-activity.mutation';
 import { PriorityItem } from '../ui/priority/PriorityItem';
-import { useState } from 'react';
 
 export const PrioritiesPage = () => {
   const navigate = useNavigate();

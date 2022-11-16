@@ -8,7 +8,7 @@ import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
 import { CALENDER_QUERY } from '../../graphql/queries/calender.query';
 import { Loading } from './loading/Loading';
 import { useNavigate } from 'react-router-dom';
-import { useDailyMoodIdStore } from '../../stores/dailyMoodStore';
+import { useDailyMoodIdStore } from '../../stores/daily-mood.store';
 
 type MoodCalenderProps = {
   month: number
@@ -48,4 +48,4 @@ export const MoodCalender = ({ year, month }: MoodCalenderProps) => {
       </Grid>
     </Box>
   );
-}
+};

@@ -8,7 +8,7 @@ import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt
 import NewReleasesIcon from '@mui/icons-material/NewReleases';
 import { useQuery } from '@tanstack/react-query';
 import request from 'graphql-request';
-import { useDailyMoodIdStore } from '../../stores/dailyMoodStore';
+import { useDailyMoodIdStore } from '../../stores/daily-mood.store';
 import { now } from '../../utils/date.util';
 import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
 import { DashboardPriorities } from '../ui/priority/DashboardPriorities';
@@ -34,7 +34,7 @@ export const DashboardPage = () => {
         }
       });
     }
-  }, []);
+  });
   const { data: recentNotesData } = useQuery({
     queryKey: ['RECENT_NOTES_QUERY'],
     queryFn: () => request(GRAPHQL_ENDPOINT, RECENT_NOTES_QUERY, { limit: 3 })

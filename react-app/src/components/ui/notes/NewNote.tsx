@@ -16,10 +16,10 @@ export const NewNote = ({ onAddNote, hidden = false, buttonLabel = 'Add Note' }:
     <Box sx={{ my: 2 }}>
       <h4>Add a Note</h4>
       <TextField
-        placeholder="Note"
+        placeholder='Note'
         sx={{
-          border: 3, borderRadius: 3, '& legend': { display: 'none' }, '& fieldset': { top: 0 }, "& .MuiOutlinedInput-root": {
-            color: "#fff"
+          border: 3, borderRadius: 3, '& legend': { display: 'none' }, '& fieldset': { top: 0 }, '& .MuiOutlinedInput-root': {
+            color: '#fff'
           }, bgcolor: '#323463', marginBottom: '30px'
         }}
         id='outlined-basic'

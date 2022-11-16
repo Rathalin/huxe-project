@@ -7,10 +7,9 @@ import { NoteCard } from '../notes/NoteCard';
 
 type EmotionCardProps = {
   emotionId: string,
-}
+};
 
 export const EmotionCard = ({ emotionId }: EmotionCardProps) => {
-
   const { data } = useQuery({
     queryKey: ['EMOTION_QUERY', emotionId],
     queryFn: () => request(GRAPHQL_ENDPOINT, EMOTION_QUERY, { emotionId })
@@ -18,8 +17,8 @@ export const EmotionCard = ({ emotionId }: EmotionCardProps) => {
 
   return (
     <Box>
-      {data?.strongEmotion?.data?.attributes?.emotions?.data.map((emotion, i) =>(
-        <Chip key={i} label={emotion?.attributes?.name} variant='outlined' sx={{mx:1, fontSize: "1rem"}}  />
+      {data?.strongEmotion?.data?.attributes?.emotions?.data.map((emotion, i) => (
+        <Chip key={i} label={emotion?.attributes?.name} variant='outlined' sx={{ mx: 1, fontSize: "1rem" }} />
       ))}
       {data?.strongEmotion?.data?.attributes?.note?.data?.id && <NoteCard noteId={data?.strongEmotion?.data?.attributes?.note?.data?.id!} />}
     </Box>

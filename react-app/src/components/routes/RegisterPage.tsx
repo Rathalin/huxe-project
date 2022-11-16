@@ -140,4 +140,4 @@ export const RegisterPage = () => {
       </Box>
     </Container>
   );
-}
+};

@@ -1,4 +1,4 @@
-import { Box, Icon, IconButton } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import React, { ButtonHTMLAttributes, PropsWithChildren } from 'react';
 
@@ -7,9 +7,9 @@ type AddButtonProps = {
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const AddButton = ({ Icon, onClick }: PropsWithChildren<AddButtonProps>) => {
-
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'row',
+    <Box sx={{
+      display: 'flex', flexDirection: 'row',
       alignItems: 'center'
     }}>
       <Icon />
@@ -17,5 +17,5 @@ export const AddButton = ({ Icon, onClick }: PropsWithChildren<AddButtonProps>) 
         <AddBoxIcon />
       </IconButton>
     </Box>
-  )
-}
+  );
+};

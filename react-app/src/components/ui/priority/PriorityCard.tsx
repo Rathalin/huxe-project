@@ -10,7 +10,7 @@ type PriorityProps = {
   }
   progressPercent?: number,
   checked?: boolean,
-}
+};
 
 export const PriorityCard = ({ priority, progressPercent, checked = false }: PriorityProps) => {
   const borderColor = checked ? '#FFC107' : '#FFF';

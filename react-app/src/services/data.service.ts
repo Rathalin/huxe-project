@@ -5,7 +5,6 @@ import { Enum_Emotion_Emotiontype } from '../graphql/generated/graphql';
 import { today, tomorrow } from '../utils/date.util';
 
 class DataService {
-
   private dailyMoodInitialized = false;
   private emotionsSeeded = false;
 

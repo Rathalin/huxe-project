@@ -5,11 +5,11 @@ interface LoadingSuccessProps {
   success?: string,
 }
 
-export function LoadingSuccess({ success }: LoadingSuccessProps) {
+export const LoadingSuccess = ({ success }: LoadingSuccessProps) => {
   if (success == null) return null;
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', }}>
       <Alert severity="success">{success}</Alert>
     </Box>
   );
-}
+};

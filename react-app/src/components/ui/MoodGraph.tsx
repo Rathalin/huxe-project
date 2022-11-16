@@ -4,7 +4,7 @@ import { request } from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
 import { Loading } from './loading/Loading';
 import { GRAPH_QUERY } from '../../graphql/queries/graph.query';
-import { Line } from "react-chartjs-2";
+import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -15,8 +15,9 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Enum_Dailymood_Mood } from '../../graphql/generated/graphql';
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -27,14 +28,11 @@ ChartJS.register(
   Legend
 );
 
-
-
 export const MoodGraph = () => {
-
-  const [graphDataSet, setGraphDataset] = useState<number[]>([])
+  const [graphDataSet, setGraphDataset] = useState<number[]>([]);
   const mapDatasets = () => {
-    setGraphDataset([])
-    data?.dailyMoods?.data?.map(moodItem => {
+    setGraphDataset([]);
+    data?.dailyMoods?.data?.forEach(moodItem => {
       switch (moodItem?.attributes?.mood) {
         case (Enum_Dailymood_Mood.VeryGood):
           setGraphDataset(prevState => [...prevState, 5])
@@ -61,19 +59,15 @@ export const MoodGraph = () => {
     onSuccess: () => mapDatasets()
   });
 
-  useEffect(()=> {
-    mapDatasets();
-  }, [data] )
-
   if (isLoading) return <Loading />;
 
   const options = {
     responsive: true,
     scales: {
-      y:{
+      y: {
         display: false,
       },
-      x:{
+      x: {
         display: false,
       },
       grid: {
@@ -95,13 +89,13 @@ export const MoodGraph = () => {
 
   const length = data?.dailyMoods?.data?.length ?? 0
   const graphData = {
-    labels: Array.from({length: length }, (_, i) => i + 1),
+    labels: Array.from({ length: length }, (_, i) => i + 1),
     datasets: [
       {
-        label: "Mood",
+        label: 'Mood',
         data: graphDataSet,
         fill: true,
-        borderColor: "#E8EAF6",
+        borderColor: '#E8EAF6',
         pointRadius: 6,
         pointHoverRadius: 8
       }
@@ -109,9 +103,8 @@ export const MoodGraph = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, justifyContent: "center", alignItems: 'center', p:3, my: 1 }}>
+    <Box sx={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center', p: 3, my: 1 }}>
       <Line data={graphData} options={options} />
     </Box>
   );
-
-}
+};

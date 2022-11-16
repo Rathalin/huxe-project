@@ -10,9 +10,8 @@ import request from 'graphql-request';
 import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
 import { DAILYMOOD_SUMMARY_QUERY } from '../../graphql/queries/dailymood-summary.query';
 import { MoodIcon } from '../ui/MoodIcon';
-import { MOODS } from '../../utils/utils';
 import { NoteCard } from '../ui/notes/NoteCard';
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ShowEmotions } from '../ui/emotion/ShowEmotions';
 import { PriorityItem } from '../ui/priority/PriorityItem';
 
@@ -21,7 +20,7 @@ export const DailySummaryPage = () => {
 
   const getEmotionIds = () => {
     setEmotionIds([]);
-    data?.dailyMood?.data?.attributes?.strongEmotions?.data.map(emotion => {
+    data?.dailyMood?.data?.attributes?.strongEmotions?.data.forEach(emotion => {
       setEmotionIds(prevState => [...prevState, emotion.id ?? '']);
     });
   };
@@ -32,10 +31,6 @@ export const DailySummaryPage = () => {
     queryFn: () => request(GRAPHQL_ENDPOINT, DAILYMOOD_SUMMARY_QUERY, { dailyMoodId: params.id ?? '' }),
     onSuccess: () => getEmotionIds
   });
-
-  useEffect(() => {
-    getEmotionIds();
-  }, [data]);
 
   if (params.id === 'no-data') return (
     <Container component='main' maxWidth='md'>
@@ -73,7 +68,7 @@ export const DailySummaryPage = () => {
               <MoodIcon moodType={data?.dailyMood?.data?.attributes?.mood ?? null} />
               {data?.dailyMood?.data?.attributes?.mood &&
                 <Typography component='p' sx={{ ml: 2 }}>
-                  {MOODS[data?.dailyMood?.data?.attributes?.mood]}
+                  {data?.dailyMood?.data?.attributes?.mood}
                 </Typography>
               }
             </Box>

@@ -1,13 +1,13 @@
-import { Box, Checkbox } from "@mui/material";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import request from "graphql-request";
-import { Fragment } from "react";
-import { GRAPHQL_ENDPOINT } from "../../graphql/endpoint";
-import { Enum_Dailymood_Mood } from "../../graphql/generated/graphql";
-import { SET_MOOD_MUTATION } from "../../graphql/mutations/set-mood.mutation";
-import { SELECTED_MOOD_QUERY } from "../../graphql/queries/selected-mood.query";
-import { useDailyMoodIdStore } from "../../stores/dailyMoodStore";
-import { MoodIcon } from "./MoodIcon";
+import { Box, Checkbox } from '@mui/material';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import request from 'graphql-request';
+import { Fragment } from 'react';
+import { GRAPHQL_ENDPOINT } from '../../graphql/endpoint';
+import { Enum_Dailymood_Mood } from '../../graphql/generated/graphql';
+import { SET_MOOD_MUTATION } from '../../graphql/mutations/set-mood.mutation';
+import { SELECTED_MOOD_QUERY } from '../../graphql/queries/selected-mood.query';
+import { useDailyMoodIdStore } from '../../stores/daily-mood.store';
+import { MoodIcon } from './MoodIcon';
 
 const moodOptions: Enum_Dailymood_Mood[] = [
   Enum_Dailymood_Mood.VeryGood,
@@ -44,16 +44,18 @@ export const SelectMood = () => {
   return (
     <Fragment>
       <Box sx={{
-        mt: 3, mb: 5,  display: 'flex', flexDirection: 'row',
+        mt: 3, mb: 5, display: 'flex', flexDirection: 'row',
         alignItems: 'center'
       }}>
         {moodOptions.map((mood) => (
           <Checkbox
-            sx={{color: '#fff', transform: 'scale(2)', m: 2, "&.MuiButtonBase-root:hover": {
-              color: "#EDD99D"
-            }}}
+            sx={{
+              color: '#fff', transform: 'scale(2)', m: 2, '&.MuiButtonBase-root:hover': {
+                color: '#EDD99D'
+              }
+            }}
             disableRipple
-            color="secondary"
+            color='secondary'
             key={mood}
             icon={<MoodIcon moodType={mood} />}
             checkedIcon={<MoodIcon moodType={mood} />}
@@ -64,4 +66,4 @@ export const SelectMood = () => {
       </Box>
     </Fragment>
   );
-}
+};

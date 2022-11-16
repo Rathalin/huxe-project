@@ -1,18 +1,19 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import request from "graphql-request";
-import { GRAPHQL_ENDPOINT } from "../../../graphql/endpoint";
-import { CREATE_SATISFIED_PRIORITY_MUTATION } from "../../../graphql/mutations/create-satisfied-priority.mutation";
-import { REMOVE_SATISFIED_PRIORITY_MUTATION } from "../../../graphql/mutations/remove-satisfied-priority.mutation";
-import { PRIORITY_QUERY } from "../../../graphql/queries/priority.query";
-import { SATISFIED_PRIORITY_OF_PRIORITY_QUERY } from "../../../graphql/queries/satisfied-priorities-of-priority.query";
-import { useDailyMoodIdStore } from "../../../stores/dailyMoodStore";
-import { MEDIA_ENDPOINT } from "../../../utils/media-endpoint";
-import { Loading } from "../loading/Loading";
-import { PriorityCard } from "./PriorityCard";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import request from 'graphql-request';
+import { GRAPHQL_ENDPOINT } from '../../../graphql/endpoint';
+import { CREATE_SATISFIED_PRIORITY_MUTATION } from '../../../graphql/mutations/create-satisfied-priority.mutation';
+import { REMOVE_SATISFIED_PRIORITY_MUTATION } from '../../../graphql/mutations/remove-satisfied-priority.mutation';
+import { PRIORITY_QUERY } from '../../../graphql/queries/priority.query';
+import { SATISFIED_PRIORITY_OF_PRIORITY_QUERY } from '../../../graphql/queries/satisfied-priorities-of-priority.query';
+import { useDailyMoodIdStore } from '../../../stores/daily-mood.store';
+import { MEDIA_ENDPOINT } from '../../../utils/media-endpoint';
+import { Loading } from '../loading/Loading';
+import { PriorityCard } from './PriorityCard';
+import defaultImage from '../../../assets/images/goal.png';
 
 type SatisfiedPriorityCheckboxProps = {
   priorityId: string,
-}
+};
 
 export const SatisfiedPriorityCheckbox = (
   { priorityId }: SatisfiedPriorityCheckboxProps
@@ -74,7 +75,7 @@ export const SatisfiedPriorityCheckbox = (
         priority={{
           title: priority?.attributes?.title ?? '',
           image: {
-            url: imageUrl != null ? MEDIA_ENDPOINT + imageUrl : 'mood1.png',
+            url: imageUrl != null ? MEDIA_ENDPOINT + imageUrl : defaultImage,
             alt: priority?.attributes?.image?.data?.attributes?.alternativeText ?? ''
           },
         }}

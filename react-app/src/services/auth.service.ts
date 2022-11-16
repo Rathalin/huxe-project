@@ -63,6 +63,6 @@ export interface AuthUser {
   },
 }
 
-export type LoginResponse = AuthUser & StrapiError
+export type LoginResponse = AuthUser & StrapiError;
 
-export type RegisterResponse = AuthUser & StrapiError
+export type RegisterResponse = AuthUser & StrapiError;
