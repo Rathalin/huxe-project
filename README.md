@@ -31,7 +31,7 @@ This project contains the **React** frontend app and the **Strapi** backend. To 
 1. Run `npm run start`.
 1. Open [localhost:3000/](http://localhost:3000/) in the browser and have fun with the app 🫡.
 
-### Testing
+### Testing 🧪
 
 End2End testing was done with Cypress. The tests can be started by going to the `/react-app` directory and using the command: `npx cypress open`.
 
