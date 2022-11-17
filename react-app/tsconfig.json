@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "types": [
+      "jest",
+      "node"
+    ],
     "target": "es2022",
     "lib": [
       "dom",
@@ -26,6 +30,7 @@
     },
   },
   "include": [
-    "src"
+    "src",
+    "src/**/*"
   ]
 }

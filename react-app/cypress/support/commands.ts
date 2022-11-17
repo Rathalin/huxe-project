@@ -1,5 +1,27 @@
 import '@testing-library/cypress/add-commands'
 /// <reference types="cypress" />
+
+Cypress.Commands.add('register', (username, email, password) => { 
+    cy.visit('http://localhost:3000/register')
+    cy.contains('Sign up');
+    cy.get('input[name=username]').type(username).should('have.value', username);
+    cy.get('input[name=email]').type(email).should('have.value', email);
+    cy.get('input[name=password]').type(password).should('have.value', password);
+    cy.get('button[type=submit]').click();
+ })
+
+ Cypress.Commands.add('login', (email, password) => { 
+    cy.visit('http://localhost:3000/')
+    cy.contains('Sign in');
+    cy.get('input[name=email]').type(email).should('have.value', email);
+    cy.get('input[name=password]').type(password).should('have.value', password);
+    cy.get('button[type=submit]').click();
+    cy.contains('Dashboard');
+ })
+
+
+
+
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
