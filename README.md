@@ -4,6 +4,8 @@
 
 With the Mood Tracker app you can document each day in your life and set priorities you aim to fulfil regularly.
 
+![Mood Graph Example](./react-app//public/MoodGraphExample.jpg)
+
 ## Getting started 💻
 
 This project contains the **React** frontend app and the **Strapi** backend. To test the app, you need to open two terminals.
